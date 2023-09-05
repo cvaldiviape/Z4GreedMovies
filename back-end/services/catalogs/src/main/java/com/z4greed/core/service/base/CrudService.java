@@ -1,15 +1,15 @@
 package com.z4greed.core.service.base;
 
-public interface CrudService <PAGEABLE, DataDTO, RequestDTO, ID> {
+public interface CrudService <PAGEABLE, DTO, ID> {
 
     public PAGEABLE getAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);
 
-    public DataDTO getById(ID id);
+    public DTO getById(ID id);
 
-    public DataDTO create(RequestDTO requestDTO);
+    public DTO create(DTO dto);
 
-    public DataDTO update(ID id, RequestDTO requestDTO);
+    public DTO update(ID id, DTO dto);
 
-    public DataDTO delete(ID id);
+    public DTO delete(ID id);
 
 }

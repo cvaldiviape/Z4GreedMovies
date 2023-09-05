@@ -1,12 +1,9 @@
 package com.z4greed.core.models.entity.base;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.Hibernate;
-
-import javax.persistence.*;
-import java.util.Objects;
-
 
 @Getter
 @Setter

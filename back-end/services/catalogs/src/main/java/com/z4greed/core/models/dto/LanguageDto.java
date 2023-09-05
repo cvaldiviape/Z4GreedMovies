@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class LanguageDto extends BaseDto {
 
-    private Integer id_language;
+    private Integer idLanguage;
 
 }

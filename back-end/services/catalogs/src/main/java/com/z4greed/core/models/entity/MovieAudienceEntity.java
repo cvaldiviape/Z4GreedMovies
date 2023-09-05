@@ -1,12 +1,9 @@
 package com.z4greed.core.models.entity;
 
 import com.z4greed.core.models.entity.base.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
-import javax.persistence.*;
 
 @Getter
 @Setter
@@ -19,5 +16,7 @@ public class MovieAudienceEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_movie_audience;
+    @Column(name = "id_movie_audience")
+    private Integer idMovieAudience;
+
 }

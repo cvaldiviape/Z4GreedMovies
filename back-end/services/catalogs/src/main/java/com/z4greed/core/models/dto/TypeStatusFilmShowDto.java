@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class TypeStatusFilmShowDto extends BaseDto {
 
-    private Integer id_type_status_film_show;
+    private Integer idTypeStatusFilmShow;
 
 }

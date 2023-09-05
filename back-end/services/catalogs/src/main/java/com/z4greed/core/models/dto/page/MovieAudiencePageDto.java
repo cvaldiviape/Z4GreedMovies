@@ -1,19 +1,20 @@
-package com.z4greed.core.models.dto;
+package com.z4greed.core.models.dto.page;
 
-import com.z4greed.core.models.dto.base.BaseDto;
+import com.z4greed.core.models.dto.MovieAudienceDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class MovieAudienceDto extends BaseDto {
+public class MovieAudiencePageDto {
 
-    private Integer idMovieAudience;
+    private List<MovieAudienceDto> listMovieAudiences;
 
 }

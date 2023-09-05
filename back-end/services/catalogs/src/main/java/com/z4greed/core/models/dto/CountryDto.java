@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class CountryDto extends BaseDto {
 
-    private Integer id_country;
+    private Integer idCountry;
 
 }

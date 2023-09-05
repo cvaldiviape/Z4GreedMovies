@@ -1,22 +1,20 @@
 package com.z4greed.core.models.dto.base;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public class BasePageDto {
+@Builder
+public class BasePageDto<T> {
 
     private Integer numberPage;
     private Integer sizePage;
     private Integer totalPages;
     private Boolean isLastPage;
     private Long totalElements;
+    private List<T> listElements;
 
 }
