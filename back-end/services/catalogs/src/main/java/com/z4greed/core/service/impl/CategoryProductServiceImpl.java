@@ -36,7 +36,7 @@ public class CategoryProductServiceImpl implements CategoryProductService {
         List<CategoryProductEntity> listEntities = pageData.getContent();
 
         List<CategoryProductDto> listDtos = listEntities.stream()
-                .map(this.categoryProductMapper::entityToDto)
+                .map(this.categoryProductMapper::toDto)
                 .collect(Collectors.toList());
 
         return BasePageDto.<CategoryProductDto>builder()
@@ -52,7 +52,7 @@ public class CategoryProductServiceImpl implements CategoryProductService {
     @Override
     public CategoryProductDto getById(Integer id) {
         CategoryProductEntity entity = this.getCategoryById(id);
-        return this.categoryProductMapper.entityToDto(entity);
+        return this.categoryProductMapper.toDto(entity);
     }
 
     @Override
@@ -60,9 +60,9 @@ public class CategoryProductServiceImpl implements CategoryProductService {
         this.verifyUnique(dto.getName());
         this.verifyUnique(dto.getCode());
 
-        CategoryProductEntity entity = this.categoryProductMapper.dtoToEntity(dto);
+        CategoryProductEntity entity = this.categoryProductMapper.toEntity(dto);
         this.categoryProductRepository.save(entity);
-        return this.categoryProductMapper.entityToDto(entity);
+        return this.categoryProductMapper.toDto(entity);
     }
 
     @Override
@@ -74,14 +74,14 @@ public class CategoryProductServiceImpl implements CategoryProductService {
 
         this.categoryProductMapper.updateEntityFromDto(dto, entity);
         this.categoryProductRepository.save(entity);
-        return this.categoryProductMapper.entityToDto(entity);
+        return this.categoryProductMapper.toDto(entity);
     }
 
     @Override
     public CategoryProductDto delete(Integer id) {
         CategoryProductEntity entity = this.getCategoryById(id);
         this.categoryProductRepository.delete(entity);
-        return this.categoryProductMapper.entityToDto(entity);
+        return this.categoryProductMapper.toDto(entity);
     }
 
     // ----------------------------------------------------------- utils ----------------------------------------------------------- //

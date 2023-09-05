@@ -24,7 +24,7 @@ public class ResponseUtil {
     public static ResponseDto error(String message, HttpStatus status) {
         return load(true, message,null, status, null);
     }
-    
+
     public static ResponseDto load(boolean success, ControllerMessageEnum messageEnum, Object data, HttpStatus status, TypeExceptionEnum type) {
         String dateTime = DateUtil.convertLocalDateTimeToString(LocalDateTime.now());
         return ResponseDto.builder()
