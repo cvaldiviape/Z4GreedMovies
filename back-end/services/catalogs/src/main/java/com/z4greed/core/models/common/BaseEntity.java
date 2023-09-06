@@ -1,4 +1,4 @@
-package com.z4greed.core.models.entity.base;
+package com.z4greed.core.models.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

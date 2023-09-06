@@ -1,7 +1,7 @@
 package com.z4greed.core.service.impl;
 
 import com.z4greed.core.models.dto.CategoryProductDto;
-import com.z4greed.core.models.dto.base.BasePageDto;
+import com.z4greed.core.models.common.BasePageDto;
 import com.z4greed.core.models.entity.CategoryProductEntity;
 import com.z4greed.core.repository.CategoryProductRepository;
 import com.z4greed.core.service.CategoryProductService;
@@ -9,6 +9,7 @@ import com.z4greed.shared.exception.Z4GreedMoviesException;
 import com.z4greed.shared.exception.ResourceNotFoundException;
 import com.z4greed.core.models.mapper.CategoryProductMapper;
 import com.z4greed.shared.utils.PageUtil;
+import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -57,24 +58,19 @@ public class CategoryProductServiceImpl implements CategoryProductService {
 
     @Override
     public CategoryProductDto create(CategoryProductDto dto) {
-        this.verifyUnique(dto.getName());
-        this.verifyUnique(dto.getCode());
-
+        this.verifyUnique(dto);
         CategoryProductEntity entity = this.categoryProductMapper.toEntity(dto);
-        this.categoryProductRepository.save(entity);
-        return this.categoryProductMapper.toDto(entity);
+        CategoryProductEntity entityCreated = this.categoryProductRepository.save(entity);
+        return this.categoryProductMapper.toDto(entityCreated);
     }
 
     @Override
     public CategoryProductDto update(Integer id, CategoryProductDto dto) {
         CategoryProductEntity entity = this.getCategoryById(id);
-
-        this.verifyUnique(dto.getCode(), entity.getCode());
-        this.verifyUnique(dto.getName(), entity.getName());
-
+        this.verifyUnique(id, dto);
         this.categoryProductMapper.updateEntityFromDto(dto, entity);
-        this.categoryProductRepository.save(entity);
-        return this.categoryProductMapper.toDto(entity);
+        CategoryProductEntity entityUpdated = this.categoryProductRepository.save(entity);
+        return this.categoryProductMapper.toDto(entityUpdated);
     }
 
     @Override
@@ -90,19 +86,18 @@ public class CategoryProductServiceImpl implements CategoryProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("id", id));
     }
 
-    public void verifyUnique(String value) {
-        Boolean existsValue = this.categoryProductRepository.existsByName(value);
-        if (existsValue) {
-            throw new Z4GreedMoviesException(HttpStatus.BAD_REQUEST, "The name " + value + " already exists.");
-        }
+    private void verifyUnique(CategoryProductDto dto){
+        Boolean existsCode = this.categoryProductRepository.existsByCode(dto.getCode());
+        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        Boolean existsName = this.categoryProductRepository.existsByName(dto.getName());
+        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
     }
 
-    public void verifyUnique(String value, String valueCurrent) {
-        Boolean existsValue = this.categoryProductRepository.existsByName(value);
-        Boolean diferentValueCurrent = (!value.equalsIgnoreCase(valueCurrent));
-        if(existsValue && diferentValueCurrent) {
-            throw new Z4GreedMoviesException(HttpStatus.BAD_REQUEST, "The name " + value + " already exists.");
-        }
+    private void verifyUnique(Integer id, CategoryProductDto dto){
+        Boolean existsCode = this.categoryProductRepository.existsByCodeAndIdCategoryProductNot(dto.getCode(), id);
+        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        Boolean existsName = this.categoryProductRepository.existsByNameAndIdCategoryProductNot(dto.getName(), id);
+        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
     }
 
 }

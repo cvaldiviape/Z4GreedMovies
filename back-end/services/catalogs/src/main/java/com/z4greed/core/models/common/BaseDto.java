@@ -1,4 +1,4 @@
-package com.z4greed.core.models.dto.base;
+package com.z4greed.core.models.common;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;

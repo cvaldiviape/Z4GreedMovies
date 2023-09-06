@@ -13,9 +13,9 @@ public interface CategoryProductRepository extends JpaRepository <CategoryProduc
     // Define una consulta personalizada que utiliza el nombre del campo de identificación 'id_usuario'
     @Query("SELECT c FROM CategoryProductEntity c")
     Page<CategoryProductEntity> findAll(Pageable pageable);
-    public Optional<CategoryProductEntity> findByCode(String code);
-    public Boolean existsByCode(String code);
-    public Optional<CategoryProductEntity> findByName(String name);
-    public Boolean existsByName(String name);
+    Boolean existsByCode(String code);
+    Boolean existsByName(String name);
+    Boolean existsByCodeAndIdCategoryProductNot(String code, Integer idCategoryProduct);
+    Boolean existsByNameAndIdCategoryProductNot(String name, Integer idCategoryProduct);
 
 }

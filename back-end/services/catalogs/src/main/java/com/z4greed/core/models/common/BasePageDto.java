@@ -1,4 +1,4 @@
-package com.z4greed.core.models.dto.base;
+package com.z4greed.core.models.common;
 
 import lombok.*;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BasePageDto<T> {
+public class BasePageDto<T extends BaseDto> {
 
     private Integer numberPage;
     private Integer sizePage;

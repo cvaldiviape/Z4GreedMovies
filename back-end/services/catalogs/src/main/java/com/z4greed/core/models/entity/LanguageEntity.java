@@ -1,6 +1,6 @@
 package com.z4greed.core.models.entity;
 
-import com.z4greed.core.models.entity.base.BaseEntity;
+import com.z4greed.core.models.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

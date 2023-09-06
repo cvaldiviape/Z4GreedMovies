@@ -1,6 +1,8 @@
-package com.z4greed.core.service.base;
+package com.z4greed.core.service.common;
 
-public interface CrudService <PAGEABLE, DTO, ID> {
+import com.z4greed.core.models.common.BaseDto;
+
+public interface CrudService <PAGEABLE, DTO extends BaseDto, ID> {
 
     public PAGEABLE getAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);
 
