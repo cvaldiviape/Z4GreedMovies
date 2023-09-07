@@ -1,10 +1,13 @@
 package com.z4greed.core.service.common;
 
 import com.z4greed.core.models.common.BaseDto;
+import com.z4greed.core.models.common.BasePageDto;
+import org.springframework.stereotype.Service;
 
-public interface CrudService <PAGEABLE, DTO extends BaseDto, ID> {
+@Service
+public interface CrudService <DTO extends BaseDto, ID> {
 
-    public PAGEABLE getAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);
+    public BasePageDto<DTO> getAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);
 
     public DTO getById(ID id);
 

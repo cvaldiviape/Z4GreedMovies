@@ -2,7 +2,6 @@ package com.z4greed.core.rest.common;
 
 import com.z4greed.core.models.common.BaseDto;
 import com.z4greed.core.models.common.BasePageDto;
-import com.z4greed.core.models.dto.CategoryProductDto;
 import com.z4greed.core.models.dto.custom.ResponseDto;
 import com.z4greed.core.service.common.CrudService;
 import com.z4greed.shared.constants.PageConstants;
@@ -12,16 +11,16 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public abstract class CrudController <PAGEABLE, DTO extends BaseDto, ID>  {
+public abstract class HandlerCrudController<DTO extends BaseDto, ID> {
 
-    public abstract CrudService<PAGEABLE, DTO, ID> getCrudService();
+    public abstract CrudService<DTO, ID> getCrudService();
 
     @GetMapping
     public ResponseEntity<ResponseDto> getAll(@RequestParam(value = "numberPage", defaultValue = PageConstants.NUM_PAGE_DEFAULT, required = false) Integer numberPage,
                                               @RequestParam(value = "sizePage", defaultValue = PageConstants.SIZE_PAGE_DEFAULT, required = false) Integer sizePage,
                                               @RequestParam(value = "sortBy", defaultValue = PageConstants.SORT_BY_DEFAULT, required = false) String sortBy,
                                               @RequestParam(value = "sortDir", defaultValue = PageConstants.SORT_DIR_DEFAULT, required = false) String sortDir) {
-        PAGEABLE result = this.getCrudService().getAll(numberPage, sizePage, sortBy, sortDir);
+        BasePageDto<DTO> result = this.getCrudService().getAll(numberPage, sizePage, sortBy, sortDir);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
         return ResponseEntity.ok(response);
     }
