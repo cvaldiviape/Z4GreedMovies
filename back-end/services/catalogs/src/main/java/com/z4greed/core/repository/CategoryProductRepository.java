@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
 
-import java.util.Optional;
-
 public interface CategoryProductRepository extends JpaRepository <CategoryProductEntity, Integer> {
 
     @NonNull
@@ -16,7 +14,7 @@ public interface CategoryProductRepository extends JpaRepository <CategoryProduc
     Page<CategoryProductEntity> findAll(@NonNull Pageable pageable);
     Boolean existsByCode(String code);
     Boolean existsByName(String name);
-    Boolean existsByCodeAndIdCategoryProductNot(String code, Integer idCategoryProduct);
-    Boolean existsByNameAndIdCategoryProductNot(String name, Integer idCategoryProduct);
+    Boolean existsByCodeAndIdCategoryProductNot(String code, Integer id);
+    Boolean existsByNameAndIdCategoryProductNot(String name, Integer id);
 
 }
