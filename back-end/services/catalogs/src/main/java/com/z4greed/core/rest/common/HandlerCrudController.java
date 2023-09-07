@@ -9,8 +9,12 @@ import com.z4greed.shared.enums.ControllerMessageEnum;
 import com.z4greed.shared.utils.ResponseUtil;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+@Service
+@Transactional
 public abstract class HandlerCrudController<DTO extends BaseDto, ID> {
 
     public abstract CrudService<DTO, ID> getCrudService();
