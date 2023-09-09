@@ -1,4 +1,4 @@
-package com.z4greed.core.service.impl;
+package com.z4greed.core.service;
 
 import com.z4greed.core.models.dto.MovieAudienceDto;
 import com.z4greed.core.models.entity.MovieAudienceEntity;
