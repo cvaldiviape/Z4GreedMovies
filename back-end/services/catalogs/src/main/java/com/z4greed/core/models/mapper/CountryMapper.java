@@ -1,8 +1,6 @@
 package com.z4greed.core.models.mapper;
 
-import com.z4greed.core.models.dto.CategoryProductDto;
 import com.z4greed.core.models.dto.CountryDto;
-import com.z4greed.core.models.entity.CategoryProductEntity;
 import com.z4greed.core.models.entity.CountryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -61,7 +61,7 @@ public class CountryServiceImpl extends HandlerCrudService<CountryEntity, Countr
     public void verifyUnique(Integer id, CountryDto dto) {
         Boolean existsCode = this.countryRepository.existsByCodeAndIdCountryNot(dto.getCode(), id);
         ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
-        Boolean existsName = this.countryRepository.existsByCodeAndIdCountryNot(dto.getName(), id);
+        Boolean existsName = this.countryRepository.existsByNameAndIdCountryNot(dto.getName(), id);
         ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
     }
 
