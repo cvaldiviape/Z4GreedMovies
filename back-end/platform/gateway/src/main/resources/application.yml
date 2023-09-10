@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: service-catalog
+          uri: lb://service-catalog
+          predicates:
+            - Path=/api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
