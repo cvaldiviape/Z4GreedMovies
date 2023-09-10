@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class GenreDto extends BaseDto {
 
-    private Integer idDenre;
+    private Integer idGenre;
 
 }
