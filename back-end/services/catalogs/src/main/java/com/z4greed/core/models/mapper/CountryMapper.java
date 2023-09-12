@@ -4,9 +4,10 @@ import com.z4greed.core.models.dto.CountryDto;
 import com.z4greed.core.models.entity.CountryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CountryMapper {
 
     public CountryDto toDto(CountryEntity entity);

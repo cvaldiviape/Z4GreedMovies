@@ -4,9 +4,10 @@ import com.z4greed.core.models.dto.GenreDto;
 import com.z4greed.core.models.entity.GenreEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface GenreMapper {
 
     public GenreDto toDto(GenreEntity entity);

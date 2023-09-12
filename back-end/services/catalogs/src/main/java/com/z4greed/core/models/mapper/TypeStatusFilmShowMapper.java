@@ -4,9 +4,10 @@ import com.z4greed.core.models.dto.TypeStatusFilmShowDto;
 import com.z4greed.core.models.entity.TypeStatusFilmShowEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface TypeStatusFilmShowMapper {
 
     public TypeStatusFilmShowDto toDto(TypeStatusFilmShowEntity entity);
