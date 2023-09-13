@@ -1,19 +1,22 @@
-package com.z4greed.core.service;
+package com.z4greed.core.service.impl;
 
 import com.z4greed.core.models.dto.LanguageDto;
 import com.z4greed.core.models.entity.LanguageEntity;
 import com.z4greed.core.models.mapper.LanguageMapper;
 import com.z4greed.core.repository.LanguageRepository;
-import com.z4greed.core.service.common.HandlerCrudService;
+import com.z4greed.core.service.LanguageService;
 import com.z4greed.shared.exception.ResourceNotFoundException;
 import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("languageServiceImpl")
 @Transactional
-public class LanguageServiceImpl extends HandlerCrudService<LanguageEntity, LanguageDto, Integer> {
+public class LanguageServiceImpl extends LanguageService<LanguageEntity, LanguageDto, Integer> {
 
     private final LanguageRepository languageRepository;
     private final LanguageMapper languageMapper;
@@ -44,7 +47,7 @@ public class LanguageServiceImpl extends HandlerCrudService<LanguageEntity, Lang
     }
 
     @Override
-    public LanguageEntity findById(Integer id) {
+    public LanguageEntity findEntityById(Integer id) {
         return this.languageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("id", id));
     }
@@ -63,6 +66,14 @@ public class LanguageServiceImpl extends HandlerCrudService<LanguageEntity, Lang
         ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
         Boolean existsName = this.languageRepository.existsByNameAndIdLanguageNot(dto.getName(), id);
         ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+    }
+
+    @Override
+    public List<LanguageDto> getAllByListIds(Collection<Integer> listIds) {
+        List<LanguageEntity> listEntities = this.languageRepository.findAllById(listIds);
+        return  listEntities.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
 }

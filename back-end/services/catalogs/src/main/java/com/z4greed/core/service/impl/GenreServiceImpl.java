@@ -1,19 +1,23 @@
-package com.z4greed.core.service;
+package com.z4greed.core.service.impl;
 
 import com.z4greed.core.models.dto.GenreDto;
+import com.z4greed.core.models.entity.CategoryProductEntity;
 import com.z4greed.core.models.entity.GenreEntity;
 import com.z4greed.core.models.mapper.GenreMapper;
 import com.z4greed.core.repository.GenreRepository;
-import com.z4greed.core.service.common.HandlerCrudService;
+import com.z4greed.core.service.GenreService;
 import com.z4greed.shared.exception.ResourceNotFoundException;
 import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("genreServiceImpl")
 @Transactional
-public class GenreServiceImpl extends HandlerCrudService<GenreEntity,GenreDto, Integer> {
+public class GenreServiceImpl extends GenreService<GenreEntity,GenreDto, Integer> {
 
     private final GenreRepository genreRepository;
     private final GenreMapper genreMapper;
@@ -44,7 +48,7 @@ public class GenreServiceImpl extends HandlerCrudService<GenreEntity,GenreDto, I
     }
 
     @Override
-    public GenreEntity findById(Integer id) {
+    public GenreEntity findEntityById(Integer id) {
         return this.genreRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("id", id));
     }
@@ -63,6 +67,14 @@ public class GenreServiceImpl extends HandlerCrudService<GenreEntity,GenreDto, I
         ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
         Boolean existsName = this.genreRepository.existsByNameAndIdGenreNot(dto.getName(), id);
         ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+    }
+
+    @Override
+    public List<GenreDto> getAllByListIds(Collection<Integer> listIds) {
+        List<GenreEntity> listEntities = this.genreRepository.findAllById(listIds);
+        return listEntities.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
 }

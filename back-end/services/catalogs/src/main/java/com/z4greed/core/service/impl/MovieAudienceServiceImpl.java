@@ -1,19 +1,22 @@
-package com.z4greed.core.service;
+package com.z4greed.core.service.impl;
 
 import com.z4greed.core.models.dto.MovieAudienceDto;
 import com.z4greed.core.models.entity.MovieAudienceEntity;
 import com.z4greed.core.models.mapper.MovieAudienceMapper;
 import com.z4greed.core.repository.MovieAudienceRepository;
-import com.z4greed.core.service.common.HandlerCrudService;
+import com.z4greed.core.service.MovieAudienceService;
 import com.z4greed.shared.exception.ResourceNotFoundException;
 import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("movieAudienceServiceImpl")
 @Transactional
-public class MovieAudienceServiceImpl extends HandlerCrudService<MovieAudienceEntity, MovieAudienceDto, Integer> {
+public class MovieAudienceServiceImpl extends MovieAudienceService<MovieAudienceEntity, MovieAudienceDto, Integer> {
 
     private final MovieAudienceRepository movieAudienceRepository;
     private final MovieAudienceMapper movieAudienceMapper;
@@ -44,7 +47,7 @@ public class MovieAudienceServiceImpl extends HandlerCrudService<MovieAudienceEn
     }
 
     @Override
-    public MovieAudienceEntity findById(Integer id) {
+    public MovieAudienceEntity findEntityById(Integer id) {
         return this.movieAudienceRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("id", id));
     }
@@ -63,6 +66,14 @@ public class MovieAudienceServiceImpl extends HandlerCrudService<MovieAudienceEn
         ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
         Boolean existsName = this.movieAudienceRepository.existsByNameAndIdMovieAudienceNot(dto.getName(), id);
         ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+    }
+
+    @Override
+    public List<MovieAudienceDto> getAllByListIds(Collection<Integer> listIds) {
+        List<MovieAudienceEntity> listEntities = this.movieAudienceRepository.findAllById(listIds);
+        return  listEntities.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
 }

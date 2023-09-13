@@ -1,20 +1,23 @@
-package com.z4greed.core.service;
+package com.z4greed.core.service.impl;
 
 import com.z4greed.core.models.dto.TypeStatusFilmShowDto;
 import com.z4greed.core.models.entity.TypeStatusFilmShowEntity;
 import com.z4greed.core.models.mapper.TypeStatusFilmShowMapper;
 import com.z4greed.core.repository.TypeStatusFilmShowRepository;
-import com.z4greed.core.service.common.HandlerCrudService;
+import com.z4greed.core.service.TypeStatusFilmShowService;
 import com.z4greed.shared.exception.ResourceNotFoundException;
 import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("typeStatusFilmShowServiceImpl")
 @Transactional
-public class TypeStatusFilmShowServiceImpl extends HandlerCrudService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> {
+public class TypeStatusFilmShowServiceImpl extends TypeStatusFilmShowService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> {
 
     private final TypeStatusFilmShowRepository typeStatusFilmShowRepository;
     private final TypeStatusFilmShowMapper typeStatusFilmShowMapper;
@@ -45,7 +48,7 @@ public class TypeStatusFilmShowServiceImpl extends HandlerCrudService<TypeStatus
     }
 
     @Override
-    public TypeStatusFilmShowEntity findById(Integer id) {
+    public TypeStatusFilmShowEntity findEntityById(Integer id) {
         return this.typeStatusFilmShowRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("id", id));
     }
@@ -64,6 +67,14 @@ public class TypeStatusFilmShowServiceImpl extends HandlerCrudService<TypeStatus
         ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
         Boolean existsName = this.typeStatusFilmShowRepository.existsByNameAndIdTypeStatusFilmShowNot(dto.getName(), id);
         ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+    }
+
+    @Override
+    public List<TypeStatusFilmShowDto> getAllByListIds(Collection<Integer> listIds) {
+        List<TypeStatusFilmShowEntity> listEntities = this.typeStatusFilmShowRepository.findAllById(listIds);
+        return  listEntities.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
 }

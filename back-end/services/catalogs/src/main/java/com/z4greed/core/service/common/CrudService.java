@@ -2,9 +2,7 @@ package com.z4greed.core.service.common;
 
 import com.z4greed.core.models.common.BaseDto;
 import com.z4greed.core.models.common.BasePageDto;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface CrudService <DTO extends BaseDto, ID> {
 
     public BasePageDto<DTO> getAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);

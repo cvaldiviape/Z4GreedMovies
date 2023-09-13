@@ -1,19 +1,22 @@
-package com.z4greed.core.service;
+package com.z4greed.core.service.impl;
 
 import com.z4greed.core.models.dto.CountryDto;
 import com.z4greed.core.models.entity.CountryEntity;
 import com.z4greed.core.models.mapper.CountryMapper;
 import com.z4greed.core.repository.CountryRepository;
-import com.z4greed.core.service.common.HandlerCrudService;
+import com.z4greed.core.service.CountryService;
 import com.z4greed.shared.exception.ResourceNotFoundException;
 import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("countryServiceImpl")
 @Transactional
-public class CountryServiceImpl extends HandlerCrudService<CountryEntity, CountryDto, Integer> {
+public class CountryServiceImpl extends CountryService<CountryEntity, CountryDto, Integer> {
 
     private final CountryRepository countryRepository;
     private final CountryMapper countryMapper;
@@ -44,7 +47,7 @@ public class CountryServiceImpl extends HandlerCrudService<CountryEntity, Countr
     }
 
     @Override
-    public CountryEntity findById(Integer id) {
+    public CountryEntity findEntityById(Integer id) {
         return this.countryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("id", id));
     }
@@ -63,6 +66,14 @@ public class CountryServiceImpl extends HandlerCrudService<CountryEntity, Countr
         ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
         Boolean existsName = this.countryRepository.existsByNameAndIdCountryNot(dto.getName(), id);
         ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+    }
+
+    @Override
+    public List<CountryDto> getAllByListIds(Collection<Integer> listIds) {
+        List<CountryEntity> listEntities = this.countryRepository.findAllById(listIds);
+        return  listEntities.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
 }

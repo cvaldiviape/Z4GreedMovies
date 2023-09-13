@@ -9,19 +9,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-@Transactional
 public abstract class HandlerCrudService<ENTITY extends BaseEntity, DTO extends BaseDto, ID> implements CrudService<DTO, ID> {
 
     public abstract JpaRepository<ENTITY, ID> getJpaRepository();
     public abstract DTO toDto(ENTITY entity);
     public abstract ENTITY toEntity(DTO dto);
     public abstract void updateEntityFromDto(DTO dto, ENTITY entity);
-    public abstract ENTITY findById(ID id);
+    public abstract ENTITY findEntityById(ID id);
     public abstract void verifyUnique(DTO dto);
     public abstract void verifyUnique(ID id, DTO dto);
 
@@ -47,7 +44,7 @@ public abstract class HandlerCrudService<ENTITY extends BaseEntity, DTO extends 
 
     @Override
     public DTO getById(ID id) {
-        ENTITY entity = this.findById(id);
+        ENTITY entity = this.findEntityById(id);
         return this.toDto(entity);
     }
 
@@ -61,7 +58,7 @@ public abstract class HandlerCrudService<ENTITY extends BaseEntity, DTO extends 
 
     @Override
     public DTO update(ID id, DTO dto) {
-        ENTITY entity = this.findById(id);
+        ENTITY entity = this.findEntityById(id);
         this.verifyUnique(id, dto);
         this.updateEntityFromDto(dto, entity);
         ENTITY entityUpdated = this.getJpaRepository().save(entity);
@@ -70,7 +67,7 @@ public abstract class HandlerCrudService<ENTITY extends BaseEntity, DTO extends 
 
     @Override
     public DTO delete(ID id) {
-        ENTITY entity = this.findById(id);
+        ENTITY entity = this.findEntityById(id);
         this.getJpaRepository().delete(entity);
         return this.toDto(entity);
     }
