@@ -15,7 +15,7 @@ public class BaseEntity {
 
     @Column(length = 3, nullable = false, unique = true)
     private String code;
-    @Column(length = 3, nullable = false, unique = true)
+    @Column(length = 40, nullable = false, unique = true)
     private String name;
 
 }
