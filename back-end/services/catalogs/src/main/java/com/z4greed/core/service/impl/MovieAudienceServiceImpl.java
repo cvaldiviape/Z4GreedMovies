@@ -69,7 +69,7 @@ public class MovieAudienceServiceImpl extends MovieAudienceService<MovieAudience
     }
 
     @Override
-    public List<MovieAudienceDto> getAllByListIds(Collection<Integer> listIds) {
+    public List<MovieAudienceDto> findAllByListIds(Collection<Integer> listIds) {
         List<MovieAudienceEntity> listEntities = this.movieAudienceRepository.findAllById(listIds);
         return  listEntities.stream()
                 .map(this::toDto)

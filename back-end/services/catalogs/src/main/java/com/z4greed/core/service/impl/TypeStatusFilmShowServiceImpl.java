@@ -70,7 +70,7 @@ public class TypeStatusFilmShowServiceImpl extends TypeStatusFilmShowService<Typ
     }
 
     @Override
-    public List<TypeStatusFilmShowDto> getAllByListIds(Collection<Integer> listIds) {
+    public List<TypeStatusFilmShowDto> findAllByListIds(Collection<Integer> listIds) {
         List<TypeStatusFilmShowEntity> listEntities = this.typeStatusFilmShowRepository.findAllById(listIds);
         return  listEntities.stream()
                 .map(this::toDto)

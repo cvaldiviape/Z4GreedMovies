@@ -69,7 +69,7 @@ public class LanguageServiceImpl extends LanguageService<LanguageEntity, Languag
     }
 
     @Override
-    public List<LanguageDto> getAllByListIds(Collection<Integer> listIds) {
+    public List<LanguageDto> findAllByListIds(Collection<Integer> listIds) {
         List<LanguageEntity> listEntities = this.languageRepository.findAllById(listIds);
         return  listEntities.stream()
                 .map(this::toDto)

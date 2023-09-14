@@ -69,7 +69,7 @@ public class CategoryProductServiceImpl extends CategoryProductService<CategoryP
     }
 
     @Override
-    public List<CategoryProductDto> getAllByListIds(Collection<Integer> listIds) {
+    public List<CategoryProductDto> findAllByListIds(Collection<Integer> listIds) {
         List<CategoryProductEntity> listEntities = this.categoryProductRepository.findAllById(listIds);
         return  listEntities.stream()
                 .map(this::toDto)

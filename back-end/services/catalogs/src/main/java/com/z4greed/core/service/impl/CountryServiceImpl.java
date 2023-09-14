@@ -69,7 +69,7 @@ public class CountryServiceImpl extends CountryService<CountryEntity, CountryDto
     }
 
     @Override
-    public List<CountryDto> getAllByListIds(Collection<Integer> listIds) {
+    public List<CountryDto> findAllByListIds(Collection<Integer> listIds) {
         List<CountryEntity> listEntities = this.countryRepository.findAllById(listIds);
         return  listEntities.stream()
                 .map(this::toDto)

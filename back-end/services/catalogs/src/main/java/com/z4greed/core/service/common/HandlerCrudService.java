@@ -23,7 +23,7 @@ public abstract class HandlerCrudService<ENTITY extends BaseEntity, DTO extends 
     public abstract void verifyUnique(ID id, DTO dto);
 
     @Override
-    public BasePageDto<DTO> getAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir) {
+    public BasePageDto<DTO> findAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir) {
         Pageable pageable = PageUtil.getPageable(numberPage, sizePage, sortBy, sortDir);
         Page<ENTITY> pageData = this.getJpaRepository().findAll(pageable);
         List<ENTITY> listEntities = pageData.getContent();
@@ -43,7 +43,7 @@ public abstract class HandlerCrudService<ENTITY extends BaseEntity, DTO extends 
     }
 
     @Override
-    public DTO getById(ID id) {
+    public DTO findById(ID id) {
         ENTITY entity = this.findEntityById(id);
         return this.toDto(entity);
     }

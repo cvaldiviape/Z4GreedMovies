@@ -6,7 +6,6 @@ import com.z4greed.core.models.entity.MovieAudienceEntity;
 import com.z4greed.core.rest.common.HandlerCrudController;
 import com.z4greed.core.service.MovieAudienceService;
 import com.z4greed.core.service.common.CrudService;
-import com.z4greed.core.service.common.HandlerCrudService;
 import com.z4greed.shared.enums.ControllerMessageEnum;
 import com.z4greed.shared.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,9 +33,9 @@ public class MovieAudienceController extends HandlerCrudController<MovieAudience
         return this.movieAudienceService;
     }
 
-    @PostMapping("/getAllByListIds")
-    public ResponseEntity<ResponseDto> getAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<MovieAudienceDto> result = this.movieAudienceService.getAllByListIds(listIds);
+    @PostMapping("/findAllByListIds")
+    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
+        List<MovieAudienceDto> result = this.movieAudienceService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
         return ResponseEntity.ok(response);
     }

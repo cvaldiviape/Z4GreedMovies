@@ -6,7 +6,6 @@ import com.z4greed.core.models.entity.LanguageEntity;
 import com.z4greed.core.rest.common.HandlerCrudController;
 import com.z4greed.core.service.LanguageService;
 import com.z4greed.core.service.common.CrudService;
-import com.z4greed.core.service.common.HandlerCrudService;
 import com.z4greed.shared.enums.ControllerMessageEnum;
 import com.z4greed.shared.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,9 +33,9 @@ public class LanguageController extends HandlerCrudController<LanguageDto, Integ
         return this.languageService;
     }
 
-    @PostMapping("/getAllByListIds")
-    public ResponseEntity<ResponseDto> getAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<LanguageDto> result = this.languageService.getAllByListIds(listIds);
+    @PostMapping("/findAllByListIds")
+    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
+        List<LanguageDto> result = this.languageService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
         return ResponseEntity.ok(response);
     }

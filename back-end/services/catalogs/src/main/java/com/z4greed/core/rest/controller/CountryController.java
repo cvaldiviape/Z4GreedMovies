@@ -6,7 +6,6 @@ import com.z4greed.core.models.entity.CountryEntity;
 import com.z4greed.core.rest.common.HandlerCrudController;
 import com.z4greed.core.service.CountryService;
 import com.z4greed.core.service.common.CrudService;
-import com.z4greed.core.service.common.HandlerCrudService;
 import com.z4greed.shared.enums.ControllerMessageEnum;
 import com.z4greed.shared.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,9 +33,9 @@ public class CountryController extends HandlerCrudController<CountryDto, Integer
         return this.countryService;
     }
 
-    @PostMapping("/getAllByListIds")
-    public ResponseEntity<ResponseDto> getAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<CountryDto> result = this.countryService.getAllByListIds(listIds);
+    @PostMapping("/findAllByListIds")
+    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
+        List<CountryDto> result = this.countryService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
         return ResponseEntity.ok(response);
     }

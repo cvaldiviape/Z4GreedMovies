@@ -70,7 +70,7 @@ public class GenreServiceImpl extends GenreService<GenreEntity,GenreDto, Integer
     }
 
     @Override
-    public List<GenreDto> getAllByListIds(Collection<Integer> listIds) {
+    public List<GenreDto> findAllByListIds(Collection<Integer> listIds) {
         List<GenreEntity> listEntities = this.genreRepository.findAllById(listIds);
         return listEntities.stream()
                 .map(this::toDto)

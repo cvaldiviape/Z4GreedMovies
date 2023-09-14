@@ -8,6 +8,6 @@ import java.util.List;
 
 public abstract class CategoryProductService <ENTITY extends BaseEntity, DTO extends BaseDto, ID> extends HandlerCrudService<ENTITY, DTO, ID> {
 
-    public abstract List<DTO> getAllByListIds(Collection<ID> listIds);
+    public abstract List<DTO> findAllByListIds(Collection<ID> listIds);
 
 }
