@@ -1,8 +1,6 @@
-package com.shared.utils;
+package com.shared.utils.filter;
 
-import com.shared.exception.Z4GreedMoviesException;
-import com.shared.interfaces.Searchable;
-import org.springframework.http.HttpStatus;
+import com.shared.utils.ValidateUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +11,7 @@ public class FilterUtil {
         return list.stream()
                 .filter(item -> filterGeneric(item, valueToSearch))
                 .findFirst()
-                .orElseThrow(() ->  new Z4GreedMoviesException(HttpStatus.BAD_REQUEST, nameValueNotFound));
+                .orElseThrow(() ->  ValidateUtil.throwNotFoundException(nameValueNotFound));
     }
 
     public static <T extends Searchable<U>, U> Optional<T> find(List<T> list, U valueToSearch) {

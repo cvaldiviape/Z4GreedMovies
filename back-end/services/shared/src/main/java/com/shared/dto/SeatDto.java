@@ -1,5 +1,6 @@
 package com.shared.dto;
 
+import com.shared.utils.filter.Searchable;
 import lombok.*;
 
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SeatDto {
+public class SeatDto implements Searchable<Integer> {
 
     private Integer idSeat;
     private String code;
@@ -27,6 +28,11 @@ public class SeatDto {
     @Override
     public int hashCode() {
         return Objects.hash(idSeat, code, idRoom, room);
+    }
+
+    @Override
+    public Integer getSearcheableField() {
+        return this.idSeat;
     }
 
 }

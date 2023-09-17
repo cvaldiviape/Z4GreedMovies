@@ -1,10 +1,8 @@
 package com.shared.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shared.dto.custom.ResponseDto;
-import com.shared.exception.Z4GreedMoviesException;
+import com.shared.utils.response.ResponseDto;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +20,10 @@ public class FeignUtil {
     }
 
     public static <T> List<T> convertDataToList(ResponseDto apiResponse, Class<T> clase, String nameValueNotFound) {
+        Object[] messageError = { nameValueNotFound };
         ObjectMapper mapper = new ObjectMapper();
         Object data = Optional.ofNullable(apiResponse.getData())
-                .orElseThrow(() -> new Z4GreedMoviesException(HttpStatus.NOT_FOUND, nameValueNotFound + " no existe"));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(messageError));
         return mapper.convertValue(data, mapper.getTypeFactory().constructCollectionType(List.class, clase));
     }
 
@@ -37,9 +36,10 @@ public class FeignUtil {
     }
 
     public static <T> T convertDataToObject(ResponseDto apiResponse, Class<T> clase, String nameValueNotFound) {
+        Object[] messageError = { nameValueNotFound };
         ObjectMapper mapper = new ObjectMapper();
         Object data = Optional.ofNullable(apiResponse.getData())
-                .orElseThrow(() -> new Z4GreedMoviesException(HttpStatus.NOT_FOUND, nameValueNotFound + " no existen"));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(messageError));
         return (T) mapper.convertValue(data, clase);
     }
 

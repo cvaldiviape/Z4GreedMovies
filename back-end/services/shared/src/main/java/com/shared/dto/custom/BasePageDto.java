@@ -1,4 +1,4 @@
-package com.shared.dto;
+package com.shared.dto.custom;
 
 import lombok.*;
 

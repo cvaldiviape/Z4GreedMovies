@@ -1,4 +1,4 @@
-package com.shared.interfaces;
+package com.shared.utils.filter;
 
 public interface Searchable<T> {
 

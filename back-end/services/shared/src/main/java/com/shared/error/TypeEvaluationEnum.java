@@ -1,4 +1,4 @@
-package com.shared.enums;
+package com.shared.error;
 
 public enum TypeEvaluationEnum {
     TRUE,

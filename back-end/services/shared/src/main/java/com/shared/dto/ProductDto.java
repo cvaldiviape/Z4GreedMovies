@@ -1,5 +1,6 @@
 package com.shared.dto;
 
+import com.shared.utils.filter.Searchable;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -10,7 +11,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductDto {
+public class ProductDto implements Searchable<Integer> {
 
     private Integer idProduct;
     private String code;
@@ -33,4 +34,8 @@ public class ProductDto {
         return Objects.hash(idProduct, code, description, price, stock, idCategoryProduct, categoryProduct);
     }
 
+    @Override
+    public Integer getSearcheableField() {
+        return this.idProduct;
+    }
 }

@@ -1,12 +1,9 @@
-package com.shared.enums;
+package com.shared.error;
 
-import com.shared.enums.TypeExceptionEnum;
-import com.shared.error.GenericError;
-
-import static com.shared.enums.TypeExceptionEnum.WARNING;
+import static com.shared.error.TypeExceptionEnum.WARNING;
 
 public enum ServiceResourceErrorEnum implements GenericError {
-    SRE_E000001("SRE_E000001", "%s no existe!", WARNING);
+    E0000("E0000", "", WARNING);
 
     private final String code;
     private final String message;

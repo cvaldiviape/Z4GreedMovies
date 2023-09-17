@@ -1,6 +1,6 @@
-package com.shared.dto.custom;
+package com.shared.utils.response;
 
-import com.shared.enums.TypeExceptionEnum;
+import com.shared.error.TypeExceptionEnum;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 
@@ -14,8 +14,8 @@ public class ResponseDto {
     private String dateTime;
     private Boolean success;
     private String message;
+    private String code;
     private Object data;
-    private HttpStatus status;
     private TypeExceptionEnum type;
 
 }
