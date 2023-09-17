@@ -1,6 +1,6 @@
 package com.z4greed.core.model.mapper;
 
-import com.z4greed.core.model.dto.SeatDto;
+import com.shared.dto.SeatDto;
 import com.z4greed.core.model.entity.SeatEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

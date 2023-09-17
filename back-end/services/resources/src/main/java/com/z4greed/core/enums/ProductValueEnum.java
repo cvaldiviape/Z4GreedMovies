@@ -2,17 +2,16 @@ package com.z4greed.core.enums;
 
 import lombok.Getter;
 
-
-public enum EnumValueProduct {
+@Getter
+public enum ProductValueEnum {
     PRODUCT("Producto"),
-    CATEGORY("Categoria");
+    CATEGORY("Categoria"),
+    LIST_CATEGORY("Lista de categorias");
 
     private final String value;
 
-    private  EnumValueProduct(String value) {
+    private ProductValueEnum(String value) {
         this.value = value;
     }
-
-    publ
 
 }
