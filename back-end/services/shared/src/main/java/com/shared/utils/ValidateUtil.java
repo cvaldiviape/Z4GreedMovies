@@ -1,38 +1,35 @@
 package com.shared.utils;
 
 import com.shared.error.GeneralErrorEnum;
-import com.shared.error.TypeEvaluationEnum;
 import com.shared.error.GenericError;
 import com.shared.exception.Z4GreedMoviesException;
-
 import java.util.Collection;
 
 public class ValidateUtil {
 
-    public static void evaluate(TypeEvaluationEnum typeEvaluation, boolean expression, GenericError codeError){
-        if (typeEvaluation.equals(TypeEvaluationEnum.TRUE)) {
-            if (expression) {
-                throwZ4GreedMoviesException(codeError);
-            }
-        }
-        if (typeEvaluation.equals(TypeEvaluationEnum.FALSE)) {
-            if (!expression) {
-                throwZ4GreedMoviesException(codeError);
-            }
+    public static void evaluateTrue(boolean expression, GenericError codeError){
+        if (expression) {
+            throwZ4GreedMoviesException(codeError);
         }
     }
 
-    public static void evaluate(TypeEvaluationEnum typeEvaluation, boolean expression, GenericError codeError, Object... value) {
-        if(typeEvaluation.equals(TypeEvaluationEnum.TRUE)) {
-            if (expression) {
-                throwZ4GreedMoviesException(codeError, value);
-            }
+    public static void evaluateFalse(boolean expression, GenericError codeError){
+        if (!expression) {
+            throwZ4GreedMoviesException(codeError);
         }
-        if (typeEvaluation.equals(TypeEvaluationEnum.FALSE)){
-            if (!expression) {
-                throwZ4GreedMoviesException(codeError, value);
-            }
+    }
+
+    public static void evaluateTrue(boolean expression, GenericError codeError, Object... value) {
+        if (expression) {
+            throwZ4GreedMoviesException(codeError, value);
         }
+    }
+
+    public static void evaluateFalse(boolean expression, GenericError codeError, Object... value) {
+        if (!expression) {
+            throwZ4GreedMoviesException(codeError, value);
+        }
+
     }
 
     public static void hasData(Collection<?> list, GenericError codeError) {
