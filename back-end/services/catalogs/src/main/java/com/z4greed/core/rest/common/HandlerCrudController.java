@@ -1,17 +1,16 @@
 package com.z4greed.core.rest.common;
 
-import com.z4greed.core.models.common.BaseDto;
-import com.z4greed.core.models.common.BasePageDto;
-import com.z4greed.core.models.dto.custom.ResponseDto;
+import com.shared.constants.PageConstants;
+import com.shared.dto.custom.BasePageDto;
+import com.shared.enums.ControllerMessageEnum;
+import com.shared.utils.response.ResponseDto;
+import com.shared.utils.response.ResponseUtil;
 import com.z4greed.core.service.common.CrudService;
-import com.z4greed.shared.constants.PageConstants;
-import com.z4greed.shared.enums.ControllerMessageEnum;
-import com.z4greed.shared.utils.ResponseUtil;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public abstract class HandlerCrudController<DTO extends BaseDto, ID> {
+public abstract class HandlerCrudController<DTO, ID> {
 
     public abstract CrudService<DTO, ID> getCrudService();
 
@@ -21,14 +20,14 @@ public abstract class HandlerCrudController<DTO extends BaseDto, ID> {
                                                @RequestParam(value = "sortBy", defaultValue = PageConstants.SORT_BY_DEFAULT, required = false) String sortBy,
                                                @RequestParam(value = "sortDir", defaultValue = PageConstants.SORT_DIR_DEFAULT, required = false) String sortDir) {
         BasePageDto<DTO> result = this.getCrudService().findAll(numberPage, sizePage, sortBy, sortDir);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
+        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto> findById(@PathVariable ID id) {
         DTO result = this.getCrudService().findById(id);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_BY_IO, result);
+        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_BY_IO, result);
         return ResponseEntity.ok(response);
     }
 

@@ -1,23 +1,22 @@
 package com.z4greed.core.service.impl;
 
-import com.z4greed.core.models.dto.GenreDto;
-import com.z4greed.core.models.entity.CategoryProductEntity;
+import com.shared.dto.GenreDto;
+import com.shared.enums.ValueEnum;
+import com.shared.error.GeneralErrorEnum;
+import com.shared.utils.ValidateUtil;
 import com.z4greed.core.models.entity.GenreEntity;
 import com.z4greed.core.models.mapper.GenreMapper;
 import com.z4greed.core.repository.GenreRepository;
 import com.z4greed.core.service.GenreService;
-import com.z4greed.shared.exception.ResourceNotFoundException;
-import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("genreServiceImpl")
 @Transactional
-public class GenreServiceImpl extends GenreService<GenreEntity,GenreDto, Integer> {
+public class GenreServiceImpl extends GenreService<GenreEntity, GenreDto, Integer> {
 
     private final GenreRepository genreRepository;
     private final GenreMapper genreMapper;
@@ -43,6 +42,11 @@ public class GenreServiceImpl extends GenreService<GenreEntity,GenreDto, Integer
     }
 
     @Override
+    public List<GenreDto> toListDtos(List<GenreEntity> listEntities) {
+        return this.genreMapper.toListDtos(listEntities);
+    }
+
+    @Override
     public void updateEntityFromDto(GenreDto dto, GenreEntity entity) {
         this.genreMapper.updateEntityFromDto(dto, entity);
     }
@@ -50,31 +54,29 @@ public class GenreServiceImpl extends GenreService<GenreEntity,GenreDto, Integer
     @Override
     public GenreEntity findEntityById(Integer id) {
         return this.genreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id", id));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.GENRE.getValue(), id));
     }
 
     @Override
     public void verifyUnique(GenreDto dto) {
         Boolean existsCode = this.genreRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.genreRepository.existsByName(dto.getName());
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public void verifyUnique(Integer id, GenreDto dto) {
         Boolean existsCode = this.genreRepository.existsByCodeAndIdGenreNot(dto.getCode(), id);
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.genreRepository.existsByNameAndIdGenreNot(dto.getName(), id);
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public List<GenreDto> findAllByListIds(Collection<Integer> listIds) {
         List<GenreEntity> listEntities = this.genreRepository.findAllById(listIds);
-        return listEntities.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+        return this.toListDtos(listEntities);
     }
 
 }

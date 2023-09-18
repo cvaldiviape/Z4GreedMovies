@@ -1,18 +1,18 @@
 package com.z4greed.core.service.impl;
 
-import com.z4greed.core.models.dto.LanguageDto;
+import com.shared.dto.LanguageDto;
+import com.shared.enums.ValueEnum;
+import com.shared.error.GeneralErrorEnum;
+import com.shared.utils.ValidateUtil;
 import com.z4greed.core.models.entity.LanguageEntity;
 import com.z4greed.core.models.mapper.LanguageMapper;
 import com.z4greed.core.repository.LanguageRepository;
 import com.z4greed.core.service.LanguageService;
-import com.z4greed.shared.exception.ResourceNotFoundException;
-import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("languageServiceImpl")
 @Transactional
@@ -42,6 +42,11 @@ public class LanguageServiceImpl extends LanguageService<LanguageEntity, Languag
     }
 
     @Override
+    public List<LanguageDto> toListDtos(List<LanguageEntity> listEntities) {
+        return this.languageMapper.toListDtos(listEntities);
+    }
+
+    @Override
     public void updateEntityFromDto(LanguageDto dto, LanguageEntity entity) {
         this.languageMapper.updateEntityFromDto(dto, entity);
     }
@@ -49,31 +54,29 @@ public class LanguageServiceImpl extends LanguageService<LanguageEntity, Languag
     @Override
     public LanguageEntity findEntityById(Integer id) {
         return this.languageRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id", id));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.LANGUAGE.getValue(), id));
     }
 
     @Override
     public void verifyUnique(LanguageDto dto) {
         Boolean existsCode = this.languageRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.languageRepository.existsByName(dto.getName());
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public void verifyUnique(Integer id, LanguageDto dto) {
         Boolean existsCode = this.languageRepository.existsByCodeAndIdLanguageNot(dto.getCode(), id);
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.languageRepository.existsByNameAndIdLanguageNot(dto.getName(), id);
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public List<LanguageDto> findAllByListIds(Collection<Integer> listIds) {
         List<LanguageEntity> listEntities = this.languageRepository.findAllById(listIds);
-        return  listEntities.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+        return  this.toListDtos(listEntities);
     }
 
 }

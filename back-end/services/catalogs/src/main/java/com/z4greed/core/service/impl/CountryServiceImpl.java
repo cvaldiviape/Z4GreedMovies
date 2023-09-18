@@ -1,18 +1,18 @@
 package com.z4greed.core.service.impl;
 
-import com.z4greed.core.models.dto.CountryDto;
+import com.shared.dto.CountryDto;
+import com.shared.enums.ValueEnum;
+import com.shared.error.GeneralErrorEnum;
+import com.shared.utils.ValidateUtil;
 import com.z4greed.core.models.entity.CountryEntity;
 import com.z4greed.core.models.mapper.CountryMapper;
 import com.z4greed.core.repository.CountryRepository;
 import com.z4greed.core.service.CountryService;
-import com.z4greed.shared.exception.ResourceNotFoundException;
-import com.z4greed.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("countryServiceImpl")
 @Transactional
@@ -42,6 +42,11 @@ public class CountryServiceImpl extends CountryService<CountryEntity, CountryDto
     }
 
     @Override
+    public List<CountryDto> toListDtos(List<CountryEntity> listEntities) {
+        return this.countryMapper.toListDtos(listEntities);
+    }
+
+    @Override
     public void updateEntityFromDto(CountryDto dto, CountryEntity entity) {
         this.countryMapper.updateEntityFromDto(dto, entity);
     }
@@ -49,31 +54,29 @@ public class CountryServiceImpl extends CountryService<CountryEntity, CountryDto
     @Override
     public CountryEntity findEntityById(Integer id) {
         return this.countryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id", id));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.COUNTRY.getValue(), id));
     }
 
     @Override
     public void verifyUnique(CountryDto dto) {
         Boolean existsCode = this.countryRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.countryRepository.existsByName(dto.getName());
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public void verifyUnique(Integer id, CountryDto dto) {
         Boolean existsCode = this.countryRepository.existsByCodeAndIdCountryNot(dto.getCode(), id);
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.countryRepository.existsByNameAndIdCountryNot(dto.getName(), id);
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public List<CountryDto> findAllByListIds(Collection<Integer> listIds) {
         List<CountryEntity> listEntities = this.countryRepository.findAllById(listIds);
-        return  listEntities.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+        return this.toListDtos(listEntities);
     }
 
 }

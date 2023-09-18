@@ -1,13 +1,13 @@
 package com.z4greed.core.rest.controller;
 
-import com.z4greed.core.models.dto.LanguageDto;
-import com.z4greed.core.models.dto.custom.ResponseDto;
+import com.shared.dto.LanguageDto;
+import com.shared.enums.ControllerMessageEnum;
+import com.shared.utils.response.ResponseDto;
+import com.shared.utils.response.ResponseUtil;
 import com.z4greed.core.models.entity.LanguageEntity;
 import com.z4greed.core.rest.common.HandlerCrudController;
 import com.z4greed.core.service.LanguageService;
 import com.z4greed.core.service.common.CrudService;
-import com.z4greed.shared.enums.ControllerMessageEnum;
-import com.z4greed.shared.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +36,7 @@ public class LanguageController extends HandlerCrudController<LanguageDto, Integ
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
         List<LanguageDto> result = this.languageService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
+        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }
 

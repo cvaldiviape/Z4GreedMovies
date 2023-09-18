@@ -1,13 +1,13 @@
 package com.z4greed.core.rest.controller;
 
-import com.z4greed.core.models.dto.CategoryProductDto;
-import com.z4greed.core.models.dto.custom.ResponseDto;
+import com.shared.dto.CategoryProductDto;
+import com.shared.enums.ControllerMessageEnum;
+import com.shared.utils.response.ResponseDto;
+import com.shared.utils.response.ResponseUtil;
 import com.z4greed.core.models.entity.CategoryProductEntity;
 import com.z4greed.core.rest.common.HandlerCrudController;
 import com.z4greed.core.service.CategoryProductService;
 import com.z4greed.core.service.common.CrudService;
-import com.z4greed.shared.enums.ControllerMessageEnum;
-import com.z4greed.shared.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +36,7 @@ public class CategoryProductController extends HandlerCrudController<CategoryPro
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
         List<CategoryProductDto> result = this.categoryProductService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
+        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }
 

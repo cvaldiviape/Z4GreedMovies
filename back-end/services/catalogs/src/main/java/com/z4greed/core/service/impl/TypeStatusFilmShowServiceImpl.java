@@ -1,19 +1,18 @@
 package com.z4greed.core.service.impl;
 
-import com.z4greed.core.models.dto.TypeStatusFilmShowDto;
+import com.shared.dto.TypeStatusFilmShowDto;
+import com.shared.enums.ValueEnum;
+import com.shared.error.GeneralErrorEnum;
+import com.shared.utils.ValidateUtil;
 import com.z4greed.core.models.entity.TypeStatusFilmShowEntity;
 import com.z4greed.core.models.mapper.TypeStatusFilmShowMapper;
 import com.z4greed.core.repository.TypeStatusFilmShowRepository;
 import com.z4greed.core.service.TypeStatusFilmShowService;
-import com.z4greed.shared.exception.ResourceNotFoundException;
-import com.z4greed.shared.utils.ValidateUtil;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("typeStatusFilmShowServiceImpl")
 @Transactional
@@ -43,6 +42,11 @@ public class TypeStatusFilmShowServiceImpl extends TypeStatusFilmShowService<Typ
     }
 
     @Override
+    public List<TypeStatusFilmShowDto> toListDtos(List<TypeStatusFilmShowEntity> listEntities) {
+        return this.typeStatusFilmShowMapper.toListDtos(listEntities);
+    }
+
+    @Override
     public void updateEntityFromDto(TypeStatusFilmShowDto dto, TypeStatusFilmShowEntity entity) {
         this.typeStatusFilmShowMapper.updateEntityFromDto(dto, entity);
     }
@@ -50,31 +54,29 @@ public class TypeStatusFilmShowServiceImpl extends TypeStatusFilmShowService<Typ
     @Override
     public TypeStatusFilmShowEntity findEntityById(Integer id) {
         return this.typeStatusFilmShowRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id", id));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.TYPE_STATUS_FILM_SHOW.getValue(), id));
     }
 
     @Override
     public void verifyUnique(TypeStatusFilmShowDto dto) {
         Boolean existsCode = this.typeStatusFilmShowRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.typeStatusFilmShowRepository.existsByName(dto.getName());
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public void verifyUnique(Integer id, TypeStatusFilmShowDto dto) {
         Boolean existsCode = this.typeStatusFilmShowRepository.existsByCodeAndIdTypeStatusFilmShowNot(dto.getCode(), id);
-        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
+        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.typeStatusFilmShowRepository.existsByNameAndIdTypeStatusFilmShowNot(dto.getName(), id);
-        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
+        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
     }
 
     @Override
     public List<TypeStatusFilmShowDto> findAllByListIds(Collection<Integer> listIds) {
         List<TypeStatusFilmShowEntity> listEntities = this.typeStatusFilmShowRepository.findAllById(listIds);
-        return  listEntities.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+        return this.typeStatusFilmShowMapper.toListDtos(listEntities);
     }
 
 }

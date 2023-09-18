@@ -1,9 +1,8 @@
 package com.z4greed.core.service.common;
 
-import com.z4greed.core.models.common.BaseDto;
-import com.z4greed.core.models.common.BasePageDto;
+import com.shared.dto.custom.BasePageDto;
 
-public interface CrudService <DTO extends BaseDto, ID> {
+public interface CrudService <DTO, ID> {
 
     public BasePageDto<DTO> findAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);
 
