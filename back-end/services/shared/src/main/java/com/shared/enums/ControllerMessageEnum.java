@@ -2,11 +2,11 @@ package com.shared.enums;
 
 public enum ControllerMessageEnum {
 
-    GET_ALL("Getting list of items"),
-    GET_BY_IO("item recovery by id"),
-    CREATE("Successful creation"),
-    UPDATE("Successful update"),
-    DELETE("Successful elimination");
+    FIND_ALL("Listado de elementos"),
+    FIND_BY_IO("Buscar elemento por Id"),
+    CREATE("Creación exitosa"),
+    UPDATE("Actualización exitosa"),
+    DELETE("Eliminación exitosa");
 
     private final String value;
 
