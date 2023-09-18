@@ -14,27 +14,27 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class CategoryProductDto extends BaseMasterDto implements Searchable<Integer> {
+public class GenreDto extends BaseMasterDto implements Searchable<Integer> {
 
-    private Integer idCategoryProduct;
+    private Integer idGenre;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CategoryProductDto that = (CategoryProductDto) o;
-        return Objects.equals(idCategoryProduct, that.idCategoryProduct);
+        GenreDto genreDto = (GenreDto) o;
+        return Objects.equals(idGenre, genreDto.idGenre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idCategoryProduct);
+        return Objects.hash(super.hashCode(), idGenre);
     }
 
     @Override
     public Integer getSearcheableField() {
-        return this.idCategoryProduct;
+        return this.idGenre;
     }
 
 }
