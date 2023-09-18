@@ -1,5 +1,6 @@
 package com.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.utils.filter.Searchable;
 import lombok.*;
 
@@ -34,6 +35,7 @@ public class ProductDto implements Searchable<Integer> {
         return Objects.hash(idProduct, code, description, price, stock, idCategoryProduct, categoryProduct);
     }
 
+    @JsonIgnore
     @Override
     public Integer getSearcheableField() {
         return this.idProduct;

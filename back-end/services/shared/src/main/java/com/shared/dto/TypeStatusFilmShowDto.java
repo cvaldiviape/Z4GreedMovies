@@ -1,5 +1,6 @@
 package com.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.dto.custom.BaseMasterDto;
 import com.shared.utils.filter.Searchable;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class TypeStatusFilmShowDto extends BaseMasterDto implements Searchable<I
         return Objects.hash(super.hashCode(), idTypeStatusFilmShow);
     }
 
+    @JsonIgnore
     @Override
     public Integer getSearcheableField() {
         return this.idTypeStatusFilmShow;

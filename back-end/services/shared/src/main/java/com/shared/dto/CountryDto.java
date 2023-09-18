@@ -1,5 +1,6 @@
 package com.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.dto.custom.BaseMasterDto;
 import com.shared.utils.filter.Searchable;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class CountryDto extends BaseMasterDto implements Searchable<Integer> {
         return Objects.hash(super.hashCode(), idCountry);
     }
 
+    @JsonIgnore
     @Override
     public Integer getSearcheableField() {
         return this.idCountry;

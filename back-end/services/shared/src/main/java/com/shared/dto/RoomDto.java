@@ -1,5 +1,6 @@
 package com.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.utils.filter.Searchable;
 import lombok.*;
 
@@ -30,6 +31,7 @@ public class RoomDto implements Searchable<Integer> {
         return Objects.hash(idRoom, code, location, seatingCapacity);
     }
 
+    @JsonIgnore
     @Override
     public Integer getSearcheableField() {
         return this.idRoom;
