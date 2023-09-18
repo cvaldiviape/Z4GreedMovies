@@ -1,15 +1,12 @@
 package com.z4greed.core.service.common;
 
-import com.z4greed.core.models.common.BaseDto;
-import com.z4greed.core.models.common.BasePageDto;
-import org.springframework.stereotype.Service;
+import com.shared.dto.custom.BasePageDto;
 
-@Service
-public interface CrudService <DTO extends BaseDto, ID> {
+public interface CrudService <DTO, ID> {
 
-    public BasePageDto<DTO> getAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);
+    public BasePageDto<DTO> findAll(Integer numberPage, Integer sizePage, String sortBy, String sortDir);
 
-    public DTO getById(ID id);
+    public DTO findById(ID id);
 
     public DTO create(DTO dto);
 

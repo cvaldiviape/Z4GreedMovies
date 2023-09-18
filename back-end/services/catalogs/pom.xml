@@ -70,7 +70,6 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -91,6 +90,11 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${org.mapstruct.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.shared</groupId>
+			<artifactId>shared</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -104,7 +108,7 @@
 		</dependencies>
 	</dependencyManagement>
 
-<!--	https://mapstruct.org/documentation/stable/reference/html/#lombok-->
+	<!--https://mapstruct.org/documentation/stable/reference/html/#lombok-->
 	<build>
 		<plugins>
 			<plugin>
