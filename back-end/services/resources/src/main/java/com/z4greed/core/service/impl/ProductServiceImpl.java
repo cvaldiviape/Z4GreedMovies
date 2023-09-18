@@ -3,13 +3,13 @@ package com.z4greed.core.service.impl;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.dto.CategoryProductDto;
 import com.shared.dto.ProductDto;
+import com.shared.enums.ValueEnum;
 import com.shared.utils.filter.FilterUtil;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.FeignUtil;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;
 import com.z4greed.core.client.ProductCategoryFeign;
-import com.z4greed.core.enums.ProductValueEnum;
 import com.z4greed.core.model.entity.ProductEntity;
 import com.z4greed.core.model.mapper.ProductMapper;
 import com.z4greed.core.repositories.ProductRepository;
@@ -18,9 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -42,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
         Page<ProductEntity> pageData = this.productRepository.findAll(pageable);
         List<ProductEntity> listEntities = pageData.getContent();
 
-        List<ProductDto> listProducts = productMapper.toDtoList(listEntities);
+        List<ProductDto> listProducts = productMapper.toListDtos(listEntities);
 
         if (ValidateUtil.hasData(listProducts)){
             setComplementaryData(listProducts);
@@ -92,12 +90,12 @@ public class ProductServiceImpl implements ProductService {
     // ------------------------------------------------------------------------- utils ------------------------------------------------------------------------- //
     public ProductEntity findEntityById(Integer id) {
         return this.productRepository.findById(id)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ProductValueEnum.PRODUCT.getValue(), id));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.PRODUCT.getValue(), id));
     }
 
     private CategoryProductDto findCategoryProductById(Integer idCategoryProduct) {
         ResponseDto response = productCategoryFeign.findById(idCategoryProduct);
-        return FeignUtil.convertDataToObject(response, CategoryProductDto.class, ProductValueEnum.PRODUCT.getValue());
+        return FeignUtil.convertDataToObject(response, CategoryProductDto.class, ValueEnum.PRODUCT.getValue());
     }
 
     private void setComplementaryData(List<ProductDto> listProducts) {
@@ -108,14 +106,14 @@ public class ProductServiceImpl implements ProductService {
         List<CategoryProductDto> listCategoryProducts = findAllCategoriesByListIds(listIdsCategories);
 
         for (ProductDto product : listProducts) {
-            CategoryProductDto category = FilterUtil.find(listCategoryProducts, product.getIdCategoryProduct(), ProductValueEnum.CATEGORY.getValue());
+            CategoryProductDto category = FilterUtil.find(listCategoryProducts, product.getIdCategoryProduct(), ValueEnum.CATEGORY.getValue());
             product.setCategoryProduct(category);
         }
     }
 
     private List<CategoryProductDto> findAllCategoriesByListIds(List<Integer> listIdsCategories) {
         ResponseDto response = productCategoryFeign.findAllByListIds(listIdsCategories);
-        return FeignUtil.convertDataToList(response, CategoryProductDto.class, ProductValueEnum.LIST_CATEGORY.getValue());
+        return FeignUtil.convertDataToList(response, CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
     }
 
 //    public void verifyUnique(ProductDto dto) {

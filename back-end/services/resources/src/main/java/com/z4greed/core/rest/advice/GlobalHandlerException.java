@@ -1,8 +1,7 @@
 package com.z4greed.core.rest.advice;
 
-import com.shared.utils.DateUtil;
-import com.shared.utils.response.ResponseDto;
 import com.shared.exception.Z4GreedMoviesException;
+import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.time.LocalDateTime;
 
 @ControllerAdvice
 @RestController

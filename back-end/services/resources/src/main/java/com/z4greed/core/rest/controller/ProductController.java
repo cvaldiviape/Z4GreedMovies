@@ -27,14 +27,14 @@ public class ProductController {
                                                @RequestParam(value = "sortBy", defaultValue = PageConstants.SORT_BY_DEFAULT, required = false) String sortBy,
                                                @RequestParam(value = "sortDir", defaultValue = PageConstants.SORT_DIR_DEFAULT, required = false) String sortDir) {
         BasePageDto<ProductDto> result = this.productService.findAll(numberPage, sizePage, sortBy, sortDir);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_ALL, result);
+        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto> findById(@PathVariable Integer id) {
         ProductDto result = this.productService.findById(id);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.GET_BY_IO, result);
+        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_BY_IO, result);
         return ResponseEntity.ok(response);
     }
 
