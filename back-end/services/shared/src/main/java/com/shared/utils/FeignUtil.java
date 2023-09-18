@@ -20,10 +20,9 @@ public class FeignUtil {
     }
 
     public static <T> List<T> convertDataToList(ResponseDto apiResponse, Class<T> clase, String nameValueNotFound) {
-        Object[] messageError = { nameValueNotFound };
         ObjectMapper mapper = new ObjectMapper();
         Object data = Optional.ofNullable(apiResponse.getData())
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(messageError));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(nameValueNotFound));
         return mapper.convertValue(data, mapper.getTypeFactory().constructCollectionType(List.class, clase));
     }
 
@@ -36,10 +35,9 @@ public class FeignUtil {
     }
 
     public static <T> T convertDataToObject(ResponseDto apiResponse, Class<T> clase, String nameValueNotFound) {
-        Object[] messageError = { nameValueNotFound };
         ObjectMapper mapper = new ObjectMapper();
         Object data = Optional.ofNullable(apiResponse.getData())
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(messageError));
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(nameValueNotFound));
         return (T) mapper.convertValue(data, clase);
     }
 
