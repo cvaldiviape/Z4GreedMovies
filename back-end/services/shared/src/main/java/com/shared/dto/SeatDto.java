@@ -15,7 +15,6 @@ public class SeatDto implements Searchable<Integer> {
 
     private Integer idSeat;
     private String code;
-    private Integer idRoom;
     private RoomDto room;
 
     @Override
@@ -23,12 +22,12 @@ public class SeatDto implements Searchable<Integer> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SeatDto seatDto = (SeatDto) o;
-        return Objects.equals(idSeat, seatDto.idSeat) && Objects.equals(code, seatDto.code) && Objects.equals(idRoom, seatDto.idRoom) && Objects.equals(room, seatDto.room);
+        return Objects.equals(idSeat, seatDto.idSeat) && Objects.equals(code, seatDto.code) && Objects.equals(room, seatDto.room);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idSeat, code, idRoom, room);
+        return Objects.hash(idSeat, code, room);
     }
 
     @JsonIgnore
