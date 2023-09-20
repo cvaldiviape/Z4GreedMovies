@@ -20,20 +20,21 @@ public class SeatEntity {
     private Integer idSeat;
     @Column(length = 3, nullable = false, unique = true)
     private String code;
-    @Column(name = "id_room", nullable = false)
-    private Integer idRoom;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_room")
+    private RoomEntity room;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         SeatEntity that = (SeatEntity) o;
-        return idSeat != null && Objects.equals(idSeat, that.idSeat);
+        return Objects.equals(idSeat, that.idSeat) && Objects.equals(code, that.code) && Objects.equals(room, that.room);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(idSeat, code, room);
     }
 
 }

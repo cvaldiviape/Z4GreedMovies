@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
         Page<ProductEntity> pageData = this.productRepository.findAll(pageable);
         List<ProductEntity> listEntities = pageData.getContent();
 
-        List<ProductDto> listProducts = productMapper.toListDtos(listEntities);
+        List<ProductDto> listProducts = this.productMapper.toListDtos(listEntities);
 
         if (ValidateUtil.hasData(listProducts)){
             setComplementaryData(listProducts);
@@ -112,22 +112,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private List<CategoryProductDto> findAllCategoriesByListIds(List<Integer> listIdsCategories) {
-        ResponseDto response = productCategoryFeign.findAllByListIds(listIdsCategories);
-        return FeignUtil.convertDataToList(response, CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
+        ResponseDto response = this.productCategoryFeign.findAllByListIds(listIdsCategories);
+        return FeignUtil.convertDataToList(response,CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
     }
-
-//    public void verifyUnique(ProductDto dto) {
-//        Boolean existsCode = this.productRepository.existsByCode(dto.getCode());
-//        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
-//        Boolean existsName = this.productRepository.existsByName(dto.getName());
-//        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
-//    }
-//
-//    public void verifyUnique(Integer id, ProductDto dto) {
-//        Boolean existsCode = this.productRepository.existsByCodeAndIdCountryNot(dto.getCode(), id);
-//        ValidateUtil.evaluate(existsCode, "The code " + dto.getCode() + " already exists.");
-//        Boolean existsName = this.productRepository.existsByNameAndIdCountryNot(dto.getName(), id);
-//        ValidateUtil.evaluate(existsName, "The name " + dto.getName() + " already exists.");
-//    }
 
 }
