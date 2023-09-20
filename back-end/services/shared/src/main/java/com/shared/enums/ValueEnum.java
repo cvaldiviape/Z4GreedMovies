@@ -10,13 +10,17 @@ public enum ValueEnum {
     AUDIENCE("Tipo de audiencia"),
     TYPE_STATUS_FILM_SHOW("Tipo de pelicula"),
     PRODUCT("Producto"),
+    ROOM("Sala"),
+    SEAT("Asiento"),
     LIST_CATEGORY("Lista de categorias"),
     LIST_COUNTRY("Lista de paises"),
     LIST_GENRE("Lista de géneros"),
     LIST_LANGUAGE("Lista de lenguajes"),
     LIST_AUDIENCE("Lista de tipos de audiencias"),
     LIST_TYPE_STATUS_FILM_SHOW("Lista de tipos de peliculas"),
-    LIST_PRODUCT("Lista de productos");
+    LIST_PRODUCT("Lista de productos"),
+    LIST_ROOM("Lista de salsa"),
+    LIST_SEAT("Lista de asientos");
 
     private final String value;
 
