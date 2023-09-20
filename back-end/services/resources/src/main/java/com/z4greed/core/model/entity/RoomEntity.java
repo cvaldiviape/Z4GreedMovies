@@ -1,9 +1,13 @@
 package com.z4greed.core.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,6 +28,10 @@ public class RoomEntity {
     private String location;
     @Column(name = "seating_capacity", nullable = false)
     private Integer seatingCapacity;
+    @Builder.Default
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<SeatEntity> listSeats = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
