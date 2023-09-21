@@ -6,3 +6,7 @@ spring:
           uri: lb://service-catalog
           predicates:
             - Path=/api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
+        - id: service-resource
+          uri: lb://service-resource
+          predicates:
+            - Path=/api/products/**, /api/rooms/**, /api/seats/**
