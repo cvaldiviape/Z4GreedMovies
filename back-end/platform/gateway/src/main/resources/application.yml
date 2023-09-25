@@ -4,9 +4,21 @@ spring:
       routes:
         - id: service-catalog
           uri: lb://service-catalog
-          predicates:
+          predicates: # los "predicates" son el conjunto de criterios que deben coincidir para que las solicitudes se envien a este microservicio
             - Path=/api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
         - id: service-resource
           uri: lb://service-resource
           predicates:
             - Path=/api/products/**, /api/rooms/**, /api/seats/**
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/z4movies-dev
+          jwt-set:-uri: http://localhost:9090/realms/z4movies-dev/protocol/openid-connect/certs
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
