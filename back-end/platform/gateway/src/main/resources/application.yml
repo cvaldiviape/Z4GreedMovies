@@ -1,4 +1,9 @@
+server:
+  port: 8090
+
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       routes:
@@ -10,7 +15,9 @@ spring:
           uri: lb://service-resource
           predicates:
             - Path=/api/products/**, /api/rooms/**, /api/seats/**
-
+    loadbalancer: # deshabilitar el balanceador de carga "Ribbon" de "Spring Cloud Netflix", debido a que usaremos el moderno llamado "Spring Cloud Balancer".
+      ribbon:
+        enabled: false
   security:
     oauth2:
       resourceserver:
@@ -18,7 +25,7 @@ spring:
           issuer-uri: http://localhost:9090/realms/z4movies-dev
           jwt-set:-uri: http://localhost:9090/realms/z4movies-dev/protocol/openid-connect/certs
 
-eureka:
+eureka: # indicando UBICACION FISICA del servidor eureka.
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka

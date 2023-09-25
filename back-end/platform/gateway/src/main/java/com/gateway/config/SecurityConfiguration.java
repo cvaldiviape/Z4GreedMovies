@@ -8,15 +8,23 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
-@EnableWebFluxSecurity
+@EnableWebFluxSecurity // Esta anotación habilita la configuración de seguridad basada en WebFlux
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity serverHttpSecurity) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity serverHttpSecurity) { // crea y configura un objeto SecurityWebFilterChain que representa la cadena de filtros de seguridad de WebFlux.
         return serverHttpSecurity.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange -> exchange.anyExchange().authenticated())
                 .oauth2ResourceServer((oauth) -> oauth.jwt(Customizer.withDefaults()))
                 .build();
     }
 
+    // csrf(ServerHttpSecurity.CsrfSpec::disable): Deshabilita la protección CSRF (Cross-Site Request Forgery) en la aplicación. Esto puede ser necesario
+    // en aplicaciones RESTful y reactivas donde las solicitudes no siguen un flujo de navegación tradicional.
+
+    // authorizeExchange(exchange -> exchange.anyExchange().authenticated()): Esta línea define la regla de autorización. Significa que cualquier intercambio
+    // (cualquier solicitud) debe estar autenticado para acceder a cualquier recurso. En otras palabras, se requiere autenticación para todas las solicitudes.
+
+    // oauth2ResourceServer((oauth) -> oauth.jwt(Customizer.withDefaults())): Configura el servidor de recursos OAuth2 y especifica que se debe usar el formato
+    // JWT (JSON Web Token) para autenticación. La llamada a Customizer.withDefaults() configura el servidor con las opciones predeterminadas para JWT.
 }
