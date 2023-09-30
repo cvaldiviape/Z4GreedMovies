@@ -1,4 +1,4 @@
-package com.z4greed.config;
+package com.z4greed.config.interceptors;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtTokenPropagatingInterceptor implements RequestInterceptor { // OK
+public class OutPutInterceptoFilter implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
