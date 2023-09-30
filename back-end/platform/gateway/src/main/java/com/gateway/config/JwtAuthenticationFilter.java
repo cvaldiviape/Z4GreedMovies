@@ -19,35 +19,34 @@ import reactor.util.context.Context;
 // "WebFilter" en Spring Framework es parte del módulo Spring WebFlux y se utiliza para implementar filtros que se aplican a las solicitudes
 // y respuestas HTTP en una aplicación web reactiva. Proporciona una forma de interceptar y modificar las solicitudes y respuestas antes de
 // que sean procesadas por los controladores y devueltas al cliente.
-//@Component
-//public class JwtAuthenticationFilter implements WebFilter { // OK
-//
-//    @Override
-//    @NonNull
-//    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-//        // "chain" representa la cadena de filtros
-//        // "exchange" es el objeto que representa la solicitud HTTP actual y sus metadatos
-//
-//        ServerHttpRequest request = exchange.getRequest();
-//        String authorization = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-//        Mono<String> token$ = Mono.justOrEmpty(authorization);
-//        return token$
-//                .filter(token -> token.startsWith("Bearer "))
-//                .switchIfEmpty(chain.filter(exchange).then(Mono.empty()))
-//                .flatMap(token -> {
-//                    ServerHttpRequest modifiedRequest = request.mutate()
-//                            .header(HttpHeaders.AUTHORIZATION, token)
-//                            .build();
-//
-//                    ServerWebExchange modifiedExchange = exchange.mutate()
-//                            .request(modifiedRequest)
-//                            .build();
-//
-//                    return chain.filter(modifiedExchange);
-//                });
-//    }
-//
-//}
+@Component
+public class JwtAuthenticationFilter implements WebFilter {
+
+    @Override
+    @NonNull
+    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+        // "chain" representa la cadena de filtros
+        // "exchange" es el objeto que representa la solicitud HTTP actual y sus metadatos
+
+        // Solo estoy verificando que el token empiece con "Bearer", lo cual no es necesario debibo a qye "Keycloak" se encarga de verificar si el token es valido.
+        ServerHttpRequest request = exchange.getRequest();
+        String authorization = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        Mono<String> token$ = Mono.justOrEmpty(authorization);
+        return token$
+                .filter(token -> token.startsWith("Bearer "))
+                .switchIfEmpty(chain.filter(exchange).then(Mono.empty()))
+                .flatMap(token -> {
+                    ServerHttpRequest modifiedRequest = request.mutate()
+                            .header(HttpHeaders.AUTHORIZATION, token)
+                            .build();
+                    ServerWebExchange modifiedExchange = exchange.mutate()
+                            .request(modifiedRequest)
+                            .build();
+                    return chain.filter(modifiedExchange);
+                });
+    }
+
+}
 // "GatewayFilter" vs "WebFilter"
 // Sí, puedes usar tanto GatewayFilter como WebFilter en Spring Cloud Gateway, pero tienen diferentes propósitos y momentos de ejecución en la cadena de filtros.
 // - GatewayFilter: Se utiliza para definir filtros específicos para la puerta de enlace (gateway). Estos filtros se ejecutan antes de que la solicitud entre al sistema
@@ -64,4 +63,3 @@ import reactor.util.context.Context;
 //   en una etapa posterior del procesamiento de solicitudes, entonces WebFilter es la elección adecuada. Puedes configurar estos filtros de manera global en tu aplicación Spring Boot.
 // En resumen, ambas opciones son válidas, pero debes seleccionar la que se ajuste mejor a tus necesidades y al alcance de las tareas de filtrado o manipulación que deseas realizar
 // en tu aplicación.
-//

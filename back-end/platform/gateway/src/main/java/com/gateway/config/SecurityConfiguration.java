@@ -13,13 +13,14 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity // Esta anotación habilita la configuración de seguridad basada en WebFlux
 public class SecurityConfiguration {
 
-//    @Autowired // OK
-//    private JwtAuthenticationFilter authenticationFilter; // implemente la interface "WebFilter" para agregar el token a cada request que realice a los servicios (propagar el token)
+    @Autowired // OK
+    private JwtAuthenticationFilter authenticationFilter; // implemente la interface "WebFilter" para agregar el token a cada request que realice a los servicios (propagar el token)
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity serverHttpSecurity) { // crea y configura un objeto SecurityWebFilterChain que representa la cadena de filtros de seguridad de WebFlux.
-        return serverHttpSecurity.csrf(ServerHttpSecurity.CsrfSpec::disable)
-//                .addFilterAt(authenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+        return serverHttpSecurity
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .addFilterBefore(authenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .authorizeExchange(exchange -> exchange.anyExchange().authenticated())
                 .oauth2ResourceServer((oauth) -> oauth.jwt(Customizer.withDefaults()))
                 .build();
