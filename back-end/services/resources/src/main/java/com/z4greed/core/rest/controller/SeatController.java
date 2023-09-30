@@ -1,7 +1,6 @@
 package com.z4greed.core.rest.controller;
 
 import com.shared.constants.PageConstants;
-import com.shared.dto.RoomDto;
 import com.shared.dto.SeatDto;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.enums.ControllerMessageEnum;
@@ -13,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/seat")
+@RequestMapping("api/seats")
 public class SeatController {
 
     private final SeatService seatService;
