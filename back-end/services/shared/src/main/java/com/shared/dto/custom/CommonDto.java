@@ -13,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class BaseMasterDto {
+public class CommonDto {
 
     private String code;
     private String name;
@@ -22,7 +22,7 @@ public class BaseMasterDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BaseMasterDto that = (BaseMasterDto) o;
+        CommonDto that = (CommonDto) o;
         return Objects.equals(code, that.code) && Objects.equals(name, that.name);
     }
 

@@ -1,7 +1,7 @@
 package com.shared.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.shared.dto.custom.BaseMasterDto;
+import com.shared.dto.custom.CommonDto;
 import com.shared.utils.filter.Searchable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class CountryDto extends BaseMasterDto implements Searchable<Integer> {
+public class CountryDto extends CommonDto implements Searchable<Integer> {
 
     private Integer idCountry;
 
