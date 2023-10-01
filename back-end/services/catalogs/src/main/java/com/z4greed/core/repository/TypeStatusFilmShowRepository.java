@@ -1,6 +1,6 @@
 package com.z4greed.core.repository;
 
-import com.z4greed.core.models.entity.TypeStatusFilmShowEntity;
+import com.z4greed.core.entity.TypeStatusFilmShowEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

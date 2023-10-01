@@ -4,7 +4,7 @@ import com.shared.dto.MovieAudienceDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.z4greed.core.models.entity.MovieAudienceEntity;
+import com.z4greed.core.entity.MovieAudienceEntity;
 import com.z4greed.core.controller.common.HandlerCrudController;
 import com.z4greed.core.service.MovieAudienceService;
 import com.z4greed.core.service.common.CrudService;

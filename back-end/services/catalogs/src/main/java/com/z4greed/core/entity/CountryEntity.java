@@ -1,6 +1,6 @@
-package com.z4greed.core.models.entity;
+package com.z4greed.core.entity;
 
-import com.z4greed.core.models.common.BaseEntity;
+import com.shared.dto.custom.CommonEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "countries")
-public class CountryEntity extends BaseEntity {
+public class CountryEntity extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

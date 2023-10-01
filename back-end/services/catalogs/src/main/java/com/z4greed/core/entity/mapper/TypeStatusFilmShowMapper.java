@@ -1,7 +1,7 @@
-package com.z4greed.core.models.mapper;
+package com.z4greed.core.entity.mapper;
 
 import com.shared.dto.TypeStatusFilmShowDto;
-import com.z4greed.core.models.entity.TypeStatusFilmShowEntity;
+import com.z4greed.core.entity.TypeStatusFilmShowEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

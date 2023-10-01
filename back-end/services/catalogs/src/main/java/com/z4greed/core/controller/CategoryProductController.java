@@ -4,7 +4,7 @@ import com.shared.dto.CategoryProductDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.z4greed.core.models.entity.CategoryProductEntity;
+import com.z4greed.core.entity.CategoryProductEntity;
 import com.z4greed.core.controller.common.HandlerCrudController;
 import com.z4greed.core.service.CategoryProductService;
 import com.z4greed.core.service.common.CrudService;

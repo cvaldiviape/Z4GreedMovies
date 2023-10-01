@@ -4,7 +4,7 @@ import com.shared.dto.CountryDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.z4greed.core.models.entity.CountryEntity;
+import com.z4greed.core.entity.CountryEntity;
 import com.z4greed.core.controller.common.HandlerCrudController;
 import com.z4greed.core.service.CountryService;
 import com.z4greed.core.service.common.CrudService;

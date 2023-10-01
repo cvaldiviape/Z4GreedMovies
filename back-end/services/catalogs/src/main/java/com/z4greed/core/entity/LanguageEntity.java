@@ -1,6 +1,6 @@
-package com.z4greed.core.models.entity;
+package com.z4greed.core.entity;
 
-import com.z4greed.core.models.common.BaseEntity;
+import com.shared.dto.custom.CommonEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -11,12 +11,12 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "genres")
-public class GenreEntity extends BaseEntity {
+@Table(name = "languages")
+public class LanguageEntity extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_genre")
-    private Integer idGenre;
+    @Column(name = "id_language")
+    private Integer idLanguage;
 
 }

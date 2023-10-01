@@ -4,7 +4,7 @@ import com.shared.dto.TypeStatusFilmShowDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.z4greed.core.models.entity.TypeStatusFilmShowEntity;
+import com.z4greed.core.entity.TypeStatusFilmShowEntity;
 import com.z4greed.core.controller.common.HandlerCrudController;
 import com.z4greed.core.service.TypeStatusFilmShowService;
 import com.z4greed.core.service.common.CrudService;

@@ -4,7 +4,7 @@ import com.shared.dto.LanguageDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.z4greed.core.models.entity.LanguageEntity;
+import com.z4greed.core.entity.LanguageEntity;
 import com.z4greed.core.controller.common.HandlerCrudController;
 import com.z4greed.core.service.LanguageService;
 import com.z4greed.core.service.common.CrudService;

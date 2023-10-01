@@ -1,7 +1,7 @@
-package com.z4greed.core.models.mapper;
+package com.z4greed.core.entity.mapper;
 
 import com.shared.dto.GenreDto;
-import com.z4greed.core.models.entity.GenreEntity;
+import com.z4greed.core.entity.GenreEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
