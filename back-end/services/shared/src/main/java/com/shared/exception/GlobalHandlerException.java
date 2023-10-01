@@ -1,6 +1,5 @@
-package com.z4greed.core.rest.advice;
+package com.shared.exception;
 
-import com.shared.exception.Z4GreedMoviesException;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
 import org.springframework.http.HttpStatus;
