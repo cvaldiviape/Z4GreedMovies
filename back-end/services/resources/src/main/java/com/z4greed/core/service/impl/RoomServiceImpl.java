@@ -1,14 +1,13 @@
 package com.z4greed.core.service.impl;
 
-import com.shared.dto.CountryDto;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.dto.RoomDto;
 import com.shared.enums.ValueEnum;
 import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;
-import com.z4greed.core.model.entity.RoomEntity;
-import com.z4greed.core.model.mapper.RoomMapper;
+import com.z4greed.core.entity.RoomEntity;
+import com.z4greed.core.entity.mapper.RoomMapper;
 import com.z4greed.core.repositories.RoomRespository;
 import com.z4greed.core.service.RoomService;
 import org.springframework.data.domain.Page;

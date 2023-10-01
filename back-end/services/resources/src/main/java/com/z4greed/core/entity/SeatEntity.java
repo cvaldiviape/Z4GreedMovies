@@ -1,8 +1,8 @@
-package com.z4greed.core.model.entity;
+package com.z4greed.core.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
+
 import java.util.Objects;
 
 @Getter

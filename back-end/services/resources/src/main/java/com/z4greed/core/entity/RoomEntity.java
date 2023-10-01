@@ -1,4 +1,4 @@
-package com.z4greed.core.model.entity;
+package com.z4greed.core.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

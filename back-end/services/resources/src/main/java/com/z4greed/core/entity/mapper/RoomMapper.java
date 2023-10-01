@@ -1,7 +1,7 @@
-package com.z4greed.core.model.mapper;
+package com.z4greed.core.entity.mapper;
 
 import com.shared.dto.RoomDto;
-import com.z4greed.core.model.entity.RoomEntity;
+import com.z4greed.core.entity.RoomEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

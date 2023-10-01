@@ -1,7 +1,7 @@
-package com.z4greed.core.model.mapper;
+package com.z4greed.core.entity.mapper;
 
 import com.shared.dto.SeatDto;
-import com.z4greed.core.model.entity.SeatEntity;
+import com.z4greed.core.entity.SeatEntity;
 import org.mapstruct.*;
 
 import java.util.List;
