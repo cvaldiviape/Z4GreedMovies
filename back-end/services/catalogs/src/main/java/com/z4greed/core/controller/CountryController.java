@@ -1,12 +1,12 @@
-package com.z4greed.core.rest.controller;
+package com.z4greed.core.controller;
 
-import com.shared.dto.LanguageDto;
+import com.shared.dto.CountryDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.z4greed.core.models.entity.LanguageEntity;
-import com.z4greed.core.rest.common.HandlerCrudController;
-import com.z4greed.core.service.LanguageService;
+import com.z4greed.core.models.entity.CountryEntity;
+import com.z4greed.core.controller.common.HandlerCrudController;
+import com.z4greed.core.service.CountryService;
 import com.z4greed.core.service.common.CrudService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -19,23 +19,23 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/languages")
-public class LanguageController extends HandlerCrudController<LanguageDto, Integer> {
+@RequestMapping("api/countries")
+public class CountryController extends HandlerCrudController<CountryDto, Integer> {
 
-    private final LanguageService<LanguageEntity, LanguageDto, Integer> languageService;
+    private final CountryService<CountryEntity, CountryDto,Integer> countryService;
 
-    public LanguageController(@Qualifier("languageServiceImpl")LanguageService<LanguageEntity, LanguageDto, Integer> languageService) {
-        this.languageService = languageService;
+    public CountryController(@Qualifier("countryServiceImpl")CountryService<CountryEntity, CountryDto, Integer> countryService) {
+        this.countryService = countryService;
     }
 
     @Override
-    public CrudService<LanguageDto, Integer> getCrudService() {
-        return this.languageService;
+    public CrudService<CountryDto, Integer> getCrudService() {
+        return this.countryService;
     }
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<LanguageDto> result = this.languageService.findAllByListIds(listIds);
+        List<CountryDto> result = this.countryService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

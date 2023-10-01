@@ -1,4 +1,4 @@
-package com.z4greed.core.rest.controller;
+package com.z4greed.core.controller;
 
 import com.shared.constants.PageConstants;
 import com.shared.dto.custom.BasePageDto;

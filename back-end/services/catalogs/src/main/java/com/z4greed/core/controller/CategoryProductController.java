@@ -1,11 +1,11 @@
-package com.z4greed.core.rest.controller;
+package com.z4greed.core.controller;
 
 import com.shared.dto.CategoryProductDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
 import com.z4greed.core.models.entity.CategoryProductEntity;
-import com.z4greed.core.rest.common.HandlerCrudController;
+import com.z4greed.core.controller.common.HandlerCrudController;
 import com.z4greed.core.service.CategoryProductService;
 import com.z4greed.core.service.common.CrudService;
 import org.springframework.beans.factory.annotation.Qualifier;
