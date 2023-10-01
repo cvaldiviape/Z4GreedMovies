@@ -1,15 +1,14 @@
 package com.z4greed.core.service.impl;
 
-import com.shared.dto.RoomDto;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.dto.SeatDto;
 import com.shared.enums.ValueEnum;
 import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;
-import com.z4greed.core.model.entity.RoomEntity;
-import com.z4greed.core.model.entity.SeatEntity;
-import com.z4greed.core.model.mapper.SeatMapper;
+import com.z4greed.core.entity.RoomEntity;
+import com.z4greed.core.entity.SeatEntity;
+import com.z4greed.core.entity.mapper.SeatMapper;
 import com.z4greed.core.repositories.RoomRespository;
 import com.z4greed.core.repositories.SeatRepository;
 import com.z4greed.core.service.SeatService;

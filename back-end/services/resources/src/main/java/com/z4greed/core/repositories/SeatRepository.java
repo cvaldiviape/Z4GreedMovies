@@ -1,6 +1,6 @@
 package com.z4greed.core.repositories;
 
-import com.z4greed.core.model.entity.SeatEntity;
+import com.z4greed.core.entity.SeatEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

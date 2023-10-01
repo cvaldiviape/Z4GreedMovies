@@ -19,7 +19,6 @@ public enum GeneralErrorEnum  implements GenericError {
     private final String message;
     private final TypeExceptionEnum type;
 
-
     @Override
     public String getCode() {
         return this.code;
