@@ -21,7 +21,13 @@ public class SecurityConfiguration {
         return serverHttpSecurity
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .addFilterBefore(authenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
-                .authorizeExchange(exchange -> exchange.anyExchange().authenticated())
+                .authorizeExchange(exchange -> exchange
+                        .pathMatchers("/v3/api-docs/**", "", "/swagger-ui/**",
+                                "/service-catalog/v3/api-docs/**", "/service-catalog/swagger-ui/**",
+                                "/service-resource/v3/api-docs/**", "/service-resource/swagger-ui/**")
+                        .permitAll()
+                        .anyExchange()
+                        .authenticated())
                 .oauth2ResourceServer((oauth) -> oauth.jwt(Customizer.withDefaults()))
                 .build();
     }

@@ -1,6 +1,8 @@
 server:
-  port: 8090
-
+  servlet:
+    context-path: /
+  port:
+    8090
 spring:
   application:
     name: api-gateway
@@ -10,15 +12,13 @@ spring:
         - id: service-catalog
           uri: lb://service-catalog
           predicates: # los "predicates" son el conjunto de criterios que deben coincidir para que las solicitudes se envien a este microservicio
-#            - Path=/service-catalog/**
-            - Path=/api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
+            - Path=/service-catalog/v3/api-docs, /api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
 #          filters: # los "filters" permiten manipulación de solicitudes y respuestas HTTP que pasan a través del gateway.
 #            - StripPrefix=2
         - id: service-resource
           uri: lb://service-resource
           predicates:
-#            - Path=/service-resource/**
-            - Path=/api/products/**, /api/rooms/**, /api/seats/**
+            - Path=/service-resource/v3/api-docs, /api/products/**, /api/rooms/**, /api/seats/**
 #          filters:
 #            - StripPrefix=2
     loadbalancer: # deshabilitar el balanceador de carga "Ribbon" de "Spring Cloud Netflix", debido a que usaremos el moderno llamado "Spring Cloud Balancer".
@@ -35,3 +35,23 @@ eureka: # indicando UBICACION FISICA del servidor eureka.
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui/index.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+        primaryName: API Gateway Service
+      - url: /service-catalog/v3/api-docs
+        name: Service Catalog
+        primaryName: Service Catalog
+      - url: /service-resource/v3/api-docs
+        name: Service Resource
+        primaryName: Service Resource
