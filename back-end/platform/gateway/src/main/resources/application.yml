@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /
   port:
     8090
 spring:
@@ -38,11 +36,8 @@ eureka: # indicando UBICACION FISICA del servidor eureka.
 
 
 springdoc:
-  enable-native-support: true
-  api-docs:
-    enabled: true
   swagger-ui:
-    enabled: true
+    operations-sorter: method
     path: /swagger-ui/index.html
     config-url: /v3/api-docs/swagger-config
     urls:
