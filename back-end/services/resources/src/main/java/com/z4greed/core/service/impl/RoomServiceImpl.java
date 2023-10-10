@@ -44,8 +44,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto findById(Integer id) {
-        RoomEntity entity = this.findEntityById(id);
+    public RoomDto findById(Integer idRoom) {
+        RoomEntity entity = this.findRoomEntityById(idRoom);
         return this.roomMapper.toDto(entity);
     }
 
@@ -58,25 +58,25 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto update(Integer id, RoomDto roomDto) {
-        RoomEntity roomEntity = this.findEntityById(id);
-        this.validateUniqueFields(id, roomDto);
+    public RoomDto update(Integer idRoom, RoomDto roomDto) {
+        RoomEntity roomEntity = this.findRoomEntityById(idRoom);
+        this.validateUniqueFields(idRoom, roomDto);
         this.roomMapper.updateEntityFromDto(roomDto, roomEntity);
         RoomEntity roomUpdated = this.roomRespository.save(roomEntity);
         return this.roomMapper.toDto(roomUpdated);
     }
 
     @Override
-    public RoomDto delete(Integer id) {
-        RoomEntity roomEntity = this.findEntityById(id);
+    public RoomDto delete(Integer idRoom) {
+        RoomEntity roomEntity = this.findRoomEntityById(idRoom);
         this.roomRespository.delete(roomEntity);
         return this.roomMapper.toDto(roomEntity);
     }
 
     // ------------------------------------------------------------------------- utils ------------------------------------------------------------------------- //
-    public RoomEntity findEntityById(Integer id) {
-        return this.roomRespository.findById(id)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.ROOM.getValue(), id));
+    public RoomEntity findRoomEntityById(Integer idRoom) {
+        return this.roomRespository.findById(idRoom)
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.ROOM.getValue(), idRoom));
     }
 
     public void validateUniqueFields(RoomDto roomDto) {
@@ -84,8 +84,8 @@ public class RoomServiceImpl implements RoomService {
         ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, roomDto.getCode());
     }
 
-    public void validateUniqueFields(Integer id, RoomDto roomDto) {
-        Boolean existsCode = this.roomRespository.existsByCodeAndIdRoomNot(roomDto.getCode(), id);
+    public void validateUniqueFields(Integer idRoom, RoomDto roomDto) {
+        Boolean existsCode = this.roomRespository.existsByCodeAndIdRoomNot(roomDto.getCode(), idRoom);
         ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, roomDto.getCode());
     }
 

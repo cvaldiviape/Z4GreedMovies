@@ -57,8 +57,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto findById(Integer id) {
-        ProductEntity entity = this.findEntityById(id);
+    public ProductDto findById(Integer idProduct) {
+        ProductEntity entity = this.findProductEntityById(idProduct);
         ProductDto productDto = this.productMapper.toDto(entity);
         CategoryProductDto categoryProduct = findCategoryProductById(productDto.getIdCategoryProduct());
         productDto.setCategoryProduct(categoryProduct);
@@ -74,25 +74,25 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto update(Integer id, ProductDto productDto) {
-        ProductEntity productEntity = this.findEntityById(id);
-        this.validateUniqueFields(id, productDto);
+    public ProductDto update(Integer idProduct, ProductDto productDto) {
+        ProductEntity productEntity = this.findProductEntityById(idProduct);
+        this.validateUniqueFields(idProduct, productDto);
         this.productMapper.updateEntityFromDto(productDto, productEntity);
         ProductEntity productUpdated = this.productRepository.save(productEntity);
         return this.productMapper.toDto(productUpdated);
     }
 
     @Override
-    public ProductDto delete(Integer id) {
-        ProductEntity productEntity = this.findEntityById(id);
+    public ProductDto delete(Integer idProduct) {
+        ProductEntity productEntity = this.findProductEntityById(idProduct);
         this.productRepository.delete(productEntity);
         return this.productMapper.toDto(productEntity);
     }
 
     // ------------------------------------------------------------------------- utils ------------------------------------------------------------------------- //
-    public ProductEntity findEntityById(Integer id) {
-        return this.productRepository.findById(id)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.PRODUCT.getValue(), id));
+    public ProductEntity findProductEntityById(Integer idProduct) {
+        return this.productRepository.findById(idProduct)
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.PRODUCT.getValue(), idProduct));
     }
 
     private CategoryProductDto findCategoryProductById(Integer idCategoryProduct) {
@@ -125,9 +125,9 @@ public class ProductServiceImpl implements ProductService {
         ValidateUtil.validateUnique(existsDescription, ValueEnum.DESCRIPTION, productDto.getDescription());
     }
 
-    public void validateUniqueFields(Integer id, ProductDto productDto) {
-        Boolean existsCode = this.productRepository.existsByCodeAndIdProductNot(productDto.getCode(), id);
-        Boolean existsDescription = this.productRepository.existsByDescriptionAndIdProductNot(productDto.getDescription(), id);
+    public void validateUniqueFields(Integer idProduct, ProductDto productDto) {
+        Boolean existsCode = this.productRepository.existsByCodeAndIdProductNot(productDto.getCode(), idProduct);
+        Boolean existsDescription = this.productRepository.existsByDescriptionAndIdProductNot(productDto.getDescription(), idProduct);
         ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, productDto.getCode());
         ValidateUtil.validateUnique(existsDescription, ValueEnum.DESCRIPTION, productDto.getDescription());
     }

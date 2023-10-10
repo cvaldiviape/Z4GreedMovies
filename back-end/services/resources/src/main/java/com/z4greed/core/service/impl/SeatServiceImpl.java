@@ -48,8 +48,8 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto findById(Integer id) {
-        SeatEntity entity = this.findSeatEntityById(id);
+    public SeatDto findById(Integer idSeat) {
+        SeatEntity entity = this.findSeatEntityById(idSeat);
         return this.seatMapper.toDto(entity);
     }
 
@@ -66,9 +66,9 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto update(Integer id, SeatDto seatDto) {
-        SeatEntity seatEntity = this.findSeatEntityById(id);
-        this.validateUniqueFields(id, seatDto);
+    public SeatDto update(Integer idSeat, SeatDto seatDto) {
+        SeatEntity seatEntity = this.findSeatEntityById(idSeat);
+        this.validateUniqueFields(idSeat, seatDto);
 
         this.seatMapper.updateEntityFromDto(seatDto, seatEntity);
 
@@ -80,8 +80,8 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto delete(Integer id) {
-        SeatEntity seatEntity = this.findSeatEntityById(id);
+    public SeatDto delete(Integer idSeat) {
+        SeatEntity seatEntity = this.findSeatEntityById(idSeat);
         this.seatRepository.delete(seatEntity);
         return this.seatMapper.toDto(seatEntity);
     }
@@ -102,8 +102,8 @@ public class SeatServiceImpl implements SeatService {
         ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, seatDto.getCode());
     }
 
-    public void validateUniqueFields(Integer id, SeatDto seatDto) {
-        Boolean existsCode = this.seatRepository.existsByCodeAndIdSeatNot(seatDto.getCode(), id);
+    public void validateUniqueFields(Integer idSeat, SeatDto seatDto) {
+        Boolean existsCode = this.seatRepository.existsByCodeAndIdSeatNot(seatDto.getCode(), idSeat);
         ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, seatDto.getCode());
     }
 
