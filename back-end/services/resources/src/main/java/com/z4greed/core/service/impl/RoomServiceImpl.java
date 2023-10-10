@@ -3,7 +3,6 @@ package com.z4greed.core.service.impl;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.dto.RoomDto;
 import com.shared.enums.ValueEnum;
-import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;
 import com.z4greed.core.entity.RoomEntity;
@@ -52,7 +51,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomDto create(RoomDto roomDto) {
-        this.verifyUnique(roomDto);
+        this.validateUniqueFields(roomDto);
         RoomEntity roomEntity = this.roomMapper.toEntity(roomDto);
         RoomEntity roomCreated = this.roomRespository.save(roomEntity);
         return this.roomMapper.toDto(roomCreated);
@@ -61,7 +60,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDto update(Integer id, RoomDto roomDto) {
         RoomEntity roomEntity = this.findEntityById(id);
-        this.verifyUnique(id, roomDto);
+        this.validateUniqueFields(id, roomDto);
         this.roomMapper.updateEntityFromDto(roomDto, roomEntity);
         RoomEntity roomUpdated = this.roomRespository.save(roomEntity);
         return this.roomMapper.toDto(roomUpdated);
@@ -80,14 +79,14 @@ public class RoomServiceImpl implements RoomService {
                 .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.ROOM.getValue(), id));
     }
 
-    public void verifyUnique(RoomDto dto) {
-        Boolean existsCode = this.roomRespository.existsByCode(dto.getCode());
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
+    public void validateUniqueFields(RoomDto roomDto) {
+        Boolean existsCode = this.roomRespository.existsByCode(roomDto.getCode());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, roomDto.getCode());
     }
 
-    public void verifyUnique(Integer id, RoomDto dto) {
-        Boolean existsCode = this.roomRespository.existsByCodeAndIdRoomNot(dto.getCode(), id);
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
+    public void validateUniqueFields(Integer id, RoomDto roomDto) {
+        Boolean existsCode = this.roomRespository.existsByCodeAndIdRoomNot(roomDto.getCode(), id);
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, roomDto.getCode());
     }
 
 }

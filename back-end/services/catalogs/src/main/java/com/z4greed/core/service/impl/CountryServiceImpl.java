@@ -60,17 +60,17 @@ public class CountryServiceImpl extends CountryService<CountryEntity, CountryDto
     @Override
     public void verifyUnique(CountryDto dto) {
         Boolean existsCode = this.countryRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.countryRepository.existsByName(dto.getName());
-        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, dto.getCode());
+        ValidateUtil.validateUnique(existsName, ValueEnum.NAME, dto.getName());
     }
 
     @Override
     public void verifyUnique(Integer id, CountryDto dto) {
         Boolean existsCode = this.countryRepository.existsByCodeAndIdCountryNot(dto.getCode(), id);
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.countryRepository.existsByNameAndIdCountryNot(dto.getName(), id);
-        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, dto.getCode());
+        ValidateUtil.validateUnique(existsName, ValueEnum.NAME, dto.getName());
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.z4greed.core.service.impl;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.dto.SeatDto;
 import com.shared.enums.ValueEnum;
-import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;
 import com.z4greed.core.entity.RoomEntity;
@@ -56,7 +55,7 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto create(SeatDto seatDto) {
-        this.verifyUnique(seatDto);
+        this.validateUniqueFields(seatDto);
         SeatEntity seatEntity = this.seatMapper.toEntity(seatDto);
 
         RoomEntity roomEntity = this.findRoomEntityById(seatDto.getRoom().getIdRoom());
@@ -69,7 +68,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public SeatDto update(Integer id, SeatDto seatDto) {
         SeatEntity seatEntity = this.findSeatEntityById(id);
-        this.verifyUnique(id, seatDto);
+        this.validateUniqueFields(id, seatDto);
 
         this.seatMapper.updateEntityFromDto(seatDto, seatEntity);
 
@@ -98,14 +97,14 @@ public class SeatServiceImpl implements SeatService {
                 .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.ROOM.getValue(), idRoom));
     }
 
-    public void verifyUnique(SeatDto dto) {
-        Boolean existsCode = this.seatRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
+    public void validateUniqueFields(SeatDto seatDto) {
+        Boolean existsCode = this.seatRepository.existsByCode(seatDto.getCode());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, seatDto.getCode());
     }
 
-    public void verifyUnique(Integer id, SeatDto dto) {
-        Boolean existsCode = this.seatRepository.existsByCodeAndIdSeatNot(dto.getCode(), id);
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
+    public void validateUniqueFields(Integer id, SeatDto seatDto) {
+        Boolean existsCode = this.seatRepository.existsByCodeAndIdSeatNot(seatDto.getCode(), id);
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, seatDto.getCode());
     }
 
 }

@@ -67,6 +67,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto create(ProductDto productDto) {
+        this.validateUniqueFields(productDto);
         ProductEntity productEntity = this.productMapper.toEntity(productDto);
         ProductEntity productCreated = this.productRepository.save(productEntity);
         return this.productMapper.toDto(productCreated);
@@ -75,6 +76,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto update(Integer id, ProductDto productDto) {
         ProductEntity productEntity = this.findEntityById(id);
+        this.validateUniqueFields(id, productDto);
         this.productMapper.updateEntityFromDto(productDto, productEntity);
         ProductEntity productUpdated = this.productRepository.save(productEntity);
         return this.productMapper.toDto(productUpdated);
@@ -114,6 +116,20 @@ public class ProductServiceImpl implements ProductService {
     private List<CategoryProductDto> findAllCategoriesByListIds(List<Integer> listIdsCategories) {
         ResponseDto response = this.productCategoryFeign.findAllByListIds(listIdsCategories);
         return FeignUtil.convertDataToList(response,CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
+    }
+
+    public void validateUniqueFields(ProductDto productDto) {
+        Boolean existsCode = this.productRepository.existsByCode(productDto.getCode());
+        Boolean existsDescription = this.productRepository.existsByDescription(productDto.getDescription());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, productDto.getCode());
+        ValidateUtil.validateUnique(existsDescription, ValueEnum.DESCRIPTION, productDto.getDescription());
+    }
+
+    public void validateUniqueFields(Integer id, ProductDto productDto) {
+        Boolean existsCode = this.productRepository.existsByCodeAndIdProductNot(productDto.getCode(), id);
+        Boolean existsDescription = this.productRepository.existsByDescriptionAndIdProductNot(productDto.getDescription(), id);
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, productDto.getCode());
+        ValidateUtil.validateUnique(existsDescription, ValueEnum.DESCRIPTION, productDto.getDescription());
     }
 
 }
