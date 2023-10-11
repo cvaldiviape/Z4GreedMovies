@@ -32,4 +32,16 @@ public class ResponseUtil {
                 .build();
     }
 
+    public static ResponseDto error(String message) {
+        String dateTime = DateUtil.convertLocalDateTimeToString(LocalDateTime.now());
+        return ResponseDto.builder()
+                .dateTime(dateTime)
+                .success(false)
+                .message(message)
+                .code(null)
+                .data(null)
+                .type(null)
+                .build();
+    }
+
 }

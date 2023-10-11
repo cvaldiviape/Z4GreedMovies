@@ -1,6 +1,8 @@
 package com.shared.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.shared.utils.response.ResponseDto;
 import lombok.NoArgsConstructor;
 
@@ -10,35 +12,31 @@ import java.util.Optional;
 @NoArgsConstructor
 public class FeignUtil {
 
-    public static <T> List<T> convertDataToList(ResponseDto apiResponse, Class<T> clase) {
-        ObjectMapper mapper = new ObjectMapper();
+    public static <T> T extracstData(ResponseDto apiResponse, Class<T> typeClass) {
         if (apiResponse.getData() != null) {
-            return mapper.convertValue(apiResponse.getData(),
-                    mapper.getTypeFactory().constructCollectionType(List.class, clase));
+            Object data = apiResponse.getData();
+            return (T) ObjectMapperUtil.convertToObject(data, typeClass);
         }
         return null;
     }
 
-    public static <T> List<T> convertDataToList(ResponseDto apiResponse, Class<T> clase, String nameValueNotFound) {
-        ObjectMapper mapper = new ObjectMapper();
+    public static <T> T extracstData(ResponseDto apiResponse, Class<T> clase, String nameValueNotFound) {
         Object data = Optional.ofNullable(apiResponse.getData())
                 .orElseThrow(() -> ValidateUtil.throwNotFoundException(nameValueNotFound));
-        return mapper.convertValue(data, mapper.getTypeFactory().constructCollectionType(List.class, clase));
+        return ObjectMapperUtil.convertToObject(data, clase);
     }
 
-    public static <T> T convertDataToObject(ResponseDto apiResponse, Class<T> clase) {
-        ObjectMapper mapper = new ObjectMapper();
+    public static <T> List<T> extractsDataList(ResponseDto apiResponse, Class<T> typeClass) {
         if (apiResponse.getData() != null) {
-            return (T) mapper.convertValue(apiResponse.getData(), clase);
+            return ObjectMapperUtil.convertObjectToList(apiResponse.getData(), typeClass);
         }
         return null;
     }
 
-    public static <T> T convertDataToObject(ResponseDto apiResponse, Class<T> clase, String nameValueNotFound) {
-        ObjectMapper mapper = new ObjectMapper();
+    public static <T> List<T> extractsDataList(ResponseDto apiResponse, Class<T> typeClass, String nameValueNotFound) {
         Object data = Optional.ofNullable(apiResponse.getData())
                 .orElseThrow(() -> ValidateUtil.throwNotFoundException(nameValueNotFound));
-        return (T) mapper.convertValue(data, clase);
+        return ObjectMapperUtil.convertObjectToList(data, typeClass);
     }
-
+    
 }

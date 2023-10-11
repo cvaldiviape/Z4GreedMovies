@@ -97,7 +97,7 @@ public class ProductServiceImpl implements ProductService {
 
     private CategoryProductDto findCategoryProductById(Integer idCategoryProduct) {
         ResponseDto response = productCategoryFeign.findById(idCategoryProduct);
-        return FeignUtil.convertDataToObject(response, CategoryProductDto.class, ValueEnum.PRODUCT.getValue());
+        return FeignUtil.extracstData(response, CategoryProductDto.class, ValueEnum.PRODUCT.getValue());
     }
 
     private void setComplementaryData(List<ProductDto> listProducts) {
@@ -115,7 +115,7 @@ public class ProductServiceImpl implements ProductService {
 
     private List<CategoryProductDto> findAllCategoriesByListIds(List<Integer> listIdsCategories) {
         ResponseDto response = this.productCategoryFeign.findAllByListIds(listIdsCategories);
-        return FeignUtil.convertDataToList(response,CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
+        return FeignUtil.extractsDataList(response,CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
     }
 
     public void validateUniqueFields(ProductDto productDto) {
