@@ -57,8 +57,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto findById(Integer id) {
-        ProductEntity entity = this.findEntityById(id);
+    public ProductDto findById(Integer idProduct) {
+        ProductEntity entity = this.findProductEntityById(idProduct);
         ProductDto productDto = this.productMapper.toDto(entity);
         CategoryProductDto categoryProduct = findCategoryProductById(productDto.getIdCategoryProduct());
         productDto.setCategoryProduct(categoryProduct);
@@ -67,35 +67,37 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto create(ProductDto productDto) {
+        this.validateUniqueFields(productDto);
         ProductEntity productEntity = this.productMapper.toEntity(productDto);
         ProductEntity productCreated = this.productRepository.save(productEntity);
         return this.productMapper.toDto(productCreated);
     }
 
     @Override
-    public ProductDto update(Integer id, ProductDto productDto) {
-        ProductEntity productEntity = this.findEntityById(id);
+    public ProductDto update(Integer idProduct, ProductDto productDto) {
+        ProductEntity productEntity = this.findProductEntityById(idProduct);
+        this.validateUniqueFields(idProduct, productDto);
         this.productMapper.updateEntityFromDto(productDto, productEntity);
         ProductEntity productUpdated = this.productRepository.save(productEntity);
         return this.productMapper.toDto(productUpdated);
     }
 
     @Override
-    public ProductDto delete(Integer id) {
-        ProductEntity productEntity = this.findEntityById(id);
+    public ProductDto delete(Integer idProduct) {
+        ProductEntity productEntity = this.findProductEntityById(idProduct);
         this.productRepository.delete(productEntity);
         return this.productMapper.toDto(productEntity);
     }
 
     // ------------------------------------------------------------------------- utils ------------------------------------------------------------------------- //
-    public ProductEntity findEntityById(Integer id) {
-        return this.productRepository.findById(id)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.PRODUCT.getValue(), id));
+    public ProductEntity findProductEntityById(Integer idProduct) {
+        return this.productRepository.findById(idProduct)
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.PRODUCT.getValue(), idProduct));
     }
 
     private CategoryProductDto findCategoryProductById(Integer idCategoryProduct) {
         ResponseDto response = productCategoryFeign.findById(idCategoryProduct);
-        return FeignUtil.convertDataToObject(response, CategoryProductDto.class, ValueEnum.PRODUCT.getValue());
+        return FeignUtil.extracstData(response, CategoryProductDto.class, ValueEnum.PRODUCT.getValue());
     }
 
     private void setComplementaryData(List<ProductDto> listProducts) {
@@ -113,7 +115,21 @@ public class ProductServiceImpl implements ProductService {
 
     private List<CategoryProductDto> findAllCategoriesByListIds(List<Integer> listIdsCategories) {
         ResponseDto response = this.productCategoryFeign.findAllByListIds(listIdsCategories);
-        return FeignUtil.convertDataToList(response,CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
+        return FeignUtil.extractsDataList(response,CategoryProductDto.class, ValueEnum.LIST_CATEGORY.getValue());
+    }
+
+    public void validateUniqueFields(ProductDto productDto) {
+        Boolean existsCode = this.productRepository.existsByCode(productDto.getCode());
+        Boolean existsDescription = this.productRepository.existsByDescription(productDto.getDescription());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, productDto.getCode());
+        ValidateUtil.validateUnique(existsDescription, ValueEnum.DESCRIPTION, productDto.getDescription());
+    }
+
+    public void validateUniqueFields(Integer idProduct, ProductDto productDto) {
+        Boolean existsCode = this.productRepository.existsByCodeAndIdProductNot(productDto.getCode(), idProduct);
+        Boolean existsDescription = this.productRepository.existsByDescriptionAndIdProductNot(productDto.getDescription(), idProduct);
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, productDto.getCode());
+        ValidateUtil.validateUnique(existsDescription, ValueEnum.DESCRIPTION, productDto.getDescription());
     }
 
 }

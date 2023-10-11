@@ -60,17 +60,17 @@ public class TypeStatusFilmShowServiceImpl extends TypeStatusFilmShowService<Typ
     @Override
     public void verifyUnique(TypeStatusFilmShowDto dto) {
         Boolean existsCode = this.typeStatusFilmShowRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.typeStatusFilmShowRepository.existsByName(dto.getName());
-        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, dto.getCode());
+        ValidateUtil.validateUnique(existsName, ValueEnum.NAME, dto.getName());
     }
 
     @Override
     public void verifyUnique(Integer id, TypeStatusFilmShowDto dto) {
         Boolean existsCode = this.typeStatusFilmShowRepository.existsByCodeAndIdTypeStatusFilmShowNot(dto.getCode(), id);
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.typeStatusFilmShowRepository.existsByNameAndIdTypeStatusFilmShowNot(dto.getName(), id);
-        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, dto.getCode());
+        ValidateUtil.validateUnique(existsName, ValueEnum.NAME, dto.getName());
     }
 
     @Override

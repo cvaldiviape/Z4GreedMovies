@@ -1,11 +1,16 @@
 package com.shared.utils;
 
+import com.shared.enums.ValueEnum;
 import com.shared.error.GeneralErrorEnum;
 import com.shared.error.GenericError;
 import com.shared.exception.Z4GreedMoviesException;
 import java.util.Collection;
 
 public class ValidateUtil {
+
+    public static void validateUnique(Boolean exists, ValueEnum existingValueName, String existingValue) {
+        ValidateUtil.evaluateTrue(exists, GeneralErrorEnum.ER000005,existingValueName.getValue(), existingValue);
+    }
 
     public static void evaluateTrue(boolean expression, GenericError codeError){
         if (expression) {

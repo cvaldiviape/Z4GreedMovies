@@ -3,6 +3,7 @@ package com.shared.enums;
 public enum ValueEnum {
     NAME("nombre"),
     CODE("código"),
+    DESCRIPTION("descripción"),
     CATEGORY("Categoria"),
     COUNTRY("Pais"),
     GENRE("Gémero"),

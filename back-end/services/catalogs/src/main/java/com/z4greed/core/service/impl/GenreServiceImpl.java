@@ -60,17 +60,17 @@ public class GenreServiceImpl extends GenreService<GenreEntity, GenreDto, Intege
     @Override
     public void verifyUnique(GenreDto dto) {
         Boolean existsCode = this.genreRepository.existsByCode(dto.getCode());
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.genreRepository.existsByName(dto.getName());
-        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, dto.getCode());
+        ValidateUtil.validateUnique(existsName, ValueEnum.NAME, dto.getName());
     }
 
     @Override
     public void verifyUnique(Integer id, GenreDto dto) {
         Boolean existsCode = this.genreRepository.existsByCodeAndIdGenreNot(dto.getCode(), id);
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
         Boolean existsName = this.genreRepository.existsByNameAndIdGenreNot(dto.getName(), id);
-        ValidateUtil.evaluateTrue(existsName, GeneralErrorEnum.ER000005, ValueEnum.NAME.getValue(), dto.getName());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, dto.getCode());
+        ValidateUtil.validateUnique(existsName, ValueEnum.NAME, dto.getName());
     }
 
     @Override

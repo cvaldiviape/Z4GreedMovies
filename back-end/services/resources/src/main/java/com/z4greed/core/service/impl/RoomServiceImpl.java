@@ -3,7 +3,6 @@ package com.z4greed.core.service.impl;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.dto.RoomDto;
 import com.shared.enums.ValueEnum;
-import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;
 import com.z4greed.core.entity.RoomEntity;
@@ -45,49 +44,49 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto findById(Integer id) {
-        RoomEntity entity = this.findEntityById(id);
+    public RoomDto findById(Integer idRoom) {
+        RoomEntity entity = this.findRoomEntityById(idRoom);
         return this.roomMapper.toDto(entity);
     }
 
     @Override
     public RoomDto create(RoomDto roomDto) {
-        this.verifyUnique(roomDto);
+        this.validateUniqueFields(roomDto);
         RoomEntity roomEntity = this.roomMapper.toEntity(roomDto);
         RoomEntity roomCreated = this.roomRespository.save(roomEntity);
         return this.roomMapper.toDto(roomCreated);
     }
 
     @Override
-    public RoomDto update(Integer id, RoomDto roomDto) {
-        RoomEntity roomEntity = this.findEntityById(id);
-        this.verifyUnique(id, roomDto);
+    public RoomDto update(Integer idRoom, RoomDto roomDto) {
+        RoomEntity roomEntity = this.findRoomEntityById(idRoom);
+        this.validateUniqueFields(idRoom, roomDto);
         this.roomMapper.updateEntityFromDto(roomDto, roomEntity);
         RoomEntity roomUpdated = this.roomRespository.save(roomEntity);
         return this.roomMapper.toDto(roomUpdated);
     }
 
     @Override
-    public RoomDto delete(Integer id) {
-        RoomEntity roomEntity = this.findEntityById(id);
+    public RoomDto delete(Integer idRoom) {
+        RoomEntity roomEntity = this.findRoomEntityById(idRoom);
         this.roomRespository.delete(roomEntity);
         return this.roomMapper.toDto(roomEntity);
     }
 
     // ------------------------------------------------------------------------- utils ------------------------------------------------------------------------- //
-    public RoomEntity findEntityById(Integer id) {
-        return this.roomRespository.findById(id)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.ROOM.getValue(), id));
+    public RoomEntity findRoomEntityById(Integer idRoom) {
+        return this.roomRespository.findById(idRoom)
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.ROOM.getValue(), idRoom));
     }
 
-    public void verifyUnique(RoomDto dto) {
-        Boolean existsCode = this.roomRespository.existsByCode(dto.getCode());
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
+    public void validateUniqueFields(RoomDto roomDto) {
+        Boolean existsCode = this.roomRespository.existsByCode(roomDto.getCode());
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, roomDto.getCode());
     }
 
-    public void verifyUnique(Integer id, RoomDto dto) {
-        Boolean existsCode = this.roomRespository.existsByCodeAndIdRoomNot(dto.getCode(), id);
-        ValidateUtil.evaluateTrue(existsCode, GeneralErrorEnum.ER000005, ValueEnum.CODE.getValue(), dto.getCode());
+    public void validateUniqueFields(Integer idRoom, RoomDto roomDto) {
+        Boolean existsCode = this.roomRespository.existsByCodeAndIdRoomNot(roomDto.getCode(), idRoom);
+        ValidateUtil.validateUnique(existsCode, ValueEnum.CODE, roomDto.getCode());
     }
 
 }
