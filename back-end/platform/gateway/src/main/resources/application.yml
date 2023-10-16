@@ -7,16 +7,16 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: service-catalog
-          uri: lb://service-catalog
+        - id: z4-catalogs-service
+          uri: lb://z4-catalogs-service
           predicates: # los "predicates" son el conjunto de criterios que deben coincidir para que las solicitudes se envien a este microservicio
-            - Path=/service-catalog/v3/api-docs, /api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
+            - Path=/z4-catalogs-service/v3/api-docs, /api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
 #          filters: # los "filters" permiten manipulación de solicitudes y respuestas HTTP que pasan a través del gateway.
 #            - StripPrefix=2
-        - id: service-resource
-          uri: lb://service-resource
+        - id: z4-facility-service
+          uri: lb://z4-facility-service
           predicates:
-            - Path=/service-resource/v3/api-docs, /api/products/**, /api/rooms/**, /api/seats/**
+            - Path=/z4-facility-service/v3/api-docs, /api/products/**, /api/rooms/**, /api/seats/**
 #          filters:
 #            - StripPrefix=2
     loadbalancer: # deshabilitar el balanceador de carga "Ribbon" de "Spring Cloud Netflix", debido a que usaremos el moderno llamado "Spring Cloud Balancer".
@@ -44,9 +44,9 @@ springdoc:
       - url: /v3/api-docs
         name: API Gateway Service
         primaryName: API Gateway Service
-      - url: /service-catalog/v3/api-docs
-        name: Service Catalog
-        primaryName: Service Catalog
-      - url: /service-resource/v3/api-docs
-        name: Service Resource
-        primaryName: Service Resource
+      - url: /z4-catalogs-service/v3/api-docs
+        name: Catalogs Service
+        primaryName: Catalogs Service
+      - url: /z4-facility-service/v3/api-docs
+        name: Facility Service
+        primaryName: Facility Service
