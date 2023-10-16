@@ -1,4 +1,4 @@
-package com.catalogs.core.service.common;
+package com.shared.core.service;
 
 import com.shared.dto.custom.BasePageDto;
 
