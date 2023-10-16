@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-// @FeignClient(name = "service-catalog") -> le quito el "name" por que las solicitudes seran a travez de mi servidor "gateway", ahora seria "htto://localhost:8090/api/category-products"
-@FeignClient(name = "service-catalog",  url = "http://localhost:8090/api/category-products") // configuration = JwtTokenPropagatingInterceptor.class
+// @FeignClient(name = "z4-catalogs-service") -> le quito el "name" por que las solicitudes seran a travez de mi servidor "gateway", ahora seria "htto://localhost:8090/api/category-products"
+@FeignClient(name = "z4-catalogs-service",  url = "http://localhost:8090/api/category-products") // configuration = JwtTokenPropagatingInterceptor.class
 public interface ProductCategoryFeign {
 
     @GetMapping("/{id}")

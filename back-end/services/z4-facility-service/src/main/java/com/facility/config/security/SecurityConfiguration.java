@@ -19,7 +19,7 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/service-resource/v3/api-docs/**", "/service-resource/swagger-ui/**")
+                        .requestMatchers("/z4-facility-service/v3/api-docs/**", "/z4-facility-service/swagger-ui/**")
                         .permitAll()
                         .anyRequest().authenticated()
                 )

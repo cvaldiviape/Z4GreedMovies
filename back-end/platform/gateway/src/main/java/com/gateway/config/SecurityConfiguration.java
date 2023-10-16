@@ -23,8 +23,8 @@ public class SecurityConfiguration {
                 .addFilterBefore(authenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/v3/api-docs/**", "", "/swagger-ui/**",
-                                "/service-catalog/v3/api-docs/**", "/service-catalog/swagger-ui/**",
-                                "/service-resource/v3/api-docs/**", "/service-resource/swagger-ui/**")
+                                "/z4-catalogs-service/v3/api-docs/**", "/z4-catalogs-service/swagger-ui/**",
+                                "/z4-facility-service/v3/api-docs/**", "/z4-facility-service/swagger-ui/**")
                         .permitAll()
                         .anyExchange()
                         .authenticated())

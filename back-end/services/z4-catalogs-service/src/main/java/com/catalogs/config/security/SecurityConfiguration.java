@@ -20,7 +20,7 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/service-catalog/v3/api-docs/**", "/service-catalog/swagger-ui/**")
+                            .requestMatchers("/z4-catalogs-service/v3/api-docs/**", "/z4-catalogs-service/swagger-ui/**")
                             .permitAll()
                             .anyRequest().authenticated()
                 )
