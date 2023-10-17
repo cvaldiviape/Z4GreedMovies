@@ -13,6 +13,9 @@ public enum ValueEnum {
     PRODUCT("Producto"),
     ROOM("Sala"),
     SEAT("Asiento"),
+    DEPARTMENT("Departamento"),
+    DISTRICT("Distrito"),
+    PROVINCE("Province"),
     LIST_CATEGORY("Lista de categorias"),
     LIST_COUNTRY("Lista de paises"),
     LIST_GENRE("Lista de géneros"),
@@ -21,7 +24,10 @@ public enum ValueEnum {
     LIST_TYPE_STATUS_FILM_SHOW("Lista de tipos de peliculas"),
     LIST_PRODUCT("Lista de productos"),
     LIST_ROOM("Lista de salsa"),
-    LIST_SEAT("Lista de asientos");
+    LIST_SEAT("Lista de asientos"),
+    LIST_DEPARTMENT("Lista de departamentos"),
+    LIST_DISTRICT("Lista de distritos"),
+    LIST_PROVINCE("Lista de provincias");
 
     private final String value;
 
