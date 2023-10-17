@@ -24,7 +24,8 @@ public class SecurityConfiguration {
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/v3/api-docs/**", "", "/swagger-ui/**",
                                 "/z4-catalogs-service/v3/api-docs/**", "/z4-catalogs-service/swagger-ui/**",
-                                "/z4-facility-service/v3/api-docs/**", "/z4-facility-service/swagger-ui/**")
+                                "/z4-facility-service/v3/api-docs/**", "/z4-facility-service/swagger-ui/**",
+                                "/z4-ubigeo-service/v3/api-docs/**", "/z4-ubigeo-service/swagger-ui/**")
                         .permitAll()
                         .anyExchange()
                         .authenticated())
