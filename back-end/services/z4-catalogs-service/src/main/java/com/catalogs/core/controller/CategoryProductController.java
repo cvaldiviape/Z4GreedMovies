@@ -1,13 +1,13 @@
 package com.catalogs.core.controller;
 
+import com.shared.core.controller.HandlerCrudController;
+import com.shared.core.service.CrudService;
 import com.shared.dto.CategoryProductDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
 import com.catalogs.core.entity.CategoryProductEntity;
-import com.catalogs.core.controller.common.HandlerCrudController;
 import com.catalogs.core.service.CategoryProductService;
-import com.catalogs.core.service.common.CrudService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

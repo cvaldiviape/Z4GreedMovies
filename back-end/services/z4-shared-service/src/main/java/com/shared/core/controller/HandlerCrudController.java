@@ -1,11 +1,11 @@
-package com.catalogs.core.controller.common;
+package com.shared.core.controller;
 
 import com.shared.constants.PageConstants;
+import com.shared.core.service.CrudService;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.catalogs.core.service.common.CrudService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

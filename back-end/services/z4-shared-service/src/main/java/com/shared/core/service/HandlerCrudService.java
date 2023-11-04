@@ -1,21 +1,29 @@
-package com.catalogs.core.service.common;
+package com.shared.core.service;
 
 import com.shared.dto.custom.BasePageDto;
 import com.shared.utils.PageUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 
 public abstract class HandlerCrudService<ENTITY, DTO, ID> implements CrudService<DTO, ID> {
 
     public abstract JpaRepository<ENTITY, ID> getJpaRepository();
+
     public abstract DTO toDto(ENTITY entity);
+
     public abstract ENTITY toEntity(DTO dto);
+
     public abstract List<DTO> toListDtos(List<ENTITY> listEntities);
+
     public abstract void updateEntityFromDto(DTO dto, ENTITY entity);
+
     public abstract ENTITY findEntityById(ID id);
+
     public abstract void verifyUnique(DTO dto);
+
     public abstract void verifyUnique(ID id, DTO dto);
 
     @Override

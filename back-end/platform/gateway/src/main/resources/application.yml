@@ -12,13 +12,14 @@ spring:
           predicates: # los "predicates" son el conjunto de criterios que deben coincidir para que las solicitudes se envien a este microservicio
             - Path=/z4-catalogs-service/v3/api-docs, /api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**
 #          filters: # los "filters" permiten manipulación de solicitudes y respuestas HTTP que pasan a través del gateway.
-#            - StripPrefix=2
         - id: z4-facility-service
           uri: lb://z4-facility-service
           predicates:
             - Path=/z4-facility-service/v3/api-docs, /api/products/**, /api/rooms/**, /api/seats/**
-#          filters:
-#            - StripPrefix=2
+        - id: z4-ubigeo-service
+          uri: lb://z4-ubigeo-service
+          predicates:
+            - Path=/z4-ubigeo-service/v3/api-docs, /api/departments/**, /api/districts/**, /api/provinces/**
     loadbalancer: # deshabilitar el balanceador de carga "Ribbon" de "Spring Cloud Netflix", debido a que usaremos el moderno llamado "Spring Cloud Balancer".
       ribbon:
         enabled: false
@@ -50,3 +51,6 @@ springdoc:
       - url: /z4-facility-service/v3/api-docs
         name: Facility Service
         primaryName: Facility Service
+      - url: /z4-ubigeo-service/v3/api-docs
+        name: Ubigeo Service
+        primaryName: Ubigeo Service

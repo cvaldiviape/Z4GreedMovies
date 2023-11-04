@@ -1,6 +1,6 @@
 package com.catalogs.core.service;
 
-import com.catalogs.core.service.common.HandlerCrudService;
+import com.shared.core.service.HandlerCrudService;
 import java.util.Collection;
 import java.util.List;
 
