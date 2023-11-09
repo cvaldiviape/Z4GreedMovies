@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "studio")
+@Table(name = "studies")
 public class StudioEntity extends CommonEntity {
 
     @Id
