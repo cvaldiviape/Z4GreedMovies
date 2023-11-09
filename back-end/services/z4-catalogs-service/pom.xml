@@ -91,7 +91,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.shared</groupId>
-			<artifactId>shared</artifactId>
+			<artifactId>z4-shared-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -102,7 +102,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<dependencyManagement>
 		<dependencies>
