@@ -14,15 +14,19 @@ import java.util.Set;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "countries")
-public class CountryEntity extends CommonEntity {
+@Table(name = "studio")
+public class StudioEntity extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_country")
-    private Integer idCountry;
+    @Column(name = "id_studio")
+    private Integer idStudio;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_country")
+    private CountryEntity country;
+    @Builder.Default
     @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
-    private Set<StudioEntity> listStudies = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "studio")
+    private Set<MovieEntity> listMovies = new HashSet<>();
 
 }
