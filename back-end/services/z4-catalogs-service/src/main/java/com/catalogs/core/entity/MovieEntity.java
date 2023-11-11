@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "movie")
+@Table(name = "movies")
 public class MovieEntity extends CommonEntity {
 
     @Id
@@ -33,16 +33,16 @@ public class MovieEntity extends CommonEntity {
     @JoinColumn(name = "id_studio")
     private StudioEntity studio;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "movie_audience")
+    @JoinColumn(name = "id_movie_audience")
     private MovieAudienceEntity movieAudience;
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "movies_genres",
             joinColumns = @JoinColumn(name = "id_movie", referencedColumnName = "id_movie"),
             inverseJoinColumns = @JoinColumn(name = "id_genre", referencedColumnName = "id_genre"))
     private Set<GenreEntity> listGenres = new HashSet<>();
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "movies_languages",
             joinColumns = @JoinColumn(name = "id_movie", referencedColumnName = "id_movie"),
             inverseJoinColumns = @JoinColumn(name = "id_language", referencedColumnName = "id_language"))
