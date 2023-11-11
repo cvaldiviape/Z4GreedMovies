@@ -67,7 +67,7 @@ public class StudioController {
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<StudioDto> result = this.studioService.findAllByListIds(listIds);
+        Collection<StudioDto> result = this.studioService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

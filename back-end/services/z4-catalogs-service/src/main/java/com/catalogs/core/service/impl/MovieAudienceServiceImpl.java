@@ -42,7 +42,7 @@ public class MovieAudienceServiceImpl extends MovieAudienceService<MovieAudience
     }
 
     @Override
-    public List<MovieAudienceDto> toListDtos(List<MovieAudienceEntity> listEntities) {
+    public Collection<MovieAudienceDto> toListDtos(Collection<MovieAudienceEntity> listEntities) {
         return this.movieAudienceMapper.toListDtos(listEntities);
     }
 
@@ -74,7 +74,7 @@ public class MovieAudienceServiceImpl extends MovieAudienceService<MovieAudience
     }
 
     @Override
-    public List<MovieAudienceDto> findAllByListIds(Collection<Integer> listIds) {
+    public Collection<MovieAudienceDto> findAllByListIds(Collection<Integer> listIds) {
         List<MovieAudienceEntity> listEntities = this.movieAudienceRepository.findAllById(listIds);
         return this.toListDtos(listEntities);
     }

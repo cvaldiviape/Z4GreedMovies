@@ -2,7 +2,6 @@ package com.catalogs.core.service.impl;
 
 import com.shared.dto.TypeStatusFilmShowDto;
 import com.shared.enums.ValueEnum;
-import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.ValidateUtil;
 import com.catalogs.core.entity.TypeStatusFilmShowEntity;
 import com.catalogs.core.entity.mapper.TypeStatusFilmShowMapper;
@@ -42,13 +41,13 @@ public class TypeStatusFilmShowServiceImpl extends TypeStatusFilmShowService<Typ
     }
 
     @Override
-    public List<TypeStatusFilmShowDto> toListDtos(List<TypeStatusFilmShowEntity> listEntities) {
+    public Collection<TypeStatusFilmShowDto> toListDtos(Collection<TypeStatusFilmShowEntity> listEntities) {
         return this.typeStatusFilmShowMapper.toListDtos(listEntities);
     }
 
     @Override
     public void updateEntityFromDto(TypeStatusFilmShowDto dto, TypeStatusFilmShowEntity entity) {
-        this.typeStatusFilmShowMapper.updateEntityFromDto(dto, entity);
+        this.typeStatusFilmShowMapper.updateEntityFromDtoIgnoredId(dto, entity);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class TypeStatusFilmShowServiceImpl extends TypeStatusFilmShowService<Typ
     }
 
     @Override
-    public List<TypeStatusFilmShowDto> findAllByListIds(Collection<Integer> listIds) {
+    public Collection<TypeStatusFilmShowDto> findAllByListIds(Collection<Integer> listIds) {
         List<TypeStatusFilmShowEntity> listEntities = this.typeStatusFilmShowRepository.findAllById(listIds);
         return this.typeStatusFilmShowMapper.toListDtos(listEntities);
     }

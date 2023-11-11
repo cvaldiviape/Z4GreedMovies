@@ -2,7 +2,6 @@ package com.catalogs.core.service.impl;
 
 import com.shared.dto.GenreDto;
 import com.shared.enums.ValueEnum;
-import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.ValidateUtil;
 import com.catalogs.core.entity.GenreEntity;
 import com.catalogs.core.entity.mapper.GenreMapper;
@@ -42,13 +41,13 @@ public class GenreServiceImpl extends GenreService<GenreEntity, GenreDto, Intege
     }
 
     @Override
-    public List<GenreDto> toListDtos(List<GenreEntity> listEntities) {
+    public Collection<GenreDto> toListDtos(Collection<GenreEntity> listEntities) {
         return this.genreMapper.toListDtos(listEntities);
     }
 
     @Override
     public void updateEntityFromDto(GenreDto dto, GenreEntity entity) {
-        this.genreMapper.updateEntityFromDto(dto, entity);
+        this.genreMapper.updateEntityFromDtoIgnoredId(dto, entity);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class GenreServiceImpl extends GenreService<GenreEntity, GenreDto, Intege
     }
 
     @Override
-    public List<GenreDto> findAllByListIds(Collection<Integer> listIds) {
+    public Collection<GenreDto> findAllByListIds(Collection<Integer> listIds) {
         List<GenreEntity> listEntities = this.genreRepository.findAllById(listIds);
         return this.toListDtos(listEntities);
     }

@@ -2,20 +2,20 @@ package com.catalogs.core.entity.mapper;
 
 import com.shared.dto.LanguageDto;
 import com.catalogs.core.entity.LanguageEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.MappingTarget;
-import java.util.List;
+import org.mapstruct.*;
+import java.util.Collection;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface LanguageMapper {
 
     public LanguageDto toDto(LanguageEntity entity);
     public LanguageEntity toEntity(LanguageDto dto);
-    List<LanguageDto> toListDtos(List<LanguageEntity> listEntities);
-    List<LanguageEntity> toListEntities(List<LanguageDto> listDtos);
-    @Mapping(target = "idLanguage", ignore = true)
+    Collection<LanguageDto> toListDtos(Collection<LanguageEntity> listEntities);
+    Collection<LanguageEntity> toListEntities(Collection<LanguageDto> listDtos);
+    @Named("LanguageMapper.updateEntityFromDto")
     void updateEntityFromDto(LanguageDto dto, @MappingTarget LanguageEntity entity);
+    @Named("LanguageMapper.updateEntityFromDtoIgnoredId")
+    @Mapping(target = "idLanguage", ignore = true)
+    void updateEntityFromDtoIgnoredId(LanguageDto dto, @MappingTarget LanguageEntity entity);
 
 }

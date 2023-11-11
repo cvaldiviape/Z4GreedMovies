@@ -2,7 +2,6 @@ package com.catalogs.core.service.impl;
 
 import com.shared.dto.LanguageDto;
 import com.shared.enums.ValueEnum;
-import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.ValidateUtil;
 import com.catalogs.core.entity.LanguageEntity;
 import com.catalogs.core.entity.mapper.LanguageMapper;
@@ -42,13 +41,13 @@ public class LanguageServiceImpl extends LanguageService<LanguageEntity, Languag
     }
 
     @Override
-    public List<LanguageDto> toListDtos(List<LanguageEntity> listEntities) {
+    public Collection<LanguageDto> toListDtos(Collection<LanguageEntity> listEntities) {
         return this.languageMapper.toListDtos(listEntities);
     }
 
     @Override
     public void updateEntityFromDto(LanguageDto dto, LanguageEntity entity) {
-        this.languageMapper.updateEntityFromDto(dto, entity);
+        this.languageMapper.updateEntityFromDtoIgnoredId(dto, entity);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class LanguageServiceImpl extends LanguageService<LanguageEntity, Languag
     }
 
     @Override
-    public List<LanguageDto> findAllByListIds(Collection<Integer> listIds) {
+    public Collection<LanguageDto> findAllByListIds(Collection<Integer> listIds) {
         List<LanguageEntity> listEntities = this.languageRepository.findAllById(listIds);
         return  this.toListDtos(listEntities);
     }

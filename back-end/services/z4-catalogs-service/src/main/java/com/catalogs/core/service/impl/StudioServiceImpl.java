@@ -38,7 +38,7 @@ public class StudioServiceImpl implements StudioService {
         Page<StudioEntity> pageData = this.studioRepository.findAll(pageable);
         List<StudioEntity> listEntities = pageData.getContent();
 
-        List<StudioDto> listStudios = this.studioMapper.toListDtos(listEntities);
+        Collection<StudioDto> listStudios = this.studioMapper.toListDtos(listEntities);
 
         return BasePageDto.<StudioDto>builder()
                 .listElements(listStudios)
@@ -83,7 +83,7 @@ public class StudioServiceImpl implements StudioService {
 
 
     @Override
-    public List<StudioDto> findAllByListIds(Collection<Integer> listIds) {
+    public Collection<StudioDto> findAllByListIds(Collection<Integer> listIds) {
         List<StudioEntity> listEntities = this.studioRepository.findAllById(listIds);
         return this.studioMapper.toListDtos(listEntities);
     }
