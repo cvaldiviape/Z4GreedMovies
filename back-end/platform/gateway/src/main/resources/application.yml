@@ -10,7 +10,7 @@ spring:
         - id: z4-catalogs-service
           uri: lb://z4-catalogs-service
           predicates: # los "predicates" son el conjunto de criterios que deben coincidir para que las solicitudes se envien a este microservicio
-            - Path=/z4-catalogs-service/v3/api-docs, /api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**, /api/studios/**
+            - Path=/z4-catalogs-service/v3/api-docs, /api/category-products/**, /api/countries/**, /api/genres/**, /api/languages/**, /api/movie-audiences/**, /api/type-status-film-shows/**, /api/studios/**, /api/movies/**
 #          filters: # los "filters" permiten manipulación de solicitudes y respuestas HTTP que pasan a través del gateway.
         - id: z4-facility-service
           uri: lb://z4-facility-service

@@ -35,7 +35,7 @@ public class MovieAudienceController extends HandlerCrudController<MovieAudience
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<MovieAudienceDto> result = this.movieAudienceService.findAllByListIds(listIds);
+        Collection<MovieAudienceDto> result = this.movieAudienceService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

@@ -35,7 +35,7 @@ public class CountryController extends HandlerCrudController<CountryDto, Integer
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<CountryDto> result = this.countryService.findAllByListIds(listIds);
+        Collection<CountryDto> result = this.countryService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

@@ -6,6 +6,6 @@ import java.util.List;
 
 public abstract class CountryService <ENTITY, DTO, ID> extends HandlerCrudService<ENTITY, DTO, ID> {
 
-    public abstract List<DTO> findAllByListIds(Collection<ID> listIds);
+    public abstract Collection<DTO> findAllByListIds(Collection<ID> listIds);
 
 }

@@ -42,7 +42,7 @@ public class CountryServiceImpl extends CountryService<CountryEntity, CountryDto
     }
 
     @Override
-    public List<CountryDto> toListDtos(List<CountryEntity> listEntities) {
+    public Collection<CountryDto> toListDtos(Collection<CountryEntity> listEntities) {
         return this.countryMapper.toListDtos(listEntities);
     }
 
@@ -74,7 +74,7 @@ public class CountryServiceImpl extends CountryService<CountryEntity, CountryDto
     }
 
     @Override
-    public List<CountryDto> findAllByListIds(Collection<Integer> listIds) {
+    public Collection<CountryDto> findAllByListIds(Collection<Integer> listIds) {
         List<CountryEntity> listEntities = this.countryRepository.findAllById(listIds);
         return this.toListDtos(listEntities);
     }

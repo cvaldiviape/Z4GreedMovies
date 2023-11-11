@@ -17,6 +17,7 @@ public enum ValueEnum {
     DISTRICT("Distrito"),
     PROVINCE("Province"),
     STUDIO("Estudio"),
+    MOVIE("Pelicula"),
     LIST_CATEGORY("Lista de categorias"),
     LIST_COUNTRY("Lista de paises"),
     LIST_GENRE("Lista de géneros"),
@@ -29,7 +30,8 @@ public enum ValueEnum {
     LIST_DEPARTMENT("Lista de departamentos"),
     LIST_DISTRICT("Lista de distritos"),
     LIST_PROVINCE("Lista de provincias"),
-    LIST_STUDIO("Lista de estudios");
+    LIST_STUDIO("Lista de estudios"),
+    LIST_MOVIE("Lista de peliculas");
 
     private final String value;
 

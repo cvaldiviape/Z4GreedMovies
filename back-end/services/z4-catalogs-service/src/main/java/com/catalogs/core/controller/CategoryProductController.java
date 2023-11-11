@@ -35,7 +35,7 @@ public class CategoryProductController extends HandlerCrudController<CategoryPro
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<CategoryProductDto> result = this.categoryProductService.findAllByListIds(listIds);
+        Collection<CategoryProductDto> result = this.categoryProductService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

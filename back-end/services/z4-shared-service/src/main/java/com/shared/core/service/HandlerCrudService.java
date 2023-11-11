@@ -5,7 +5,7 @@ import com.shared.utils.PageUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import java.util.Collection;
 import java.util.List;
 
 public abstract class HandlerCrudService<ENTITY, DTO, ID> implements CrudService<DTO, ID> {
@@ -16,7 +16,7 @@ public abstract class HandlerCrudService<ENTITY, DTO, ID> implements CrudService
 
     public abstract ENTITY toEntity(DTO dto);
 
-    public abstract List<DTO> toListDtos(List<ENTITY> listEntities);
+    public abstract Collection<DTO> toListDtos(Collection<ENTITY> listEntities);
 
     public abstract void updateEntityFromDto(DTO dto, ENTITY entity);
 
@@ -32,7 +32,7 @@ public abstract class HandlerCrudService<ENTITY, DTO, ID> implements CrudService
         Page<ENTITY> pageData = this.getJpaRepository().findAll(pageable);
         List<ENTITY> listEntities = pageData.getContent();
 
-        List<DTO> listDtos = this.toListDtos(listEntities);
+        Collection<DTO> listDtos = this.toListDtos(listEntities);
 
         return BasePageDto.<DTO>builder()
                 .listElements(listDtos)

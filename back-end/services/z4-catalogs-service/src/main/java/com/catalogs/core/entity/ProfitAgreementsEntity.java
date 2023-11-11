@@ -21,7 +21,5 @@ public class ProfitAgreementsEntity {
     private BigDecimal studio;
     @Column(name = "house", nullable = false, precision = 5, scale = 2)
     private BigDecimal house;
-    @OneToOne(mappedBy = "profitAgreements")
-    private MovieEntity movie;
 
 }

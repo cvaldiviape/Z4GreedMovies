@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface StudioService extends CrudService<StudioDto, Integer> {
 
-    List<StudioDto> findAllByListIds(Collection<Integer> listIds);
+    Collection<StudioDto> findAllByListIds(Collection<Integer> listIds);
 
 }

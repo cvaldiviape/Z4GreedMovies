@@ -35,7 +35,7 @@ public class TypeStatusFilmShowController extends HandlerCrudController<TypeStat
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<TypeStatusFilmShowDto> result = this.typeStatusFilmShowService.findAllByListIds(listIds);
+        Collection<TypeStatusFilmShowDto> result = this.typeStatusFilmShowService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

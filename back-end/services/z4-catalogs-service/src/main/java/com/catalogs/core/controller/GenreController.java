@@ -35,7 +35,7 @@ public class GenreController extends HandlerCrudController<GenreDto, Integer> {
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<GenreDto> result = this.genreService.findAllByListIds(listIds);
+        Collection<GenreDto> result = this.genreService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

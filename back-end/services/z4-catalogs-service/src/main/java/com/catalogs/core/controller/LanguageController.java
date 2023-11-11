@@ -35,7 +35,7 @@ public class LanguageController extends HandlerCrudController<LanguageDto, Integ
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<LanguageDto> result = this.languageService.findAllByListIds(listIds);
+        Collection<LanguageDto> result = this.languageService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

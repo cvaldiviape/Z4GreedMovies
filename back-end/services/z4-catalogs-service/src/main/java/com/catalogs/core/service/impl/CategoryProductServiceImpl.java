@@ -2,7 +2,6 @@ package com.catalogs.core.service.impl;
 
 import com.shared.dto.CategoryProductDto;
 import com.shared.enums.ValueEnum;
-import com.shared.error.GeneralErrorEnum;
 import com.shared.utils.ValidateUtil;
 import com.catalogs.core.entity.CategoryProductEntity;
 import com.catalogs.core.entity.mapper.CategoryProductMapper;
@@ -42,13 +41,13 @@ public class CategoryProductServiceImpl extends CategoryProductService<CategoryP
     }
 
     @Override
-    public List<CategoryProductDto> toListDtos(List<CategoryProductEntity> listEntities) {
+    public Collection<CategoryProductDto> toListDtos(Collection<CategoryProductEntity> listEntities) {
         return this.categoryProductMapper.toListDtos(listEntities);
     }
 
     @Override
     public void updateEntityFromDto(CategoryProductDto dto, CategoryProductEntity entity) {
-        this.categoryProductMapper.updateEntityFromDto(dto, entity);
+        this.categoryProductMapper.updateEntityFromDtoIgnoredId(dto, entity);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class CategoryProductServiceImpl extends CategoryProductService<CategoryP
     }
 
     @Override
-    public List<CategoryProductDto> findAllByListIds(Collection<Integer> listIds) {
+    public Collection<CategoryProductDto> findAllByListIds(Collection<Integer> listIds) {
         List<CategoryProductEntity> listEntities = this.categoryProductRepository.findAllById(listIds);
         return this.toListDtos(listEntities);
     }
