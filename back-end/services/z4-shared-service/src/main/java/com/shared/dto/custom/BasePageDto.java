@@ -2,6 +2,7 @@ package com.shared.dto.custom;
 
 import lombok.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -16,6 +17,6 @@ public class BasePageDto<T> {
     private Integer totalPages;
     private Boolean isLastPage;
     private Long totalElements;
-    private List<T> listElements;
+    private Collection<T> listElements;
 
 }
