@@ -9,9 +9,15 @@ import java.util.Collection;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CountryMapper {
 
+    @Named("CountryMapper.toDto")
     public CountryDto toDto(CountryEntity entity);
+    @Named("CountryMapper.toDto")
     public CountryEntity toEntity(CountryDto dto);
+    @Named("CountryMapper.toEntityIgnoredId")
+    public CountryEntity toEntityIgnoredId(CountryDto dto);
+    @Named("CountryMapper.toListDtos")
     Collection<CountryDto> toListDtos(Collection<CountryEntity> listEntities);
+    @Named("CountryMapper.toListEntities")
     Collection<CountryEntity> toListEntities(Collection<CountryDto> listDtos);
     @Named("CountryMapper.updateEntityFromDto")
     void updateEntityFromDto(CountryDto dto, @MappingTarget CountryEntity entity);

@@ -1,7 +1,7 @@
 package com.catalogs.core.controller;
 
-import com.shared.core.controller.HandlerCrudController;
-import com.shared.core.service.CrudService;
+import com.shared.core.controller.old.HandlerCrudController;
+import com.shared.core.service.old.CrudService;
 import com.shared.dto.MovieAudienceDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/movie-audiences")

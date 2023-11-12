@@ -1,21 +1,16 @@
 package com.catalogs.core.controller;
 
-import com.catalogs.core.entity.StudioEntity;
 import com.catalogs.core.service.StudioService;
 import com.shared.constants.PageConstants;
-import com.shared.core.controller.HandlerCrudController;
-import com.shared.core.service.CrudService;
 import com.shared.dto.StudioDto;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/studios")
