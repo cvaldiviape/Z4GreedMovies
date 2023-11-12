@@ -1,7 +1,7 @@
-package com.shared.core.controller;
+package com.shared.core.controller.old;
 
 import com.shared.constants.PageConstants;
-import com.shared.core.service.CrudService;
+import com.shared.core.service.old.CrudService;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;

@@ -1,4 +1,4 @@
-package com.shared.core.service;
+package com.shared.core.service.old;
 
 import com.shared.dto.custom.BasePageDto;
 
