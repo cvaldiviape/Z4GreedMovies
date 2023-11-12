@@ -1,42 +1,68 @@
 package com.catalogs.core.controller;
 
-import com.shared.core.controller.old.HandlerCrudController;
-import com.shared.core.service.old.CrudService;
-import com.shared.dto.GenreDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
 import com.catalogs.core.entity.GenreEntity;
-import com.catalogs.core.service.GenreService;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
+import com.shared.dto.GenreDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-
 @RestController
 @RequestMapping("api/genres")
-public class GenreController extends HandlerCrudController<GenreDto, Integer> {
+public class GenreController implements FindAllController<GenreDto>, FindByIdController<GenreDto, Integer>, CreateController<GenreDto>, UpdateController<GenreDto, Integer>, DeleteController<GenreDto, Integer>, FindAllByListIdsController<GenreDto, Integer> {
 
-    private final GenreService<GenreEntity, GenreDto,Integer> genreService;
+    private final GenericFindAllService<GenreEntity, GenreDto, Integer> findAllService;
+    private final GenericFindByIdService<GenreEntity, GenreDto, Integer> findByIdService;
+    private final GenericCreateService<GenreEntity, GenreDto, Integer> createService;
+    private final GenericUpdateService<GenreEntity, GenreDto, Integer> updateService;
+    private final GenericDeleteService<GenreEntity, GenreDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<GenreEntity, GenreDto, Integer> findAllByListIdsService;
 
-    public GenreController(@Qualifier("genreServiceImpl")GenreService<GenreEntity, GenreDto, Integer> genreService) {
-        this.genreService = genreService;
+    public GenreController(
+            @Qualifier("findAllGenreImpl") GenericFindAllService<GenreEntity, GenreDto, Integer> findAllService,
+            @Qualifier("findByIdGenreImpl") GenericFindByIdService<GenreEntity, GenreDto, Integer> findByIdService,
+            @Qualifier("createGenreImpl") GenericCreateService<GenreEntity, GenreDto, Integer> createService,
+            @Qualifier("updateGenreImpl") GenericUpdateService<GenreEntity, GenreDto, Integer> updateService,
+            @Qualifier("deleteGenreImpl") GenericDeleteService<GenreEntity, GenreDto, Integer> deleteService,
+            @Qualifier("findAllGenreByListIdsImpl") GenericFindAllByListIdsService<GenreEntity, GenreDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
     @Override
-    public CrudService<GenreDto, Integer> getCrudService() {
-        return this.genreService;
+    public FindAllService<GenreDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @PostMapping("/findAllByListIds")
-    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        Collection<GenreDto> result = this.genreService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<GenreDto, Integer> getFindByIdService() {
+        return this.findByIdService;
+    }
+
+    @Override
+    public CreateService<GenreDto> getCreateService() {
+        return this.createService;
+    }
+
+    @Override
+    public UpdateService<GenreDto, Integer> getUpdateService() {
+        return this.updateService;
+    }
+
+    @Override
+    public DeleteService<GenreDto, Integer> getDeleteService() {
+        return this.deleteService;
+    }
+
+    @Override
+    public FindAllByListIdsService<GenreDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }
