@@ -9,7 +9,6 @@ import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("createCountryImpl")
 public class CreateCountryImpl extends GenericCreateService<CountryEntity, CountryDto, Integer> {

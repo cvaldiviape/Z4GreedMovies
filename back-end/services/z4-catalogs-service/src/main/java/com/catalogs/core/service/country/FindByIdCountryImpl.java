@@ -3,7 +3,6 @@ package com.catalogs.core.service.country;
 import com.catalogs.core.entity.CountryEntity;
 import com.catalogs.core.entity.mapper.CountryMapper;
 import com.catalogs.core.repository.CountryRepository;
-import com.shared.core.service.FindByIdService;
 import com.shared.core.service.impl.GenericFindByIdService;
 import com.shared.dto.CountryDto;
 import com.shared.enums.ValueEnum;

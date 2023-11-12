@@ -29,4 +29,5 @@ public class FindAllCountryByListIdsImpl extends GenericFindAllByListIdsService<
     public Collection<CountryDto> toListDtos(Collection<CountryEntity> listEntities) {
         return this.countryMapper.toListDtos(listEntities);
     }
+
 }
