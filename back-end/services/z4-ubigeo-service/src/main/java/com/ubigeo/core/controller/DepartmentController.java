@@ -1,7 +1,7 @@
 package com.ubigeo.core.controller;
 
-import com.shared.core.controller.HandlerCrudController;
-import com.shared.core.service.CrudService;
+import com.shared.core.controller.old.HandlerCrudController;
+import com.shared.core.service.old.CrudService;
 import com.shared.dto.DepartmentDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;

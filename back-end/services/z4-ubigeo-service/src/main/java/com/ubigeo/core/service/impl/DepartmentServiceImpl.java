@@ -1,8 +1,6 @@
 package com.ubigeo.core.service.impl;
 
-import com.shared.core.service.CrudService;
 import com.shared.dto.DepartmentDto;
-import com.shared.dto.custom.BasePageDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import com.ubigeo.core.entity.DepartmentEntity;

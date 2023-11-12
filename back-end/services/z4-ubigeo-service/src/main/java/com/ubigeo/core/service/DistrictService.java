@@ -1,6 +1,6 @@
 package com.ubigeo.core.service;
 
-import com.shared.core.service.HandlerCrudService;
+import com.shared.core.service.old.HandlerCrudService;
 
 import java.util.Collection;
 import java.util.List;
