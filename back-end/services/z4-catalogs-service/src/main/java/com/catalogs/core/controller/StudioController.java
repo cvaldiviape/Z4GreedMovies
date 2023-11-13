@@ -1,70 +1,67 @@
 package com.catalogs.core.controller;
 
-import com.catalogs.core.service.StudioService;
-import com.shared.constants.PageConstants;
+import com.catalogs.core.entity.StudioEntity;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
 import com.shared.dto.StudioDto;
-import com.shared.dto.custom.BasePageDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-import java.util.Collection;
 
 @RestController
 @RequestMapping("api/studios")
-public class StudioController {
+public class StudioController implements FindAllController<StudioDto>, FindByIdController<StudioDto, Integer>, CreateController<StudioDto>, UpdateController<StudioDto, Integer>, DeleteController<StudioDto, Integer>, FindAllByListIdsController<StudioDto, Integer> {
 
-    private final StudioService studioService;
+    private final GenericFindAllService<StudioEntity, StudioDto, Integer> findAllService;
+    private final GenericFindByIdService<StudioEntity, StudioDto, Integer> findByIdService;
+    private final CreateService<StudioDto> createService;
+    private final UpdateService<StudioDto, Integer> updateService;
+    private final GenericDeleteService<StudioEntity, StudioDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<StudioEntity, StudioDto, Integer> findAllByListIdsService;
 
-    public StudioController(StudioService studioService) {
-        this.studioService = studioService;
+    public StudioController(
+            @Qualifier("findAllStudioImpl") GenericFindAllService<StudioEntity, StudioDto, Integer> findAllService,
+            @Qualifier("findByIdStudioImpl") GenericFindByIdService<StudioEntity, StudioDto, Integer> findByIdService,
+            @Qualifier("createStudioImpl") CreateService<StudioDto> createService,
+            @Qualifier("updateStudioImpl") UpdateService<StudioDto, Integer> updateService,
+            @Qualifier("deleteStudioImpl") GenericDeleteService<StudioEntity, StudioDto, Integer> deleteService,
+            @Qualifier("findAllStudioByListIdsImpl") GenericFindAllByListIdsService<StudioEntity, StudioDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseDto> findAll(@RequestParam(value = "numberPage", defaultValue = PageConstants.NUM_PAGE_DEFAULT, required = false) Integer numberPage,
-                                               @RequestParam(value = "sizePage", defaultValue = PageConstants.SIZE_PAGE_DEFAULT, required = false) Integer sizePage,
-                                               @RequestParam(value = "sortBy", defaultValue = PageConstants.SORT_BY_DEFAULT, required = false) String sortBy,
-                                               @RequestParam(value = "sortDir", defaultValue = PageConstants.SORT_DIR_DEFAULT, required = false) String sortDir) {
-        BasePageDto<StudioDto> result = this.studioService.findAll(numberPage, sizePage, sortBy, sortDir);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindAllService<StudioDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseDto> findById(@PathVariable Integer id) {
-        StudioDto result = this.studioService.findById(id);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_BY_IO, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<StudioDto, Integer> getFindByIdService() {
+        return this.findByIdService;
     }
 
-    @PostMapping
-    public ResponseEntity<ResponseDto> create(@Valid @RequestBody StudioDto dto) {
-        StudioDto result = this.studioService.create(dto);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.CREATE, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public CreateService<StudioDto> getCreateService() {
+        return this.createService;
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto> update(@PathVariable Integer id, @Valid @RequestBody StudioDto dto) {
-        StudioDto result = this.studioService.update(id, dto);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.UPDATE, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public UpdateService<StudioDto, Integer> getUpdateService() {
+        return this.updateService;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto> delete(@PathVariable Integer id) {
-        StudioDto result = this.studioService.delete(id);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.DELETE, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public DeleteService<StudioDto, Integer> getDeleteService() {
+        return this.deleteService;
     }
 
-    @PostMapping("/findAllByListIds")
-    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        Collection<StudioDto> result = this.studioService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindAllByListIdsService<StudioDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }
