@@ -11,12 +11,12 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "movie_audiences")
-public class MovieAudienceEntity extends CommonEntity {
+@Table(name = "audiences")
+public class AudienceEntity extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_movie_audience")
-    private Integer idMovieAudience;
+    @Column(name = "id_audience")
+    private Integer idAudience;
 
 }

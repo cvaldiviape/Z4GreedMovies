@@ -20,31 +20,31 @@ public class CreateMovieImpl implements CreateService<MovieDto> {
 
     private final MovieRepository movieRepository;
     private final StudioRepository studioRepository;
-    private final MovieAudienceRepository movieAudienceRepository;
+    private final AudienceRepository audienceRepository;
     private final GenreRepository genreRepository;
     private final LanguageRepository languageRepository;
     private final MovieMapper movieMapper;
     private final StudioMapper studioMapper;
-    private final MovieAudienceMapper movieAudienceMapper;
+    private final AudienceMapper audienceMapper;
     private final GenreMapper genreMapper;
     private final LanguageMapper languageMapper;
 
     public CreateMovieImpl(
             MovieRepository movieRepository,
             StudioRepository studioRepository,
-            MovieAudienceRepository movieAudienceRepository,
+            AudienceRepository audienceRepository,
             GenreRepository genreRepository,
             LanguageRepository languageRepository,
             MovieMapper movieMapper,
-            StudioMapper studioMapper, MovieAudienceMapper movieAudienceMapper, GenreMapper genreMapper, LanguageMapper languageMapper) {
+            StudioMapper studioMapper, AudienceMapper audienceMapper, GenreMapper genreMapper, LanguageMapper languageMapper) {
         this.movieRepository = movieRepository;
         this.studioRepository = studioRepository;
-        this.movieAudienceRepository = movieAudienceRepository;
+        this.audienceRepository = audienceRepository;
         this.genreRepository = genreRepository;
         this.languageRepository = languageRepository;
         this.movieMapper = movieMapper;
         this.studioMapper = studioMapper;
-        this.movieAudienceMapper = movieAudienceMapper;
+        this.audienceMapper = audienceMapper;
         this.genreMapper = genreMapper;
         this.languageMapper = languageMapper;
     }
@@ -67,8 +67,8 @@ public class CreateMovieImpl implements CreateService<MovieDto> {
         Integer idStudio = movieDto.getStudio().getIdStudio();
         StudioEntity studioEntity = this.findStudioEntityById(idStudio);
 
-        Integer idMovieAudience = movieDto.getMovieAudience().getIdMovieAudience();
-        MovieAudienceEntity movieAudienceEntity = this.findMovieAudienceEntityById(idMovieAudience);
+        Integer idAudience = movieDto.getAudience().getIdAudience();
+        AudienceEntity audienceEntity = this.findAudienceEntityById(idAudience);
 
         Set<GenreEntity> listGenresEntities = movieDto.getListGenres()
                 .stream()
@@ -82,8 +82,8 @@ public class CreateMovieImpl implements CreateService<MovieDto> {
 
         StudioDto studioDto = this.studioMapper.toDto(studioEntity);
         movieDto.setStudio(studioDto);
-        MovieAudienceDto movieAudienceDto = this.movieAudienceMapper.toDto(movieAudienceEntity);
-        movieDto.setMovieAudience(movieAudienceDto);
+        AudienceDto audienceDto = this.audienceMapper.toDto(audienceEntity);
+        movieDto.setAudience(audienceDto);
         Collection<GenreDto> listGenresDtos = this.genreMapper.toListDtos(listGenresEntities);
         movieDto.setListGenres(new HashSet<>(listGenresDtos));
         Collection<LanguageDto> listLanguagesDtos = this.languageMapper.toListDtos(listLanguagesEntities);
@@ -95,9 +95,9 @@ public class CreateMovieImpl implements CreateService<MovieDto> {
                 .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.STUDIO.getValue(), idStudio));
     }
 
-    private MovieAudienceEntity findMovieAudienceEntityById(Integer idMovieAudience) {
-        return this.movieAudienceRepository.findById(idMovieAudience)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.AUDIENCE.getValue(), idMovieAudience));
+    private AudienceEntity findAudienceEntityById(Integer idAudience) {
+        return this.audienceRepository.findById(idAudience)
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.AUDIENCE.getValue(), idAudience));
     }
 
     private GenreEntity findGenreEntityById(Integer idGenre) {

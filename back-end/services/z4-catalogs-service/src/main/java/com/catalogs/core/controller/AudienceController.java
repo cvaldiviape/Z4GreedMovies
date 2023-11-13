@@ -1,13 +1,13 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.entity.AudienceEntity;
 import com.shared.core.controller.old.HandlerCrudController;
 import com.shared.core.service.old.CrudService;
-import com.shared.dto.MovieAudienceDto;
+import com.shared.dto.AudienceDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;
 import com.shared.utils.response.ResponseUtil;
-import com.catalogs.core.entity.MovieAudienceEntity;
-import com.catalogs.core.service.MovieAudienceService;
+import com.catalogs.core.service.AudienceService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,23 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("api/movie-audiences")
-public class MovieAudienceController extends HandlerCrudController<MovieAudienceDto, Integer> {
+@RequestMapping("api/audiences")
+public class AudienceController extends HandlerCrudController<AudienceDto, Integer> {
 
-    private final MovieAudienceService<MovieAudienceEntity, MovieAudienceDto, Integer> movieAudienceService;
+    private final AudienceService<AudienceEntity, AudienceDto, Integer> audienceService;
 
-    public MovieAudienceController(@Qualifier("movieAudienceServiceImpl")MovieAudienceService<MovieAudienceEntity, MovieAudienceDto, Integer> movieAudienceService) {
-        this.movieAudienceService = movieAudienceService;
+    public AudienceController(@Qualifier("audienceServiceImpl") AudienceService<AudienceEntity, AudienceDto, Integer> audienceService) {
+        this.audienceService = audienceService;
     }
 
     @Override
-    public CrudService<MovieAudienceDto, Integer> getCrudService() {
-        return this.movieAudienceService;
+    public CrudService<AudienceDto, Integer> getCrudService() {
+        return this.audienceService;
     }
 
     @PostMapping("/findAllByListIds")
     public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        Collection<MovieAudienceDto> result = this.movieAudienceService.findAllByListIds(listIds);
+        Collection<AudienceDto> result = this.audienceService.findAllByListIds(listIds);
         ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
         return ResponseEntity.ok(response);
     }

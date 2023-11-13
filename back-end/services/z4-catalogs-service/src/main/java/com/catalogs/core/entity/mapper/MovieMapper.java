@@ -5,7 +5,7 @@ import com.shared.dto.MovieDto;
 import org.mapstruct.*;
 import java.util.Collection;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {StudioMapper.class, MovieAudienceMapper.class, GenreMapper.class, LanguageMapper.class, ProfitAgreementsMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {StudioMapper.class, AudienceMapper.class, GenreMapper.class, LanguageMapper.class, ProfitAgreementsMapper.class})
 public interface MovieMapper {
 
     @Named("MovieMapper.toDto")
@@ -22,7 +22,7 @@ public interface MovieMapper {
     @Named("MovieMapper.updateEntityFromDto")
     @Mappings({
             @Mapping(target = "studio", qualifiedByName = "StudioMapper.updateEntityFromDto"),
-            @Mapping(target = "movieAudience", qualifiedByName = "MovieAudienceMapper.updateEntityFromDto"),
+            @Mapping(target = "audience", qualifiedByName = "AudienceMapper.updateEntityFromDto"),
             @Mapping(target = "profitAgreements", qualifiedByName = "ProfitAgreementsMapper.updateEntityFromDto")
     })
     void updateEntityFromDto(MovieDto dto, @MappingTarget MovieEntity entity);
@@ -30,7 +30,7 @@ public interface MovieMapper {
     @Mappings({
             @Mapping(target = "idMovie", ignore = true),
             @Mapping(target = "studio", qualifiedByName = "StudioMapper.updateEntityFromDto"),
-            @Mapping(target = "movieAudience", qualifiedByName = "MovieAudienceMapper.updateEntityFromDto"),
+            @Mapping(target = "audience", qualifiedByName = "AudienceMapper.updateEntityFromDto"),
             @Mapping(target = "profitAgreements", qualifiedByName = "ProfitAgreementsMapper.updateEntityFromDto")
     })
     void updateEntityFromDtoIgnoredId(MovieDto dto, @MappingTarget MovieEntity entity);
