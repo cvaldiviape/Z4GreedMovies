@@ -3,16 +3,15 @@ package com.catalogs.core.service.movie;
 import com.catalogs.core.entity.MovieEntity;
 import com.catalogs.core.entity.mapper.MovieMapper;
 import com.catalogs.core.repository.MovieRepository;
-import com.shared.core.service.DeleteService;
+import com.shared.core.service.impl.GenericDeleteService;
 import com.shared.dto.MovieDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("deleteMovieImpl")
-@Transactional
-public class DeleteMovieImpl implements DeleteService<MovieDto, Integer> {
+public class DeleteMovieImpl extends GenericDeleteService<MovieEntity, MovieDto, Integer> {
 
     private final MovieRepository movieRepository;
     private final MovieMapper movieMapper;
@@ -23,15 +22,19 @@ public class DeleteMovieImpl implements DeleteService<MovieDto, Integer> {
     }
 
     @Override
-    public MovieDto delete(Integer idMovie) {
-        MovieEntity movieEntity = this.findMovieEntityById(idMovie);
-        this.movieRepository.delete(movieEntity);
-        return this.movieMapper.toDto(movieEntity);
+    public JpaRepository<MovieEntity, Integer> getJpaRepository() {
+        return this.movieRepository;
     }
 
-    private MovieEntity findMovieEntityById(Integer id) {
-        return this.movieRepository.findById(id)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.MOVIE.getValue(), id));
+    @Override
+    public MovieDto toDto(MovieEntity countryEntity) {
+        return this.movieMapper.toDto(countryEntity);
+    }
+
+    @Override
+    public MovieEntity findEntityById(Integer idCountry) {
+        return this.movieRepository.findById(idCountry)
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.MOVIE.getValue(), idCountry));
     }
 
 }
