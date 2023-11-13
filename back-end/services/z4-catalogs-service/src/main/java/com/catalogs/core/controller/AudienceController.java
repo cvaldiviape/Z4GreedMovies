@@ -1,42 +1,68 @@
 package com.catalogs.core.controller;
 
 import com.catalogs.core.entity.AudienceEntity;
-import com.shared.core.controller.old.HandlerCrudController;
-import com.shared.core.service.old.CrudService;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
 import com.shared.dto.AudienceDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
-import com.catalogs.core.service.AudienceService;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-
 @RestController
 @RequestMapping("api/audiences")
-public class AudienceController extends HandlerCrudController<AudienceDto, Integer> {
+public class AudienceController implements FindAllController<AudienceDto>, FindByIdController<AudienceDto, Integer>, CreateController<AudienceDto>, UpdateController<AudienceDto, Integer>, DeleteController<AudienceDto, Integer>, FindAllByListIdsController<AudienceDto, Integer> {
 
-    private final AudienceService<AudienceEntity, AudienceDto, Integer> audienceService;
+    private final GenericFindAllService<AudienceEntity, AudienceDto, Integer> findAllService;
+    private final GenericFindByIdService<AudienceEntity, AudienceDto, Integer> findByIdService;
+    private final GenericCreateService<AudienceEntity, AudienceDto, Integer> createService;
+    private final GenericUpdateService<AudienceEntity, AudienceDto, Integer> updateService;
+    private final GenericDeleteService<AudienceEntity, AudienceDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<AudienceEntity, AudienceDto, Integer> findAllByListIdsService;
 
-    public AudienceController(@Qualifier("audienceServiceImpl") AudienceService<AudienceEntity, AudienceDto, Integer> audienceService) {
-        this.audienceService = audienceService;
+    public AudienceController(
+            @Qualifier("findAllAudienceImpl") GenericFindAllService<AudienceEntity, AudienceDto, Integer> findAllService,
+            @Qualifier("findByIdAudienceImpl") GenericFindByIdService<AudienceEntity, AudienceDto, Integer> findByIdService,
+            @Qualifier("createAudienceImpl") GenericCreateService<AudienceEntity, AudienceDto, Integer> createService,
+            @Qualifier("updateAudienceImpl") GenericUpdateService<AudienceEntity, AudienceDto, Integer> updateService,
+            @Qualifier("deleteAudienceImpl") GenericDeleteService<AudienceEntity, AudienceDto, Integer> deleteService,
+            @Qualifier("findAllAudienceByListIdsImpl") GenericFindAllByListIdsService<AudienceEntity, AudienceDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
     @Override
-    public CrudService<AudienceDto, Integer> getCrudService() {
-        return this.audienceService;
+    public FindAllService<AudienceDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @PostMapping("/findAllByListIds")
-    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        Collection<AudienceDto> result = this.audienceService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<AudienceDto, Integer> getFindByIdService() {
+        return this.findByIdService;
+    }
+
+    @Override
+    public CreateService<AudienceDto> getCreateService() {
+        return this.createService;
+    }
+
+    @Override
+    public UpdateService<AudienceDto, Integer> getUpdateService() {
+        return this.updateService;
+    }
+
+    @Override
+    public DeleteService<AudienceDto, Integer> getDeleteService() {
+        return this.deleteService;
+    }
+
+    @Override
+    public FindAllByListIdsService<AudienceDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }
