@@ -1,11 +1,8 @@
 package com.shared.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.shared.dto.custom.CommonDto;
 import com.shared.utils.filter.Searchable;
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import java.time.LocalTime;
@@ -28,7 +25,7 @@ public class MovieDto extends CommonDto implements Searchable<Integer> {
     private LocalTime duration;
     private String urlImage;
     private StudioDto studio;
-    private MovieAudienceDto movieAudience;
+    private AudienceDto audience;
     private Set<GenreDto> listGenres = new HashSet<>();
     private Set<LanguageDto> listLanguages = new HashSet<>();
     private ProfitAgreementsDto profitAgreements;
@@ -39,12 +36,12 @@ public class MovieDto extends CommonDto implements Searchable<Integer> {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MovieDto movieDto = (MovieDto) o;
-        return Objects.equals(idMovie, movieDto.idMovie) && Objects.equals(synopsis, movieDto.synopsis) && Objects.equals(year, movieDto.year) && Objects.equals(duration, movieDto.duration) && Objects.equals(urlImage, movieDto.urlImage) && Objects.equals(studio, movieDto.studio) && Objects.equals(movieAudience, movieDto.movieAudience) && Objects.equals(listGenres, movieDto.listGenres) && Objects.equals(listLanguages, movieDto.listLanguages) && Objects.equals(profitAgreements, movieDto.profitAgreements);
+        return Objects.equals(idMovie, movieDto.idMovie) && Objects.equals(synopsis, movieDto.synopsis) && Objects.equals(year, movieDto.year) && Objects.equals(duration, movieDto.duration) && Objects.equals(urlImage, movieDto.urlImage) && Objects.equals(studio, movieDto.studio) && Objects.equals(audience, movieDto.audience) && Objects.equals(listGenres, movieDto.listGenres) && Objects.equals(listLanguages, movieDto.listLanguages) && Objects.equals(profitAgreements, movieDto.profitAgreements);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idMovie, synopsis, year, duration, urlImage, studio, movieAudience, listGenres, listLanguages, profitAgreements);
+        return Objects.hash(super.hashCode(), idMovie, synopsis, year, duration, urlImage, studio, audience, listGenres, listLanguages, profitAgreements);
     }
 
     @Override

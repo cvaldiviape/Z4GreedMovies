@@ -1,42 +1,68 @@
 package com.catalogs.core.controller;
 
-import com.shared.core.controller.old.HandlerCrudController;
-import com.shared.core.service.old.CrudService;
-import com.shared.dto.LanguageDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
 import com.catalogs.core.entity.LanguageEntity;
-import com.catalogs.core.service.LanguageService;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
+import com.shared.dto.LanguageDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-
 @RestController
 @RequestMapping("api/languages")
-public class LanguageController extends HandlerCrudController<LanguageDto, Integer> {
+public class LanguageController implements FindAllController<LanguageDto>, FindByIdController<LanguageDto, Integer>, CreateController<LanguageDto>, UpdateController<LanguageDto, Integer>, DeleteController<LanguageDto, Integer>, FindAllByListIdsController<LanguageDto, Integer> {
 
-    private final LanguageService<LanguageEntity, LanguageDto, Integer> languageService;
+    private final GenericFindAllService<LanguageEntity, LanguageDto, Integer> findAllService;
+    private final GenericFindByIdService<LanguageEntity, LanguageDto, Integer> findByIdService;
+    private final GenericCreateService<LanguageEntity, LanguageDto, Integer> createService;
+    private final GenericUpdateService<LanguageEntity, LanguageDto, Integer> updateService;
+    private final GenericDeleteService<LanguageEntity, LanguageDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<LanguageEntity, LanguageDto, Integer> findAllByListIdsService;
 
-    public LanguageController(@Qualifier("languageServiceImpl")LanguageService<LanguageEntity, LanguageDto, Integer> languageService) {
-        this.languageService = languageService;
+    public LanguageController(
+            @Qualifier("findAllLanguageImpl") GenericFindAllService<LanguageEntity, LanguageDto, Integer> findAllService,
+            @Qualifier("findByIdLanguageImpl") GenericFindByIdService<LanguageEntity, LanguageDto, Integer> findByIdService,
+            @Qualifier("createLanguageImpl") GenericCreateService<LanguageEntity, LanguageDto, Integer> createService,
+            @Qualifier("updateLanguageImpl") GenericUpdateService<LanguageEntity, LanguageDto, Integer> updateService,
+            @Qualifier("deleteLanguageImpl") GenericDeleteService<LanguageEntity, LanguageDto, Integer> deleteService,
+            @Qualifier("findAllLanguageByListIdsImpl") GenericFindAllByListIdsService<LanguageEntity, LanguageDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
     @Override
-    public CrudService<LanguageDto, Integer> getCrudService() {
-        return this.languageService;
+    public FindAllService<LanguageDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @PostMapping("/findAllByListIds")
-    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        Collection<LanguageDto> result = this.languageService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<LanguageDto, Integer> getFindByIdService() {
+        return this.findByIdService;
+    }
+
+    @Override
+    public CreateService<LanguageDto> getCreateService() {
+        return this.createService;
+    }
+
+    @Override
+    public UpdateService<LanguageDto, Integer> getUpdateService() {
+        return this.updateService;
+    }
+
+    @Override
+    public DeleteService<LanguageDto, Integer> getDeleteService() {
+        return this.deleteService;
+    }
+
+    @Override
+    public FindAllByListIdsService<LanguageDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }

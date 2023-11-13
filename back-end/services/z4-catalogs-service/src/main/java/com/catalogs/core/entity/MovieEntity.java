@@ -33,8 +33,8 @@ public class MovieEntity extends CommonEntity {
     @JoinColumn(name = "id_studio")
     private StudioEntity studio;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_movie_audience")
-    private MovieAudienceEntity movieAudience;
+    @JoinColumn(name = "id_audience")
+    private AudienceEntity audience;
     @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "movies_genres",

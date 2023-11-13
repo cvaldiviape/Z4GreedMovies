@@ -1,42 +1,68 @@
 package com.catalogs.core.controller;
 
-import com.shared.core.controller.old.HandlerCrudController;
-import com.shared.core.service.old.CrudService;
-import com.shared.dto.TypeStatusFilmShowDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
 import com.catalogs.core.entity.TypeStatusFilmShowEntity;
-import com.catalogs.core.service.TypeStatusFilmShowService;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
+import com.shared.dto.TypeStatusFilmShowDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-
 @RestController
 @RequestMapping("api/type-status-film-shows")
-public class TypeStatusFilmShowController extends HandlerCrudController<TypeStatusFilmShowDto, Integer> {
+public class TypeStatusFilmShowController implements FindAllController<TypeStatusFilmShowDto>, FindByIdController<TypeStatusFilmShowDto, Integer>, CreateController<TypeStatusFilmShowDto>, UpdateController<TypeStatusFilmShowDto, Integer>, DeleteController<TypeStatusFilmShowDto, Integer>, FindAllByListIdsController<TypeStatusFilmShowDto, Integer> {
 
-    private final TypeStatusFilmShowService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> typeStatusFilmShowService;
+    private final GenericFindAllService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findAllService;
+    private final GenericFindByIdService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findByIdService;
+    private final GenericCreateService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> createService;
+    private final GenericUpdateService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> updateService;
+    private final GenericDeleteService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findAllByListIdsService;
 
-    public TypeStatusFilmShowController(@Qualifier("typeStatusFilmShowServiceImpl")TypeStatusFilmShowService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> typeStatusFilmShowService) {
-        this.typeStatusFilmShowService = typeStatusFilmShowService;
+    public TypeStatusFilmShowController(
+            @Qualifier("findAllTypeStatusFilmShowImpl") GenericFindAllService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findAllService,
+            @Qualifier("findByIdTypeStatusFilmShowImpl") GenericFindByIdService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findByIdService,
+            @Qualifier("createTypeStatusFilmShowImpl") GenericCreateService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> createService,
+            @Qualifier("updateTypeStatusFilmShowImpl") GenericUpdateService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> updateService,
+            @Qualifier("deleteTypeStatusFilmShowImpl") GenericDeleteService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> deleteService,
+            @Qualifier("findAllTypeStatusFilmShowByListIdsImpl") GenericFindAllByListIdsService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
     @Override
-    public CrudService<TypeStatusFilmShowDto, Integer> getCrudService() {
-        return this.typeStatusFilmShowService;
+    public FindAllService<TypeStatusFilmShowDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @PostMapping("/findAllByListIds")
-    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        Collection<TypeStatusFilmShowDto> result = this.typeStatusFilmShowService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<TypeStatusFilmShowDto, Integer> getFindByIdService() {
+        return this.findByIdService;
+    }
+
+    @Override
+    public CreateService<TypeStatusFilmShowDto> getCreateService() {
+        return this.createService;
+    }
+
+    @Override
+    public UpdateService<TypeStatusFilmShowDto, Integer> getUpdateService() {
+        return this.updateService;
+    }
+
+    @Override
+    public DeleteService<TypeStatusFilmShowDto, Integer> getDeleteService() {
+        return this.deleteService;
+    }
+
+    @Override
+    public FindAllByListIdsService<TypeStatusFilmShowDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }

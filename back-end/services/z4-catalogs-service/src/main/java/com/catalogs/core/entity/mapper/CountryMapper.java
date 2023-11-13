@@ -3,7 +3,6 @@ package com.catalogs.core.entity.mapper;
 import com.shared.dto.CountryDto;
 import com.catalogs.core.entity.CountryEntity;
 import org.mapstruct.*;
-
 import java.util.Collection;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -11,9 +10,10 @@ public interface CountryMapper {
 
     @Named("CountryMapper.toDto")
     public CountryDto toDto(CountryEntity entity);
-    @Named("CountryMapper.toDto")
+    @Named("CountryMapper.toEntity")
     public CountryEntity toEntity(CountryDto dto);
     @Named("CountryMapper.toEntityIgnoredId")
+    @Mapping(target = "idCountry", ignore = true)
     public CountryEntity toEntityIgnoredId(CountryDto dto);
     @Named("CountryMapper.toListDtos")
     Collection<CountryDto> toListDtos(Collection<CountryEntity> listEntities);

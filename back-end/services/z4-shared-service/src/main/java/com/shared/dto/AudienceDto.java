@@ -15,28 +15,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class MovieAudienceDto extends CommonDto implements Searchable<Integer> {
+public class AudienceDto extends CommonDto implements Searchable<Integer> {
 
-    private Integer idMovieAudience;
+    private Integer idAudience;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        MovieAudienceDto that = (MovieAudienceDto) o;
-        return Objects.equals(idMovieAudience, that.idMovieAudience);
+        AudienceDto that = (AudienceDto) o;
+        return Objects.equals(idAudience, that.idAudience);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idMovieAudience);
+        return Objects.hash(super.hashCode(), idAudience);
     }
 
     @JsonIgnore
     @Override
     public Integer getSearcheableField() {
-        return this.idMovieAudience;
+        return this.idAudience;
     }
 
 }

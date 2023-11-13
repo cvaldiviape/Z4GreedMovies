@@ -3,16 +3,14 @@ package com.catalogs.core.service.movie;
 import com.catalogs.core.entity.MovieEntity;
 import com.catalogs.core.entity.mapper.MovieMapper;
 import com.catalogs.core.repository.MovieRepository;
-import com.shared.core.service.FindByIdService;
+import com.shared.core.service.impl.GenericFindByIdService;
 import com.shared.dto.MovieDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("findMovieByIdImpl")
-@Transactional
-public class FindMovieByIdImpl implements FindByIdService<MovieDto, Integer> {
+public class FindMovieByIdImpl extends GenericFindByIdService<MovieEntity, MovieDto, Integer> {
 
     private final MovieRepository movieRepository;
     private final MovieMapper movieMapper;
@@ -23,14 +21,14 @@ public class FindMovieByIdImpl implements FindByIdService<MovieDto, Integer> {
     }
 
     @Override
-    public MovieDto findById(Integer idMovie) {
-        MovieEntity entity = this.findMovieEntityById(idMovie);
-        return this.movieMapper.toDto(entity);
+    public MovieDto toDto(MovieEntity countryEntity) {
+        return this.movieMapper.toDto(countryEntity);
     }
 
-    private MovieEntity findMovieEntityById(Integer id) {
-        return this.movieRepository.findById(id)
-                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.MOVIE.getValue(), id));
+    @Override
+    public MovieEntity findEntityById(Integer idCountry) {
+        return this.movieRepository.findById(idCountry)
+                .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.MOVIE.getValue(), idCountry));
     }
 
 }
