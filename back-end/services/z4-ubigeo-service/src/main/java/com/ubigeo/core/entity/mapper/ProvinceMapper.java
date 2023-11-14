@@ -13,6 +13,9 @@ public interface ProvinceMapper {
     public ProvinceDto toDto(ProvinceEntity entity);
     @Named("ProvinceMapper.toEntity")
     public ProvinceEntity toEntity(ProvinceDto dto);
+    @Named("ProvinceMapper.toEntityIngoredId")
+    @Mapping(target = "idProvince", ignore = true)
+    public ProvinceEntity toEntityIngoredId(ProvinceDto dto);
     @Named("ProvinceMapper.toListDtos")
     List<ProvinceDto> toListDtos(List<ProvinceEntity> listEntities);
     @Named("ProvinceMapper.toListEntities")

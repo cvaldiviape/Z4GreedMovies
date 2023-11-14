@@ -3,7 +3,6 @@ package com.ubigeo.core.entity.mapper;
 import com.shared.dto.DistrictDto;
 import com.ubigeo.core.entity.DistrictEntity;
 import org.mapstruct.*;
-
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {DepartmentMapper.class, ProvinceMapper.class})
@@ -13,6 +12,9 @@ public interface DistrictMapper {
     public DistrictDto toDto(DistrictEntity entity);
     @Named("DistrictMapper.toEntity")
     public DistrictEntity toEntity(DistrictDto dto);
+    @Named("DistrictMapper.toEntityIgnoredId")
+    @Mapping(target = "idDistrict", ignore = true)
+    public DistrictEntity toEntityIgnoredId(DistrictDto dto);
     @Named("DistrictMapper.toListDtos")
     List<DistrictDto> toListDtos(List<DistrictEntity> listEntities);
     @Named("DistrictMapper.toListEntities")
