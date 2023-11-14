@@ -18,21 +18,19 @@ public class ProductDto implements Searchable<Integer> {
     private String code;
     private String description;
     private BigDecimal price;
-    private Integer stock;
-    private Integer idCategoryProduct;
-    private CategoryProductDto categoryProduct;
+    private CategoryProductDto category;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
-        return Objects.equals(idProduct, that.idProduct) && Objects.equals(code, that.code) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(stock, that.stock) && Objects.equals(idCategoryProduct, that.idCategoryProduct) && Objects.equals(categoryProduct, that.categoryProduct);
+        return Objects.equals(idProduct, that.idProduct) && Objects.equals(code, that.code) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idProduct, code, description, price, stock, idCategoryProduct, categoryProduct);
+        return Objects.hash(idProduct, code, description, price, category);
     }
 
     @JsonIgnore
@@ -40,4 +38,5 @@ public class ProductDto implements Searchable<Integer> {
     public Integer getSearcheableField() {
         return this.idProduct;
     }
+
 }
