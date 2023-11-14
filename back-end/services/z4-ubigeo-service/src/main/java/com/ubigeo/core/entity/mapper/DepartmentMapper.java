@@ -3,6 +3,8 @@ package com.ubigeo.core.entity.mapper;
 import com.shared.dto.DepartmentDto;
 import com.ubigeo.core.entity.DepartmentEntity;
 import org.mapstruct.*;
+
+import java.util.Collection;
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -16,9 +18,9 @@ public interface DepartmentMapper {
     @Mapping(target = "idDepartment", ignore = true)
     public DepartmentEntity toEntityIgnoredId(DepartmentDto dto);
     @Named("DepartmentMapper.toListDtos")
-    List<DepartmentDto> toListDtos(List<DepartmentEntity> listEntities);
+    Collection<DepartmentDto> toListDtos(Collection<DepartmentEntity> listEntities);
     @Named("DepartmentMapper.toListEntities")
-    List<DepartmentEntity> toListEntities(List<DepartmentDto> listDtos);
+    Collection<DepartmentEntity> toListEntities(Collection<DepartmentDto> listDtos);
     @Named("DepartmentMapper.updateEntityFromDto")
     void updateEntityFromDto(DepartmentDto dto, @MappingTarget DepartmentEntity entity);
     @Named("DepartmentMapper.updateEntityFromDtoIgnoredId")
