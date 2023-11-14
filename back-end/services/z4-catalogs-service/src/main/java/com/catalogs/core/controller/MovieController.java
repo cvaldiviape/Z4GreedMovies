@@ -1,7 +1,12 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.entity.MovieEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
+import com.shared.core.service.impl.GenericDeleteService;
+import com.shared.core.service.impl.GenericFindAllByListIdsService;
+import com.shared.core.service.impl.GenericFindAllService;
+import com.shared.core.service.impl.GenericFindByIdService;
 import com.shared.dto.MovieDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +15,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/movies")
 public class MovieController implements FindAllController<MovieDto>, FindByIdController<MovieDto, Integer>, CreateController<MovieDto>, UpdateController<MovieDto, Integer>, DeleteController<MovieDto, Integer>, FindAllByListIdsController<MovieDto, Integer> {
 
-    private final FindAllService<MovieDto> findAllService;
-    private final FindByIdService<MovieDto, Integer> findByIdService;
+    private final GenericFindAllService<MovieEntity, MovieDto, Integer> findAllService;
+    private final GenericFindByIdService<MovieEntity, MovieDto, Integer> findByIdService;
     private final CreateService<MovieDto> createService;
     private final UpdateService<MovieDto, Integer> updateService;
-    private final DeleteService<MovieDto, Integer> deleteService;
-    private final FindAllByListIdsService<MovieDto, Integer> findAllByListIdsService;
+    private final GenericDeleteService<MovieEntity, MovieDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<MovieEntity, MovieDto, Integer> findAllByListIdsService;
 
     public MovieController(
-            @Qualifier("findAllMovieImpl") FindAllService<MovieDto> findAllService,
-            @Qualifier("findMovieByIdImpl") FindByIdService<MovieDto, Integer> findByIdService,
+            @Qualifier("findAllMovieImpl") GenericFindAllService<MovieEntity, MovieDto, Integer> findAllService,
+            @Qualifier("findByIdMovieImpl") GenericFindByIdService<MovieEntity, MovieDto, Integer> findByIdService,
             @Qualifier("createMovieImpl") CreateService<MovieDto> createService,
             @Qualifier("updateMovieImpl") UpdateService<MovieDto, Integer> updateService,
-            @Qualifier("deleteMovieImpl") DeleteService<MovieDto, Integer> deleteService,
-            @Qualifier("findAllMovieByListIdsImpl") FindAllByListIdsService<MovieDto, Integer> findAllByListIdsService
+            @Qualifier("deleteMovieImpl") GenericDeleteService<MovieEntity, MovieDto, Integer> deleteService,
+            @Qualifier("findAllMovieByListIdsImpl") GenericFindAllByListIdsService<MovieEntity, MovieDto, Integer> findAllByListIdsService
     ) {
         this.findAllService = findAllService;
         this.findByIdService = findByIdService;

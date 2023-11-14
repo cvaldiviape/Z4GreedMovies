@@ -9,13 +9,13 @@ import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;
 
-@Service("findMovieByIdImpl")
-public class FindMovieByIdImpl extends GenericFindByIdService<MovieEntity, MovieDto, Integer> {
+@Service("findByIdMovieImpl")
+public class FindByIdMovieImpl extends GenericFindByIdService<MovieEntity, MovieDto, Integer> {
 
     private final MovieRepository movieRepository;
     private final MovieMapper movieMapper;
 
-    public FindMovieByIdImpl(MovieRepository movieRepository, MovieMapper movieMapper) {
+    public FindByIdMovieImpl(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
         this.movieMapper = movieMapper;
     }
