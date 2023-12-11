@@ -1,6 +1,5 @@
 package com.ubigeo.core.controller;
 
-
 import com.ubigeo.core.entity.DepartmentEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;

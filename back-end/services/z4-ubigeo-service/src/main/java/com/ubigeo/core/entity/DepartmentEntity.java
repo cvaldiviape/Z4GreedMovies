@@ -21,13 +21,8 @@ public class DepartmentEntity extends CommonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_department")
     private Integer idDepartment;
-    @Builder.Default
     @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     private Set<ProvinceEntity> listProvinces = new HashSet<>();
-    @Builder.Default
-    @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<DistrictEntity> listDistricts = new HashSet<>();
 
 }

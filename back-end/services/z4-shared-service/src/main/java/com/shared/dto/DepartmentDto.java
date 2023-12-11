@@ -20,7 +20,6 @@ public class DepartmentDto extends CommonDto implements Searchable<Integer> {
 
     private Integer idDepartment;
     private Set<ProvinceDto> listProvinces = new HashSet<>();
-    private Set<DistrictDto> listDistricts = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -28,12 +27,12 @@ public class DepartmentDto extends CommonDto implements Searchable<Integer> {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         DepartmentDto that = (DepartmentDto) o;
-        return Objects.equals(idDepartment, that.idDepartment) && Objects.equals(listProvinces, that.listProvinces) && Objects.equals(listDistricts, that.listDistricts);
+        return Objects.equals(idDepartment, that.idDepartment) && Objects.equals(listProvinces, that.listProvinces);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idDepartment, listProvinces, listDistricts);
+        return Objects.hash(super.hashCode(), idDepartment, listProvinces);
     }
 
     @Override

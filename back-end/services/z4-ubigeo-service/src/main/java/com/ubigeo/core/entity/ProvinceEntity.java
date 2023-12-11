@@ -27,6 +27,7 @@ public class ProvinceEntity extends CommonEntity {
     private DepartmentEntity department;
     @Builder.Default
     @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "province", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "province")
     private Set<DistrictEntity> listDistricts = new HashSet<>();
+
 }

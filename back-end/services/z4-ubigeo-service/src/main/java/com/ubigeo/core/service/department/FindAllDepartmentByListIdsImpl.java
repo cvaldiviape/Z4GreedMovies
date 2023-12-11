@@ -1,7 +1,7 @@
 package com.ubigeo.core.service.department;
 
 import com.ubigeo.core.entity.DepartmentEntity;
-import com.ubigeo.core.entity.mapper.DepartmentMapper;
+import com.ubigeo.core.entity.mapper.DepartmentCustomMapper;
 import com.ubigeo.core.repository.DepartmentRepository;
 import com.shared.core.service.impl.GenericFindAllByListIdsService;
 import com.shared.dto.DepartmentDto;
@@ -13,11 +13,11 @@ import java.util.Collection;
 public class FindAllDepartmentByListIdsImpl extends GenericFindAllByListIdsService<DepartmentEntity, DepartmentDto, Integer> {
 
     private final DepartmentRepository departmentRepository;
-    private final DepartmentMapper departmentMapper;
+    private final DepartmentCustomMapper commonMapper;
 
-    public FindAllDepartmentByListIdsImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
+    public FindAllDepartmentByListIdsImpl(DepartmentRepository departmentRepository, DepartmentCustomMapper commonMapper) {
         this.departmentRepository = departmentRepository;
-        this.departmentMapper = departmentMapper;
+        this.commonMapper = commonMapper;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class FindAllDepartmentByListIdsImpl extends GenericFindAllByListIdsServi
 
     @Override
     public Collection<DepartmentDto> toListDtos(Collection<DepartmentEntity> listEntities) {
-        return this.departmentMapper.toListDtos(listEntities);
+        return this.commonMapper.toListDtos(listEntities);
     }
 
 }
