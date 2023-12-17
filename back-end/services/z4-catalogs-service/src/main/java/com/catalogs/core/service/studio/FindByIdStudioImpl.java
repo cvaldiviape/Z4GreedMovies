@@ -4,7 +4,7 @@ import com.catalogs.core.entity.StudioEntity;
 import com.catalogs.core.entity.mapper.StudioMapper;
 import com.catalogs.core.repository.StudioRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
-import com.shared.dto.StudioDto;
+import com.shared.dto.external.catalogs.StudioDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.catalogs.core.entity.mapper;
 
 import com.catalogs.core.entity.StudioEntity;
-import com.shared.dto.StudioDto;
+import com.shared.dto.external.catalogs.StudioDto;
 import org.mapstruct.*;
 
 import java.util.Collection;

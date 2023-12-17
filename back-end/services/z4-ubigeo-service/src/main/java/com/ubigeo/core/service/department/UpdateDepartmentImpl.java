@@ -4,7 +4,7 @@ import com.ubigeo.core.entity.DepartmentEntity;
 import com.ubigeo.core.entity.mapper.DepartmentMapper;
 import com.ubigeo.core.repository.DepartmentRepository;
 import com.shared.core.service.impl.GenericUpdateService;
-import com.shared.dto.DepartmentDto;
+import com.shared.dto.external.ubigeo.DepartmentDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;

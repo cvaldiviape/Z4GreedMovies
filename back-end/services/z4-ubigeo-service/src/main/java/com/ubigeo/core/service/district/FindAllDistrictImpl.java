@@ -4,7 +4,7 @@ import com.ubigeo.core.entity.DistrictEntity;
 import com.ubigeo.core.entity.mapper.custom.DistrictCustomMapper;
 import com.ubigeo.core.repository.DistrictRepository;
 import com.shared.core.service.impl.GenericFindAllService;
-import com.shared.dto.DistrictDto;
+import com.shared.dto.external.ubigeo.DistrictDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.Collection;

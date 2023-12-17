@@ -4,7 +4,7 @@ import com.catalogs.core.entity.CountryEntity;
 import com.catalogs.core.entity.mapper.CountryMapper;
 import com.catalogs.core.repository.CountryRepository;
 import com.shared.core.service.impl.GenericFindAllService;
-import com.shared.dto.CountryDto;
+import com.shared.dto.external.catalogs.CountryDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.Collection;

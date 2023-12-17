@@ -1,6 +1,5 @@
-package com.shared.dto;
+package com.shared.dto.external.ubigeo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.dto.custom.CommonDto;
 import com.shared.utils.filter.Searchable;
 import lombok.AllArgsConstructor;
@@ -8,35 +7,38 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class TypeStatusFilmShowDto extends CommonDto implements Searchable<Integer> {
+public class ProvinceDto  extends CommonDto implements Searchable<Integer> {
 
-    private Integer idTypeStatusFilmShow;
+    private Integer idProvince;
+    private DepartmentDto department;
+    private Set<DistrictDto> listDistricts = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        TypeStatusFilmShowDto that = (TypeStatusFilmShowDto) o;
-        return Objects.equals(idTypeStatusFilmShow, that.idTypeStatusFilmShow);
+        ProvinceDto that = (ProvinceDto) o;
+        return Objects.equals(idProvince, that.idProvince) && Objects.equals(department, that.department) && Objects.equals(listDistricts, that.listDistricts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idTypeStatusFilmShow);
+        return Objects.hash(super.hashCode(), idProvince, department, listDistricts);
     }
 
-    @JsonIgnore
     @Override
     public Integer getSearcheableField() {
-        return this.idTypeStatusFilmShow;
+        return this.idProvince;
     }
 
 }

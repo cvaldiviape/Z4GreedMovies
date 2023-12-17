@@ -4,7 +4,7 @@ import com.ubigeo.core.entity.ProvinceEntity;
 import com.ubigeo.core.entity.mapper.custom.ProvinceCustomMapper;
 import com.ubigeo.core.repository.ProvinceRepository;
 import com.shared.core.service.impl.GenericDeleteService;
-import com.shared.dto.ProvinceDto;
+import com.shared.dto.external.ubigeo.ProvinceDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;

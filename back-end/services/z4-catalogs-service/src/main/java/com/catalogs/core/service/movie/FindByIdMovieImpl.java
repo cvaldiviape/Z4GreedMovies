@@ -4,7 +4,7 @@ import com.catalogs.core.entity.MovieEntity;
 import com.catalogs.core.entity.mapper.MovieMapper;
 import com.catalogs.core.repository.MovieRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
-import com.shared.dto.MovieDto;
+import com.shared.dto.external.catalogs.MovieDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

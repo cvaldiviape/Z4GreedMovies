@@ -4,7 +4,7 @@ import com.catalogs.core.entity.TypeStatusFilmShowEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
-import com.shared.dto.TypeStatusFilmShowDto;
+import com.shared.dto.external.catalogs.TypeStatusFilmShowDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

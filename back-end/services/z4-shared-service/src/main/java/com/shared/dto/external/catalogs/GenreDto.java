@@ -1,4 +1,4 @@
-package com.shared.dto;
+package com.shared.dto.external.catalogs;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.dto.custom.CommonDto;

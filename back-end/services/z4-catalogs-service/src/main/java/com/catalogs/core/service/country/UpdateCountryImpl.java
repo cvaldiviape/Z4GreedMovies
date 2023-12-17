@@ -4,10 +4,9 @@ import com.catalogs.core.entity.CountryEntity;
 import com.catalogs.core.entity.mapper.CountryMapper;
 import com.catalogs.core.repository.CountryRepository;
 import com.shared.core.service.impl.GenericUpdateService;
-import com.shared.dto.CountryDto;
+import com.shared.dto.external.catalogs.CountryDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 

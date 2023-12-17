@@ -1,7 +1,7 @@
 package com.catalogs.core.entity.mapper;
 
 import com.catalogs.core.entity.MovieEntity;
-import com.shared.dto.MovieDto;
+import com.shared.dto.external.catalogs.MovieDto;
 import org.mapstruct.*;
 import java.util.Collection;
 

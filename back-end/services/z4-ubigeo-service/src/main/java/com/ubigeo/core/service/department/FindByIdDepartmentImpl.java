@@ -4,7 +4,7 @@ import com.ubigeo.core.entity.DepartmentEntity;
 import com.ubigeo.core.entity.mapper.custom.DepartmentCustomMapper;
 import com.ubigeo.core.repository.DepartmentRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
-import com.shared.dto.DepartmentDto;
+import com.shared.dto.external.ubigeo.DepartmentDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

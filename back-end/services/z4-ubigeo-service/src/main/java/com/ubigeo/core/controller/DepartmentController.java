@@ -4,7 +4,7 @@ import com.ubigeo.core.entity.DepartmentEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
-import com.shared.dto.DepartmentDto;
+import com.shared.dto.external.ubigeo.DepartmentDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

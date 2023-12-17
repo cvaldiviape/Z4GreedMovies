@@ -4,7 +4,7 @@ import com.catalogs.core.entity.StudioEntity;
 import com.catalogs.core.entity.mapper.StudioMapper;
 import com.catalogs.core.repository.StudioRepository;
 import com.shared.core.service.impl.GenericFindAllByListIdsService;
-import com.shared.dto.StudioDto;
+import com.shared.dto.external.catalogs.StudioDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.Collection;

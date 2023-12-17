@@ -1,4 +1,4 @@
-package com.shared.dto;
+package com.shared.dto.external.facility;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.utils.filter.Searchable;

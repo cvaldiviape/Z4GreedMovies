@@ -1,6 +1,6 @@
 package com.catalogs.core.entity.mapper;
 
-import com.shared.dto.GenreDto;
+import com.shared.dto.external.catalogs.GenreDto;
 import com.catalogs.core.entity.GenreEntity;
 import org.mapstruct.*;
 import java.util.Collection;

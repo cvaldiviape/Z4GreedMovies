@@ -4,7 +4,7 @@ import com.catalogs.core.entity.LanguageEntity;
 import com.catalogs.core.entity.mapper.LanguageMapper;
 import com.catalogs.core.repository.LanguageRepository;
 import com.shared.core.service.impl.GenericFindAllByListIdsService;
-import com.shared.dto.LanguageDto;
+import com.shared.dto.external.catalogs.LanguageDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 

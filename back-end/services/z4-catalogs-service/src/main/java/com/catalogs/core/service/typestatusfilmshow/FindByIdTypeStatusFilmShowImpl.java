@@ -4,7 +4,7 @@ import com.catalogs.core.entity.TypeStatusFilmShowEntity;
 import com.catalogs.core.entity.mapper.TypeStatusFilmShowMapper;
 import com.catalogs.core.repository.TypeStatusFilmShowRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
-import com.shared.dto.TypeStatusFilmShowDto;
+import com.shared.dto.external.catalogs.TypeStatusFilmShowDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

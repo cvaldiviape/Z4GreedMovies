@@ -1,7 +1,7 @@
 package com.ubigeo.core.service.district;
 
 import com.shared.core.service.impl.GenericDeleteService;
-import com.shared.dto.DistrictDto;
+import com.shared.dto.external.ubigeo.DistrictDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import com.ubigeo.core.entity.DistrictEntity;

@@ -1,6 +1,6 @@
 package com.ubigeo.core.entity.mapper;
 
-import com.shared.dto.ProvinceDto;
+import com.shared.dto.external.ubigeo.ProvinceDto;
 import com.ubigeo.core.entity.ProvinceEntity;
 import org.mapstruct.*;
 import java.util.Collection;

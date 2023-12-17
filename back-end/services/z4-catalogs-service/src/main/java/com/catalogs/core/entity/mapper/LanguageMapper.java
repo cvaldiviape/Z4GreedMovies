@@ -1,6 +1,6 @@
 package com.catalogs.core.entity.mapper;
 
-import com.shared.dto.LanguageDto;
+import com.shared.dto.external.catalogs.LanguageDto;
 import com.catalogs.core.entity.LanguageEntity;
 import org.mapstruct.*;
 import java.util.Collection;

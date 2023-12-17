@@ -1,7 +1,7 @@
 package com.catalogs.core.entity.mapper;
 
 import com.catalogs.core.entity.AudienceEntity;
-import com.shared.dto.AudienceDto;
+import com.shared.dto.external.catalogs.AudienceDto;
 import org.mapstruct.*;
 import java.util.Collection;
 

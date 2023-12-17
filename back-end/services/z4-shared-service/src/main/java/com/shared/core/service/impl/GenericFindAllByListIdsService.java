@@ -1,7 +1,6 @@
 package com.shared.core.service.impl;
 
 import com.shared.core.service.FindAllByListIdsService;
-import com.shared.dto.CountryDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;

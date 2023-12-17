@@ -1,6 +1,5 @@
-package com.shared.dto;
+package com.shared.dto.external.catalogs;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.dto.custom.CommonDto;
 import com.shared.utils.filter.Searchable;
 import lombok.AllArgsConstructor;
@@ -15,28 +14,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class CountryDto extends CommonDto implements Searchable<Integer> {
+public class StudioDto  extends CommonDto implements Searchable<Integer> {
 
-    private Integer idCountry;
+    private Integer idStudio;
+    private CountryDto country;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CountryDto that = (CountryDto) o;
-        return Objects.equals(idCountry, that.idCountry);
+        StudioDto studioDto = (StudioDto) o;
+        return Objects.equals(idStudio, studioDto.idStudio) && Objects.equals(country, studioDto.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idCountry);
+        return Objects.hash(super.hashCode(), idStudio, country);
     }
 
-    @JsonIgnore
     @Override
     public Integer getSearcheableField() {
-        return this.idCountry;
+        return this.idStudio;
     }
 
 }

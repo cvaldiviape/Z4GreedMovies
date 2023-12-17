@@ -4,7 +4,7 @@ import com.catalogs.core.entity.MovieEntity;
 import com.catalogs.core.entity.mapper.MovieMapper;
 import com.catalogs.core.repository.MovieRepository;
 import com.shared.core.service.impl.GenericFindAllService;
-import com.shared.dto.MovieDto;
+import com.shared.dto.external.catalogs.MovieDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
