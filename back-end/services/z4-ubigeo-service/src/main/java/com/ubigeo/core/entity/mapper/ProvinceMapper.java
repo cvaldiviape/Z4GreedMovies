@@ -2,20 +2,42 @@ package com.ubigeo.core.entity.mapper;
 
 import com.shared.dto.ProvinceDto;
 import com.ubigeo.core.entity.ProvinceEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.MappingTarget;
-import java.util.List;
+import org.mapstruct.*;
+import java.util.Collection;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {DepartmentMapper.class})
 public interface ProvinceMapper {
 
-    public ProvinceDto toDto(ProvinceEntity entity);
-    public ProvinceEntity toEntity(ProvinceDto dto);
-    List<ProvinceDto> toListDtos(List<ProvinceEntity> listEntities);
-    List<ProvinceEntity> toListEntities(List<ProvinceDto> listDtos);
+    @Named("ProvinceMapper.toDto")
+    ProvinceDto toDto(ProvinceEntity entity);
+    @Named("ProvinceMapper.toDtoCustom")
+    @Mapping(target = "department", qualifiedByName = "DepartmentMapper.toDtoIgnoredListProvinces")
+    ProvinceDto toDtoCustom(ProvinceEntity entity);
+    @Named("ProvinceMapper.toDtoIgnoredListDistricts")
+    @Mapping(target = "listDistricts", ignore = true)
+    ProvinceDto toDtoIgnoredListDistricts(ProvinceEntity entity);
+    @Named("ProvinceMapper.toDtoIgnoredDepartmentAndListDistricts")
+    @Mappings({
+        @Mapping(target = "department", ignore = true),
+        @Mapping(target = "listDistricts", ignore = true)
+    })
+    ProvinceDto toDtoIgnoredDepartmentAndListDistricts(ProvinceEntity entity);
+    @Named("ProvinceMapper.toEntity")
+    ProvinceEntity toEntity(ProvinceDto dto);
+    @Named("ProvinceMapper.toEntityIngoredId")
     @Mapping(target = "idProvince", ignore = true)
+    ProvinceEntity toEntityIngoredId(ProvinceDto dto);
+    @Named("ProvinceMapper.toListDtos")
+    Collection<ProvinceDto> toListDtos(Collection<ProvinceEntity> listEntities);
+    @Named("ProvinceMapper.toListEntities")
+    Collection<ProvinceEntity> toListEntities(Collection<ProvinceDto> listDtos);
+    @Named("ProvinceMapper.updateEntityFromDto")
     void updateEntityFromDto(ProvinceDto dto, @MappingTarget ProvinceEntity entity);
+    @Named("ProvinceMapper.updateEntityFromDtoIgnoredId")
+    @Mappings({
+            @Mapping(target = "idProvince", ignore = true),
+            @Mapping(target = "department", qualifiedByName = "DepartmentMapper.updateEntityFromDto"),
+    })
+    void updateEntityFromDtoIgnoredId(ProvinceDto dto, @MappingTarget ProvinceEntity entity);
 
 }

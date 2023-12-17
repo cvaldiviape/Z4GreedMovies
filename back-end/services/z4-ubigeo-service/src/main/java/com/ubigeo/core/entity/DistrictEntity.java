@@ -19,9 +19,6 @@ public class DistrictEntity extends CommonEntity {
     @Column(name = "id_district")
     private Integer idDistrict;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_department")
-    private DepartmentEntity department;
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_province")
     private ProvinceEntity province;
 

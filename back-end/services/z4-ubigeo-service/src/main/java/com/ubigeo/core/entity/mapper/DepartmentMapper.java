@@ -2,20 +2,26 @@ package com.ubigeo.core.entity.mapper;
 
 import com.shared.dto.DepartmentDto;
 import com.ubigeo.core.entity.DepartmentEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.MappingTarget;
-import java.util.List;
+import org.mapstruct.*;
+import java.util.Collection;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface DepartmentMapper {
 
-    public DepartmentDto toDto(DepartmentEntity entity);
-    public DepartmentEntity toEntity(DepartmentDto dto);
-    List<DepartmentDto> toListDtos(List<DepartmentEntity> listEntities);
-    List<DepartmentEntity> toListEntities(List<DepartmentDto> listDtos);
+    @Named("DepartmentMapper.toDto")
+    DepartmentDto toDto(DepartmentEntity entity);
+    @Named("DepartmentMapper.toDtoIgnoredListProvinces")
+    @Mapping(target = "listProvinces", ignore = true)
+    DepartmentDto toDtoIgnoredListProvinces(DepartmentEntity entity); // use by "ProvinceMapper"
+    @Named("DepartmentMapper.toEntityIgnoredId")
     @Mapping(target = "idDepartment", ignore = true)
-    void updateEntityFromDto(DepartmentDto dto, @MappingTarget DepartmentEntity entity);
+    DepartmentEntity toEntityIgnoredId(DepartmentDto dto);
+    @Named("DepartmentMapper.toListEntities")
+    Collection<DepartmentEntity> toListEntities(Collection<DepartmentDto> listDtos);
+    @Named("DepartmentMapper.updateEntityFromDto")
+    void updateEntityFromDto(DepartmentDto dto, @MappingTarget DepartmentEntity entity); // use by "ProvinceMapper"
+    @Named("DepartmentMapper.updateEntityFromDtoIgnoredId")
+    @Mapping(target = "idDepartment", ignore = true)
+    void updateEntityFromDtoIgnoredId(DepartmentDto dto, @MappingTarget DepartmentEntity entity);
 
 }

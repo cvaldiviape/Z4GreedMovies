@@ -1,42 +1,68 @@
 package com.ubigeo.core.controller;
 
-import com.shared.core.controller.old.HandlerCrudController;
-import com.shared.core.service.old.CrudService;
-import com.shared.dto.DepartmentDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
 import com.ubigeo.core.entity.DepartmentEntity;
-import com.ubigeo.core.service.DepartmentService;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
+import com.shared.dto.DepartmentDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/departments")
-public class DepartmentController extends HandlerCrudController<DepartmentDto, Integer> {
+public class DepartmentController implements FindAllController<DepartmentDto>, FindByIdController<DepartmentDto, Integer>, CreateController<DepartmentDto>, UpdateController<DepartmentDto, Integer>, DeleteController<DepartmentDto, Integer>, FindAllByListIdsController<DepartmentDto, Integer> {
 
-    private final DepartmentService<DepartmentEntity, DepartmentDto, Integer> departmentService;
+    private final GenericFindAllService<DepartmentEntity, DepartmentDto, Integer> findAllService;
+    private final GenericFindByIdService<DepartmentEntity, DepartmentDto, Integer> findByIdService;
+    private final GenericCreateService<DepartmentEntity, DepartmentDto, Integer> createService;
+    private final GenericUpdateService<DepartmentEntity, DepartmentDto, Integer> updateService;
+    private final GenericDeleteService<DepartmentEntity, DepartmentDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<DepartmentEntity, DepartmentDto, Integer> findAllByListIdsService;
 
-    public DepartmentController(@Qualifier("departmentServiceImpl")DepartmentService<DepartmentEntity, DepartmentDto, Integer> departmentService) {
-        this.departmentService = departmentService;
+    public DepartmentController(
+            @Qualifier("findAllDepartmentImpl") GenericFindAllService<DepartmentEntity, DepartmentDto, Integer> findAllService,
+            @Qualifier("findByIdDepartmentImpl") GenericFindByIdService<DepartmentEntity, DepartmentDto, Integer> findByIdService,
+            @Qualifier("createDepartmentImpl") GenericCreateService<DepartmentEntity, DepartmentDto, Integer> createService,
+            @Qualifier("updateDepartmentImpl") GenericUpdateService<DepartmentEntity, DepartmentDto, Integer> updateService,
+            @Qualifier("deleteDepartmentImpl") GenericDeleteService<DepartmentEntity, DepartmentDto, Integer> deleteService,
+            @Qualifier("findAllDepartmentByListIdsImpl") GenericFindAllByListIdsService<DepartmentEntity, DepartmentDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
     @Override
-    public CrudService<DepartmentDto, Integer> getCrudService() {
-        return this.departmentService;
+    public FindAllService<DepartmentDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @PostMapping("/findAllByListIds")
-    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<DepartmentDto> result = this.departmentService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<DepartmentDto, Integer> getFindByIdService() {
+        return this.findByIdService;
+    }
+
+    @Override
+    public CreateService<DepartmentDto> getCreateService() {
+        return this.createService;
+    }
+
+    @Override
+    public UpdateService<DepartmentDto, Integer> getUpdateService() {
+        return this.updateService;
+    }
+
+    @Override
+    public DeleteService<DepartmentDto, Integer> getDeleteService() {
+        return this.deleteService;
+    }
+
+    @Override
+    public FindAllByListIdsService<DepartmentDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }

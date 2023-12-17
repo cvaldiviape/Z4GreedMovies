@@ -1,42 +1,68 @@
 package com.ubigeo.core.controller;
 
-import com.shared.core.controller.old.HandlerCrudController;
-import com.shared.core.service.old.CrudService;
-import com.shared.dto.ProvinceDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
 import com.ubigeo.core.entity.ProvinceEntity;
-import com.ubigeo.core.service.ProvinceService;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
+import com.shared.dto.ProvinceDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/provinces")
-public class ProvinceController extends HandlerCrudController<ProvinceDto, Integer> {
+public class ProvinceController implements FindAllController<ProvinceDto>, FindByIdController<ProvinceDto, Integer>, CreateController<ProvinceDto>, UpdateController<ProvinceDto, Integer>, DeleteController<ProvinceDto, Integer>, FindAllByListIdsController<ProvinceDto, Integer> {
 
-    private final ProvinceService<ProvinceEntity, ProvinceDto, Integer> provinceService;
+    private final GenericFindAllService<ProvinceEntity, ProvinceDto, Integer> findAllService;
+    private final GenericFindByIdService<ProvinceEntity, ProvinceDto, Integer> findByIdService;
+    private final CreateService<ProvinceDto> createService;
+    private final UpdateService<ProvinceDto, Integer> updateService;
+    private final GenericDeleteService<ProvinceEntity, ProvinceDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<ProvinceEntity, ProvinceDto, Integer> findAllByListIdsService;
 
-    public ProvinceController(@Qualifier("provinceServiceImpl")ProvinceService<ProvinceEntity, ProvinceDto, Integer> provinceService) {
-        this.provinceService = provinceService;
+    public ProvinceController(
+            @Qualifier("findAllProvinceImpl") GenericFindAllService<ProvinceEntity, ProvinceDto, Integer> findAllService,
+            @Qualifier("findByIdProvinceImpl") GenericFindByIdService<ProvinceEntity, ProvinceDto, Integer> findByIdService,
+            @Qualifier("createProvinceImpl") CreateService<ProvinceDto> createService,
+            @Qualifier("updateProvinceImpl") UpdateService<ProvinceDto, Integer> updateService,
+            @Qualifier("deleteProvinceImpl") GenericDeleteService<ProvinceEntity, ProvinceDto, Integer> deleteService,
+            @Qualifier("findAllProvinceByListIdsImpl") GenericFindAllByListIdsService<ProvinceEntity, ProvinceDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
     @Override
-    public CrudService<ProvinceDto, Integer> getCrudService() {
-        return this.provinceService;
+    public FindAllService<ProvinceDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @PostMapping("/findAllByListIds")
-    public ResponseEntity<ResponseDto> findAllByListIds(@RequestBody Collection<Integer> listIds) {
-        List<ProvinceDto> result = this.provinceService.findAllByListIds(listIds);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<ProvinceDto, Integer> getFindByIdService() {
+        return this.findByIdService;
+    }
+
+    @Override
+    public CreateService<ProvinceDto> getCreateService() {
+        return this.createService;
+    }
+
+    @Override
+    public UpdateService<ProvinceDto, Integer> getUpdateService() {
+        return this.updateService;
+    }
+
+    @Override
+    public DeleteService<ProvinceDto, Integer> getDeleteService() {
+        return this.deleteService;
+    }
+
+    @Override
+    public FindAllByListIdsService<ProvinceDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }
