@@ -1,8 +1,8 @@
 package com.facility.core.service.impl;
 
 import com.shared.dto.custom.BasePageDto;
-import com.shared.dto.CategoryProductDto;
-import com.shared.dto.ProductDto;
+import com.shared.dto.external.catalogs.CategoryProductDto;
+import com.shared.dto.external.catalogs.ProductDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.filter.FilterUtil;
 import com.shared.utils.response.ResponseDto;
@@ -60,8 +60,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto findById(Integer idProduct) {
         ProductEntity entity = this.findProductEntityById(idProduct);
         ProductDto productDto = this.productMapper.toDto(entity);
-        CategoryProductDto categoryProduct = findCategoryProductById(productDto.getIdCategoryProduct());
-        productDto.setCategoryProduct(categoryProduct);
+        Integer idCategory = productDto.getCategory().getIdCategoryProduct();
+        CategoryProductDto categoryProduct = findCategoryById(idCategory);
+        productDto.setCategory(categoryProduct);
         return productDto;
     }
 
@@ -95,21 +96,22 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> ValidateUtil.throwNotFoundException(ValueEnum.PRODUCT.getValue(), idProduct));
     }
 
-    private CategoryProductDto findCategoryProductById(Integer idCategoryProduct) {
+    private CategoryProductDto findCategoryById(Integer idCategoryProduct) {
         ResponseDto response = productCategoryFeign.findById(idCategoryProduct);
         return FeignUtil.extracstData(response, CategoryProductDto.class, ValueEnum.PRODUCT.getValue());
     }
 
     private void setComplementaryData(List<ProductDto> listProducts) {
         List<Integer> listIdsCategories = listProducts.stream()
-                .map(ProductDto::getIdCategoryProduct)
+                .map(product -> product.getCategory().getIdCategoryProduct())
                 .toList();
 
         List<CategoryProductDto> listCategoryProducts = findAllCategoriesByListIds(listIdsCategories);
 
         for (ProductDto product : listProducts) {
-            CategoryProductDto category = FilterUtil.find(listCategoryProducts, product.getIdCategoryProduct(), ValueEnum.CATEGORY.getValue());
-            product.setCategoryProduct(category);
+            Integer idCategory = product.getCategory().getIdCategoryProduct();
+            CategoryProductDto category = FilterUtil.find(listCategoryProducts, idCategory, ValueEnum.CATEGORY.getValue());
+            product.setCategory(category);
         }
     }
 

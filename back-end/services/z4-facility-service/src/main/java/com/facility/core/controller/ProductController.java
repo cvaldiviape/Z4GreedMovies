@@ -2,7 +2,7 @@ package com.facility.core.controller;
 
 import com.shared.constants.PageConstants;
 import com.shared.dto.custom.BasePageDto;
-import com.shared.dto.ProductDto;
+import com.shared.dto.external.catalogs.ProductDto;
 import com.shared.utils.response.ResponseDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseUtil;
