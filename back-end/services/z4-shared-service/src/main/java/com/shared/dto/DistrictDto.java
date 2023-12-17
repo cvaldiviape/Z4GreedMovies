@@ -17,6 +17,7 @@ import java.util.Objects;
 public class DistrictDto  extends CommonDto implements Searchable<Integer> {
 
     private Integer idDistrict;
+    private ProvinceDto province;
 
     @Override
     public boolean equals(Object o) {
@@ -24,12 +25,12 @@ public class DistrictDto  extends CommonDto implements Searchable<Integer> {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         DistrictDto that = (DistrictDto) o;
-        return Objects.equals(idDistrict, that.idDistrict);
+        return Objects.equals(idDistrict, that.idDistrict) && Objects.equals(province, that.province);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idDistrict);
+        return Objects.hash(super.hashCode(), idDistrict, province);
     }
 
     @Override
