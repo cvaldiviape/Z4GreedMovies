@@ -4,16 +4,24 @@ import com.shared.dto.ProvinceDto;
 import com.ubigeo.core.entity.ProvinceEntity;
 import org.mapstruct.*;
 import java.util.Collection;
-import java.util.Set;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {DepartmentMapper.class})
 public interface ProvinceMapper {
 
     @Named("ProvinceMapper.toDto")
     ProvinceDto toDto(ProvinceEntity entity);
-    @Named("ProvinceMapper.toDtoIgnoredListDistricts")
+    @Named("ProvinceMapper.toDtoCustom")
     @Mapping(target = "department", qualifiedByName = "DepartmentMapper.toDtoIgnoredListProvinces")
-    ProvinceDto toDtoIgnoredDepartment(ProvinceEntity entity);
+    ProvinceDto toDtoCustom(ProvinceEntity entity);
+    @Named("ProvinceMapper.toDtoIgnoredListDistricts")
+    @Mapping(target = "listDistricts", ignore = true)
+    ProvinceDto toDtoIgnoredListDistricts(ProvinceEntity entity);
+    @Named("ProvinceMapper.toDtoIgnoredDepartmentAndListDistricts")
+    @Mappings({
+        @Mapping(target = "department", ignore = true),
+        @Mapping(target = "listDistricts", ignore = true)
+    })
+    ProvinceDto toDtoIgnoredDepartmentAndListDistricts(ProvinceEntity entity);
     @Named("ProvinceMapper.toEntity")
     ProvinceEntity toEntity(ProvinceDto dto);
     @Named("ProvinceMapper.toEntityIngoredId")

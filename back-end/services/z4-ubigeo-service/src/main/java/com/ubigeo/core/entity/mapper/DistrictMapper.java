@@ -5,11 +5,14 @@ import com.ubigeo.core.entity.DistrictEntity;
 import org.mapstruct.*;
 import java.util.Collection;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {DepartmentMapper.class, ProvinceMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {ProvinceMapper.class})
 public interface DistrictMapper {
 
     @Named("DistrictMapper.toDto")
     public DistrictDto toDto(DistrictEntity entity);
+    @Named("DistrictMapper.toDtoCustom")
+    @Mapping(target = "province", qualifiedByName = "ProvinceMapper.toDtoIgnoredDepartmentAndListDistricts")
+    public DistrictDto toDtoCustom(DistrictEntity entity);
     @Named("DistrictMapper.toEntity")
     public DistrictEntity toEntity(DistrictDto dto);
     @Named("DistrictMapper.toEntityIgnoredId")
@@ -22,9 +25,7 @@ public interface DistrictMapper {
     @Named("DistrictMapper.updateEntityFromDto")
     void updateEntityFromDto(DistrictDto dto, @MappingTarget DistrictEntity entity);
     @Named("DistrictMapper.updateEntityFromDtoIgnoredId")
-    @Mappings({
-            @Mapping(target = "idDistrict", ignore = true)
-    })
+    @Mapping(target = "idDistrict", ignore = true)
     void updateEntityFromDtoIgnoredId(DistrictDto dto, @MappingTarget DistrictEntity entity);
 
 }

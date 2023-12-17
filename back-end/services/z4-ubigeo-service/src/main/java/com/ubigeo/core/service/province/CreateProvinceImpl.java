@@ -36,7 +36,7 @@ public class CreateProvinceImpl implements CreateService<ProvinceDto> {
         this.setComplementaryData(provinceDto);
         ProvinceEntity provinceEntity = this.provinceMapper.toEntity(provinceDto);
         ProvinceEntity provinceCreated = this.provinceRepository.save(provinceEntity);
-        return this.provinceMapper.toDtoIgnoredDepartment(provinceCreated);
+        return this.provinceMapper.toDtoCustom(provinceCreated);
     }
 
     // ------------------------------------------------------------------------- utils ------------------------------------------------------------------------- //
