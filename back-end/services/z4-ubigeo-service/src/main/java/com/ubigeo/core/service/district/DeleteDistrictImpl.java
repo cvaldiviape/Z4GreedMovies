@@ -5,7 +5,7 @@ import com.shared.dto.DistrictDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import com.ubigeo.core.entity.DistrictEntity;
-import com.ubigeo.core.entity.mapper.DistrictCustomMapper;
+import com.ubigeo.core.entity.mapper.custom.DistrictCustomMapper;
 import com.ubigeo.core.repository.DistrictRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

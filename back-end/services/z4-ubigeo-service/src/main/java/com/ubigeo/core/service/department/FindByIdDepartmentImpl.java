@@ -1,7 +1,7 @@
 package com.ubigeo.core.service.department;
 
 import com.ubigeo.core.entity.DepartmentEntity;
-import com.ubigeo.core.entity.mapper.DepartmentCustomMapper;
+import com.ubigeo.core.entity.mapper.custom.DepartmentCustomMapper;
 import com.ubigeo.core.repository.DepartmentRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
 import com.shared.dto.DepartmentDto;

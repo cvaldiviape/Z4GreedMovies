@@ -1,7 +1,7 @@
 package com.ubigeo.core.service.province;
 
 import com.ubigeo.core.entity.ProvinceEntity;
-import com.ubigeo.core.entity.mapper.ProvinceCustomMapper;
+import com.ubigeo.core.entity.mapper.custom.ProvinceCustomMapper;
 import com.ubigeo.core.repository.ProvinceRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
 import com.shared.dto.ProvinceDto;

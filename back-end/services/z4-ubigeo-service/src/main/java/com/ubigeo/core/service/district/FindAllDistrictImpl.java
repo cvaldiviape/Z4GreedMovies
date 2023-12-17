@@ -1,7 +1,7 @@
 package com.ubigeo.core.service.district;
 
 import com.ubigeo.core.entity.DistrictEntity;
-import com.ubigeo.core.entity.mapper.DistrictCustomMapper;
+import com.ubigeo.core.entity.mapper.custom.DistrictCustomMapper;
 import com.ubigeo.core.repository.DistrictRepository;
 import com.shared.core.service.impl.GenericFindAllService;
 import com.shared.dto.DistrictDto;

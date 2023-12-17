@@ -1,4 +1,4 @@
-package com.ubigeo.core.entity.mapper;
+package com.ubigeo.core.entity.mapper.custom;
 
 import com.shared.dto.DepartmentDto;
 import com.shared.dto.ProvinceDto;
