@@ -1,6 +1,5 @@
-package com.shared.dto;
+package com.shared.dto.external.catalogs;
 
-import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.util.Objects;

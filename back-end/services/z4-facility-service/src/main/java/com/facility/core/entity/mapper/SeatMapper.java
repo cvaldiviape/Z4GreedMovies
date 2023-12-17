@@ -1,9 +1,8 @@
 package com.facility.core.entity.mapper;
 
-import com.shared.dto.SeatDto;
+import com.shared.dto.external.facility.SeatDto;
 import com.facility.core.entity.SeatEntity;
 import org.mapstruct.*;
-
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {RoomMapper.class}) // como "Seat" contiene "Room", hago que use el RoomMapper, aunque cabe aclarar

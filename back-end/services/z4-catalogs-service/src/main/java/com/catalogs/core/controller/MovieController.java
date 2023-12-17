@@ -7,7 +7,7 @@ import com.shared.core.service.impl.GenericDeleteService;
 import com.shared.core.service.impl.GenericFindAllByListIdsService;
 import com.shared.core.service.impl.GenericFindAllService;
 import com.shared.core.service.impl.GenericFindByIdService;
-import com.shared.dto.MovieDto;
+import com.shared.dto.external.catalogs.MovieDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 

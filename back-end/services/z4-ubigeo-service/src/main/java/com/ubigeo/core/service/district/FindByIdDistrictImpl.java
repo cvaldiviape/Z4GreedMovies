@@ -1,10 +1,10 @@
 package com.ubigeo.core.service.district;
 
 import com.ubigeo.core.entity.DistrictEntity;
-import com.ubigeo.core.entity.mapper.DistrictCustomMapper;
+import com.ubigeo.core.entity.mapper.custom.DistrictCustomMapper;
 import com.ubigeo.core.repository.DistrictRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
-import com.shared.dto.DistrictDto;
+import com.shared.dto.external.ubigeo.DistrictDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.facility.core.service.impl;
 
 import com.shared.dto.custom.BasePageDto;
-import com.shared.dto.SeatDto;
+import com.shared.dto.external.facility.SeatDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;

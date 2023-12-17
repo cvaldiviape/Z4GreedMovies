@@ -1,6 +1,6 @@
 package com.catalogs.core.entity.mapper;
 
-import com.shared.dto.CountryDto;
+import com.shared.dto.external.catalogs.CountryDto;
 import com.catalogs.core.entity.CountryEntity;
 import org.mapstruct.*;
 import java.util.Collection;

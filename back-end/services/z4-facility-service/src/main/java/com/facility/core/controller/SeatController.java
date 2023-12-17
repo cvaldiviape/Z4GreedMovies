@@ -1,7 +1,7 @@
 package com.facility.core.controller;
 
 import com.shared.constants.PageConstants;
-import com.shared.dto.SeatDto;
+import com.shared.dto.external.facility.SeatDto;
 import com.shared.dto.custom.BasePageDto;
 import com.shared.enums.ControllerMessageEnum;
 import com.shared.utils.response.ResponseDto;

@@ -1,4 +1,4 @@
-package com.shared.dto;
+package com.shared.dto.external.catalogs;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.dto.custom.CommonDto;
@@ -15,28 +15,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class LanguageDto extends CommonDto implements Searchable<Integer> {
+public class CategoryProductDto extends CommonDto implements Searchable<Integer> {
 
-    private Integer idLanguage;
+    private Integer idCategoryProduct;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        LanguageDto that = (LanguageDto) o;
-        return Objects.equals(idLanguage, that.idLanguage);
+        CategoryProductDto that = (CategoryProductDto) o;
+        return Objects.equals(idCategoryProduct, that.idCategoryProduct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idLanguage);
+        return Objects.hash(super.hashCode(), idCategoryProduct);
     }
 
     @JsonIgnore
     @Override
     public Integer getSearcheableField() {
-        return this.idLanguage;
+        return this.idCategoryProduct;
     }
 
 }

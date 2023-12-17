@@ -1,6 +1,6 @@
 package com.ubigeo.core.entity.mapper;
 
-import com.shared.dto.DepartmentDto;
+import com.shared.dto.external.ubigeo.DepartmentDto;
 import com.ubigeo.core.entity.DepartmentEntity;
 import org.mapstruct.*;
 import java.util.Collection;

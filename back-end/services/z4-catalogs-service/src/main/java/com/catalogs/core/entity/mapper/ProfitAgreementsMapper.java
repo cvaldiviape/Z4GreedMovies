@@ -1,7 +1,7 @@
 package com.catalogs.core.entity.mapper;
 
 import com.catalogs.core.entity.ProfitAgreementsEntity;
-import com.shared.dto.ProfitAgreementsDto;
+import com.shared.dto.external.catalogs.ProfitAgreementsDto;
 import org.mapstruct.*;
 import java.util.Collection;
 

@@ -1,11 +1,8 @@
 package com.facility.core.entity.mapper;
 
-import com.shared.dto.ProductDto;
+import com.shared.dto.external.catalogs.ProductDto;
 import com.facility.core.entity.ProductEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)

@@ -1,11 +1,8 @@
 package com.facility.core.entity.mapper;
 
-import com.shared.dto.RoomDto;
+import com.shared.dto.external.facility.RoomDto;
 import com.facility.core.entity.RoomEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)

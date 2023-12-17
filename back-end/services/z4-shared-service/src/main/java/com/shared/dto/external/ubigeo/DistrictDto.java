@@ -1,6 +1,5 @@
-package com.shared.dto;
+package com.shared.dto.external.ubigeo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shared.dto.custom.CommonDto;
 import com.shared.utils.filter.Searchable;
 import lombok.AllArgsConstructor;
@@ -15,28 +14,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class CategoryProductDto extends CommonDto implements Searchable<Integer> {
+public class DistrictDto  extends CommonDto implements Searchable<Integer> {
 
-    private Integer idCategoryProduct;
+    private Integer idDistrict;
+    private ProvinceDto province;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CategoryProductDto that = (CategoryProductDto) o;
-        return Objects.equals(idCategoryProduct, that.idCategoryProduct);
+        DistrictDto that = (DistrictDto) o;
+        return Objects.equals(idDistrict, that.idDistrict) && Objects.equals(province, that.province);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idCategoryProduct);
+        return Objects.hash(super.hashCode(), idDistrict, province);
     }
 
-    @JsonIgnore
     @Override
     public Integer getSearcheableField() {
-        return this.idCategoryProduct;
+        return this.idDistrict;
     }
 
 }

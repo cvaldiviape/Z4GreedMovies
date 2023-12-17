@@ -4,7 +4,7 @@ import com.catalogs.core.entity.AudienceEntity;
 import com.catalogs.core.entity.mapper.AudienceMapper;
 import com.catalogs.core.repository.AudienceRepository;
 import com.shared.core.service.impl.GenericDeleteService;
-import com.shared.dto.AudienceDto;
+import com.shared.dto.external.catalogs.AudienceDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;

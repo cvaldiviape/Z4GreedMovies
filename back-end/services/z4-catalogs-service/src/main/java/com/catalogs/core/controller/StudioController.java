@@ -4,7 +4,7 @@ import com.catalogs.core.entity.StudioEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
-import com.shared.dto.StudioDto;
+import com.shared.dto.external.catalogs.StudioDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 

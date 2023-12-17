@@ -4,7 +4,7 @@ import com.catalogs.core.entity.CountryEntity;
 import com.catalogs.core.entity.mapper.CountryMapper;
 import com.catalogs.core.repository.CountryRepository;
 import com.shared.core.service.impl.GenericFindByIdService;
-import com.shared.dto.CountryDto;
+import com.shared.dto.external.catalogs.CountryDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.shared.dto;
+package com.shared.dto.external.ubigeo;
 
 import com.shared.dto.custom.CommonDto;
 import com.shared.utils.filter.Searchable;

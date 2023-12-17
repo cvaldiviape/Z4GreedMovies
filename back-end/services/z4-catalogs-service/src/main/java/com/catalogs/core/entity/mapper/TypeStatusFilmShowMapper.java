@@ -1,6 +1,6 @@
 package com.catalogs.core.entity.mapper;
 
-import com.shared.dto.TypeStatusFilmShowDto;
+import com.shared.dto.external.catalogs.TypeStatusFilmShowDto;
 import com.catalogs.core.entity.TypeStatusFilmShowEntity;
 import org.mapstruct.*;
 

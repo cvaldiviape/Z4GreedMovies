@@ -4,7 +4,7 @@ import com.catalogs.core.entity.*;
 import com.catalogs.core.entity.mapper.*;
 import com.catalogs.core.repository.*;
 import com.shared.core.service.UpdateService;
-import com.shared.dto.*;
+import com.shared.dto.external.catalogs.*;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

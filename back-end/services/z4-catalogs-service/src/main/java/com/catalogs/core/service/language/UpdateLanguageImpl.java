@@ -4,7 +4,7 @@ import com.catalogs.core.entity.LanguageEntity;
 import com.catalogs.core.entity.mapper.LanguageMapper;
 import com.catalogs.core.repository.LanguageRepository;
 import com.shared.core.service.impl.GenericUpdateService;
-import com.shared.dto.LanguageDto;
+import com.shared.dto.external.catalogs.LanguageDto;
 import com.shared.enums.ValueEnum;
 import com.shared.utils.ValidateUtil;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -4,7 +4,7 @@ import com.catalogs.core.entity.CategoryProductEntity;
 import com.catalogs.core.entity.mapper.CategoryProductMapper;
 import com.catalogs.core.repository.CategoryProductRepository;
 import com.shared.core.service.impl.GenericFindAllService;
-import com.shared.dto.CategoryProductDto;
+import com.shared.dto.external.catalogs.CategoryProductDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.Collection;

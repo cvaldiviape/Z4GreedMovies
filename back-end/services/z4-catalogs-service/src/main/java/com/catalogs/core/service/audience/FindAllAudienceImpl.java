@@ -4,7 +4,7 @@ import com.catalogs.core.entity.AudienceEntity;
 import com.catalogs.core.entity.mapper.AudienceMapper;
 import com.catalogs.core.repository.AudienceRepository;
 import com.shared.core.service.impl.GenericFindAllService;
-import com.shared.dto.AudienceDto;
+import com.shared.dto.external.catalogs.AudienceDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.Collection;

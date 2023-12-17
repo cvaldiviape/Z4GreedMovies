@@ -1,10 +1,10 @@
 package com.ubigeo.core.service.province;
 
 import com.ubigeo.core.entity.ProvinceEntity;
-import com.ubigeo.core.entity.mapper.ProvinceCustomMapper;
+import com.ubigeo.core.entity.mapper.custom.ProvinceCustomMapper;
 import com.ubigeo.core.repository.ProvinceRepository;
 import com.shared.core.service.impl.GenericFindAllByListIdsService;
-import com.shared.dto.ProvinceDto;
+import com.shared.dto.external.ubigeo.ProvinceDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
