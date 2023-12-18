@@ -9,7 +9,7 @@ import com.shared.utils.response.ResponseDto;
 import com.shared.utils.FeignUtil;
 import com.shared.utils.PageUtil;
 import com.shared.utils.ValidateUtil;
-import com.facility.core.client.ProductCategoryFeign;
+import com.facility.external.client.ProductCategoryFeign;
 import com.facility.core.entity.ProductEntity;
 import com.facility.core.entity.mapper.ProductMapper;
 import com.facility.core.repositories.ProductRepository;
