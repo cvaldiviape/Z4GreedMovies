@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -28,6 +27,9 @@ public class RoomEntity {
     private String location;
     @Column(name = "seating_capacity", nullable = false)
     private Integer seatingCapacity;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_establishment")
+    private EstablishmentEntity establishment;
     @Builder.Default
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.MERGE})

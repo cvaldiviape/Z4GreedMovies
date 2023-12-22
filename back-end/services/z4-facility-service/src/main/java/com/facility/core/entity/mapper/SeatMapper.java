@@ -5,15 +5,18 @@ import com.facility.core.entity.SeatEntity;
 import org.mapstruct.*;
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {RoomMapper.class}) // como "Seat" contiene "Room", hago que use el RoomMapper, aunque cabe aclarar
-                                                                                            // que "MapStruct" tambien se encarga de hacer el mapeo aparte, pero mejor es indicarle
-                                                                                            // que use el "RoomMapper" que yo he creado, ya que tengo cosas mas personalizadas.
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface SeatMapper {
 
+    @Named("SeatMapper.toDto")
     public SeatDto toDto(SeatEntity entity);
+    @Named("SeatMapper.toEntity")
     public SeatEntity toEntity(SeatDto dto);
+    @Named("SeatMapper.toListDtos")
     List<SeatDto> toListDtos(List<SeatEntity> listEntities);
+    @Named("SeatMapper.toListEntities")
     List<SeatEntity> toListEntities(List<SeatDto> listDtos);
+    @Named("SeatMapper.updateEntityFromDto")
     @Mappings({
             @Mapping(target = "idSeat", ignore = true),
             @Mapping(target = "room", ignore = true) // mejor que ingore el mapeo del "Room"

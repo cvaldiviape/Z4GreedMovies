@@ -2,7 +2,6 @@ package com.facility.core.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Objects;
 
 @Getter

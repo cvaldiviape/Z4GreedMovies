@@ -1,19 +1,26 @@
 package com.facility.core.entity.mapper;
 
-import com.facility.core.entity.ProductEntity;
-import com.shared.dto.external.catalogs.ProductDto;
+import com.facility.core.entity.EstablishmentEntity;
+import com.shared.dto.external.facility.EstablishmentDto;
 import org.mapstruct.*;
 import java.util.Collection;
-
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface EstablishmentMapper {
 
-    public ProductDto toDto(ProductEntity entity);
-    public ProductEntity toEntity(ProductDto dto);
-    Collection<ProductDto> toListDtos(Collection<ProductEntity> listEntities);
-    Collection<ProductEntity> toListEntities(Collection<ProductDto> listDtos);
+    @Named("EstablishmentMapper.toDto")
+    EstablishmentDto toDto(EstablishmentEntity entity);
+    @Named("EstablishmentMapper.toEntity")
+    EstablishmentEntity toEntity(EstablishmentDto dto);
+    @Named("EstablishmentMapper.toDto")
     @Mapping(target = "idEstablishment", ignore = true)
-    void updateEntityFromDto(ProductDto dto, @MappingTarget ProductEntity entity);
+    EstablishmentEntity toEntityIgnoredId(EstablishmentDto dto);
+    @Named("EstablishmentMapper.toListDtos")
+    Collection<EstablishmentDto> toListDtos(Collection<EstablishmentEntity> listEntities);
+    @Named("EstablishmentMapper.toListEntities")
+    Collection<EstablishmentEntity> toListEntities(Collection<EstablishmentDto> listDtos);
+    @Named("EstablishmentMapper.updateEntityFromDto")
+    @Mapping(target = "idEstablishment", ignore = true)
+    void updateEntityFromDtoIgnoredId(EstablishmentDto dto, @MappingTarget EstablishmentEntity entity);
 
 }
