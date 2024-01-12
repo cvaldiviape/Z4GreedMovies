@@ -17,7 +17,7 @@ public class SeatEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_seat")
     private Integer idSeat;
-    @Column(length = 3, nullable = false, unique = true)
+    @Column(length = 7, nullable = false, unique = true)
     private String code;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_room")

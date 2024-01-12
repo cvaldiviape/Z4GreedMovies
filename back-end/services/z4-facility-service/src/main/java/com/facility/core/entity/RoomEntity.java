@@ -32,20 +32,20 @@ public class RoomEntity {
     private EstablishmentEntity establishment;
     @Builder.Default
     @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true)
     private Set<SeatEntity> listSeats = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         RoomEntity that = (RoomEntity) o;
-        return idRoom != null && Objects.equals(idRoom, that.idRoom);
+        return Objects.equals(idRoom, that.idRoom) && Objects.equals(code, that.code) && Objects.equals(location, that.location) && Objects.equals(seatingCapacity, that.seatingCapacity) && Objects.equals(establishment, that.establishment) && Objects.equals(listSeats, that.listSeats);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(idRoom, code, location, seatingCapacity, establishment, listSeats);
     }
 
 }
