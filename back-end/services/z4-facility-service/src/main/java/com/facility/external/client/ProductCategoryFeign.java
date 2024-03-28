@@ -1,4 +1,4 @@
-package com.facility.core.client;
+package com.facility.external.client;
 
 import com.shared.utils.response.ResponseDto;
 //import com.z4greed.config.JwtTokenPropagatingInterceptor;

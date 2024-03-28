@@ -15,7 +15,7 @@ spring:
         - id: z4-facility-service
           uri: lb://z4-facility-service
           predicates:
-            - Path=/z4-facility-service/v3/api-docs, /api/products/**, /api/rooms/**, /api/seats/**
+            - Path=/z4-facility-service/v3/api-docs, /api/rooms/**, /api/seats/**, /api/establishment/**
         - id: z4-ubigeo-service
           uri: lb://z4-ubigeo-service
           predicates:

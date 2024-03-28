@@ -1,62 +1,68 @@
 package com.facility.core.controller;
 
-import com.shared.constants.PageConstants;
+import com.facility.core.entity.RoomEntity;
+import com.shared.core.controller.*;
+import com.shared.core.service.*;
+import com.shared.core.service.impl.*;
 import com.shared.dto.external.facility.RoomDto;
-import com.shared.dto.custom.BasePageDto;
-import com.shared.enums.ControllerMessageEnum;
-import com.shared.utils.response.ResponseDto;
-import com.shared.utils.response.ResponseUtil;
-import com.facility.core.service.RoomService;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/rooms")
-public class RoomController {
+public class RoomController implements FindAllController<RoomDto>, FindByIdController<RoomDto, Integer>, CreateController<RoomDto>, UpdateController<RoomDto, Integer>, DeleteController<RoomDto, Integer>, FindAllByListIdsController<RoomDto, Integer> {
 
-    private final RoomService roomService;
+    private final GenericFindAllService<RoomEntity, RoomDto, Integer> findAllService;
+    private final GenericFindByIdService<RoomEntity, RoomDto, Integer> findByIdService;
+    private final CreateService<RoomDto> createService;
+    private final GenericUpdateService<RoomEntity, RoomDto, Integer> updateService;
+    private final GenericDeleteService<RoomEntity, RoomDto, Integer> deleteService;
+    private final GenericFindAllByListIdsService<RoomEntity, RoomDto, Integer> findAllByListIdsService;
 
-    public RoomController(RoomService roomService) {
-        this.roomService = roomService;
+    public RoomController(
+        @Qualifier("findAllRoomImpl") GenericFindAllService<RoomEntity, RoomDto, Integer> findAllService,
+        @Qualifier("findByIdRoomImpl") GenericFindByIdService<RoomEntity, RoomDto, Integer> findByIdService,
+        @Qualifier("createRoomImpl") CreateService<RoomDto> createService,
+        @Qualifier("updateRoomImpl") GenericUpdateService<RoomEntity, RoomDto, Integer> updateService,
+        @Qualifier("deleteRoomImpl") GenericDeleteService<RoomEntity, RoomDto, Integer> deleteService,
+        @Qualifier("findAllRoomByListIdsImpl") GenericFindAllByListIdsService<RoomEntity, RoomDto, Integer> findAllByListIdsService) {
+        this.findAllService = findAllService;
+        this.findByIdService = findByIdService;
+        this.createService = createService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
+        this.findAllByListIdsService = findAllByListIdsService;
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseDto> findAll(@RequestParam(value = "numberPage", defaultValue = PageConstants.NUM_PAGE_DEFAULT, required = false) Integer numberPage,
-                                               @RequestParam(value = "sizePage", defaultValue = PageConstants.SIZE_PAGE_DEFAULT, required = false) Integer sizePage,
-                                               @RequestParam(value = "sortBy", defaultValue = PageConstants.SORT_BY_DEFAULT, required = false) String sortBy,
-                                               @RequestParam(value = "sortDir", defaultValue = PageConstants.SORT_DIR_DEFAULT, required = false) String sortDir) {
-        BasePageDto<RoomDto> result = this.roomService.findAll(numberPage, sizePage, sortBy, sortDir);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_ALL, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindAllService<RoomDto> getFindAllService() {
+        return this.findAllService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseDto> findById(@PathVariable Integer id) {
-        RoomDto result = this.roomService.findById(id);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.FIND_BY_IO, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public FindByIdService<RoomDto, Integer> getFindByIdService() {
+        return this.findByIdService;
     }
 
-    @PostMapping
-    public ResponseEntity<ResponseDto> create(@Valid @RequestBody RoomDto dto) {
-        RoomDto result = this.roomService.create(dto);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.CREATE, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public CreateService<RoomDto> getCreateService() {
+        return this.createService;
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto> update(@PathVariable Integer id, @Valid @RequestBody RoomDto dto) {
-        RoomDto result = this.roomService.update(id, dto);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.UPDATE, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public UpdateService<RoomDto, Integer> getUpdateService() {
+        return this.updateService;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto> delete(@PathVariable Integer id) {
-        RoomDto result = this.roomService.delete(id);
-        ResponseDto response = ResponseUtil.ok(ControllerMessageEnum.DELETE, result);
-        return ResponseEntity.ok(response);
+    @Override
+    public DeleteService<RoomDto, Integer> getDeleteService() {
+        return this.deleteService;
+    }
+
+    @Override
+    public FindAllByListIdsService<RoomDto, Integer> getFindAllByListIdsService() {
+        return this.findAllByListIdsService;
     }
 
 }
