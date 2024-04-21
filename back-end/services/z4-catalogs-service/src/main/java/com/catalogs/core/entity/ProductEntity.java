@@ -17,9 +17,9 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
     private Integer idProduct;
-    @Column(length = 3, nullable = false, unique = true)
+    @Column(name = "code", length = 3, nullable = false, unique = true)
     private String code;
-    @Column(length = 255, nullable = false, unique = true)
+    @Column(name = "description", length = 255, nullable = false, unique = true)
     private String description;
     @Column(name = "price", nullable = false, precision = 5, scale = 2)
     private BigDecimal price;
