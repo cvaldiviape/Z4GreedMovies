@@ -1,5 +1,6 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.IGenreController;
 import com.catalogs.core.entity.GenreEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/genres")
-public class GenreController implements FindAllController<GenreDto>, FindByIdController<GenreDto, Integer>, CreateController<GenreDto>, UpdateController<GenreDto, Integer>, DeleteController<GenreDto, Integer>, FindAllByListIdsController<GenreDto, Integer> {
+public class GenreController implements IGenreController<GenreDto, Integer> {
 
     private final GenericFindAllService<GenreEntity, GenreDto, Integer> findAllService;
     private final GenericFindByIdService<GenreEntity, GenreDto, Integer> findByIdService;

@@ -1,5 +1,6 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.IAudienceController;
 import com.catalogs.core.entity.AudienceEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/audiences")
-public class AudienceController implements FindAllController<AudienceDto>, FindByIdController<AudienceDto, Integer>, CreateController<AudienceDto>, UpdateController<AudienceDto, Integer>, DeleteController<AudienceDto, Integer>, FindAllByListIdsController<AudienceDto, Integer> {
+public class AudienceController implements IAudienceController<AudienceDto, Integer> {
 
     private final GenericFindAllService<AudienceEntity, AudienceDto, Integer> findAllService;
     private final GenericFindByIdService<AudienceEntity, AudienceDto, Integer> findByIdService;

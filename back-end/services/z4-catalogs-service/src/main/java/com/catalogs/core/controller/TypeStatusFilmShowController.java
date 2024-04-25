@@ -1,5 +1,6 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.ITypeStatusFilmShowController;
 import com.catalogs.core.entity.TypeStatusFilmShowEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/type-status-film-shows")
-public class TypeStatusFilmShowController implements FindAllController<TypeStatusFilmShowDto>, FindByIdController<TypeStatusFilmShowDto, Integer>, CreateController<TypeStatusFilmShowDto>, UpdateController<TypeStatusFilmShowDto, Integer>, DeleteController<TypeStatusFilmShowDto, Integer>, FindAllByListIdsController<TypeStatusFilmShowDto, Integer> {
+public class TypeStatusFilmShowController implements ITypeStatusFilmShowController<TypeStatusFilmShowDto, Integer> {
 
     private final GenericFindAllService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findAllService;
     private final GenericFindByIdService<TypeStatusFilmShowEntity, TypeStatusFilmShowDto, Integer> findByIdService;

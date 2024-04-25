@@ -1,5 +1,6 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.ICategoryProductController;
 import com.catalogs.core.entity.CategoryProductEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/category-products")
-public class CategoryProductController implements FindAllController<CategoryProductDto>, FindByIdController<CategoryProductDto, Integer>, CreateController<CategoryProductDto>, UpdateController<CategoryProductDto, Integer>, DeleteController<CategoryProductDto, Integer>, FindAllByListIdsController<CategoryProductDto, Integer> {
+public class CategoryProductController implements ICategoryProductController<CategoryProductDto, Integer> {
 
     private final GenericFindAllService<CategoryProductEntity, CategoryProductDto, Integer> findAllService;
     private final GenericFindByIdService<CategoryProductEntity, CategoryProductDto, Integer> findByIdService;

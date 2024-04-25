@@ -1,5 +1,6 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.IMovieController;
 import com.catalogs.core.entity.MovieEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -9,11 +10,12 @@ import com.shared.core.service.impl.GenericFindAllService;
 import com.shared.core.service.impl.GenericFindByIdService;
 import com.shared.dto.external.catalogs.MovieDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/movies")
-public class MovieController implements FindAllController<MovieDto>, FindByIdController<MovieDto, Integer>, CreateController<MovieDto>, UpdateController<MovieDto, Integer>, DeleteController<MovieDto, Integer>, FindAllByListIdsController<MovieDto, Integer> {
+public class MovieController implements IMovieController<MovieDto, Integer> {
 
     private final GenericFindAllService<MovieEntity, MovieDto, Integer> findAllService;
     private final GenericFindByIdService<MovieEntity, MovieDto, Integer> findByIdService;

@@ -1,16 +1,18 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.IStudioController;
 import com.catalogs.core.entity.StudioEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
 import com.shared.dto.external.catalogs.StudioDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/studios")
-public class StudioController implements FindAllController<StudioDto>, FindByIdController<StudioDto, Integer>, CreateController<StudioDto>, UpdateController<StudioDto, Integer>, DeleteController<StudioDto, Integer>, FindAllByListIdsController<StudioDto, Integer> {
+public class StudioController implements IStudioController<StudioDto, Integer> {
 
     private final GenericFindAllService<StudioEntity, StudioDto, Integer> findAllService;
     private final GenericFindByIdService<StudioEntity, StudioDto, Integer> findByIdService;
