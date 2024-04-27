@@ -3,6 +3,7 @@ package com.shared.dto.external.catalogs;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.shared.dto.custom.CommonDto;
 import com.shared.utils.filter.Searchable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import java.time.LocalTime;
@@ -20,7 +21,7 @@ public class MovieDto extends CommonDto implements Searchable<Integer> {
     private Integer idMovie;
     private String synopsis;
     private Integer year;
-//    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    @Schema(description = "The duration of the movie in HH:mm:ss format", example = "02:30:00")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss")
     private LocalTime duration;
     private String urlImage;
