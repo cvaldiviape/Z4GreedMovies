@@ -1,5 +1,6 @@
 package com.facility.core.controller;
 
+import com.facility.core.controller.interfaces.IEstablishmentController;
 import com.facility.core.entity.EstablishmentEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/establishment")
-public class EstablishmentController implements FindAllController<EstablishmentDto>, FindByIdController<EstablishmentDto, Integer>, CreateController<EstablishmentDto>, UpdateController<EstablishmentDto, Integer>, DeleteController<EstablishmentDto, Integer>, FindAllByListIdsController<EstablishmentDto, Integer> {
+public class EstablishmentController implements IEstablishmentController<EstablishmentDto, Integer> {
 
     private final GenericFindAllService<EstablishmentEntity, EstablishmentDto, Integer> findAllService;
     private final GenericFindByIdService<EstablishmentEntity, EstablishmentDto, Integer> findByIdService;
