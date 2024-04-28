@@ -1,5 +1,6 @@
 package com.ubigeo.core.controller;
 
+import com.ubigeo.core.controller.interfaces.IDistrictController;
 import com.ubigeo.core.entity.DistrictEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/districts")
-public class DistrictController  implements FindAllController<DistrictDto>, FindByIdController<DistrictDto, Integer>, CreateController<DistrictDto>, UpdateController<DistrictDto, Integer>, DeleteController<DistrictDto, Integer>, FindAllByListIdsController<DistrictDto, Integer> {
+public class DistrictController  implements IDistrictController<DistrictDto, Integer> {
 
     private final GenericFindAllService<DistrictEntity, DistrictDto, Integer> findAllService;
     private final GenericFindByIdService<DistrictEntity, DistrictDto, Integer> findByIdService;

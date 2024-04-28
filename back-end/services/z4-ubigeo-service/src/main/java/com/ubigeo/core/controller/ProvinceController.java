@@ -1,5 +1,6 @@
 package com.ubigeo.core.controller;
 
+import com.ubigeo.core.controller.interfaces.IProvinceController;
 import com.ubigeo.core.entity.ProvinceEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/provinces")
-public class ProvinceController implements FindAllController<ProvinceDto>, FindByIdController<ProvinceDto, Integer>, CreateController<ProvinceDto>, UpdateController<ProvinceDto, Integer>, DeleteController<ProvinceDto, Integer>, FindAllByListIdsController<ProvinceDto, Integer> {
+public class ProvinceController implements IProvinceController<ProvinceDto, Integer> {
 
     private final GenericFindAllService<ProvinceEntity, ProvinceDto, Integer> findAllService;
     private final GenericFindByIdService<ProvinceEntity, ProvinceDto, Integer> findByIdService;
