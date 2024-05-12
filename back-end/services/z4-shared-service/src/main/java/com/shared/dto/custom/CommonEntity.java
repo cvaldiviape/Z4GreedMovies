@@ -18,7 +18,7 @@ public class CommonEntity {
 
     @Column(length = 6, nullable = false, unique = true)
     private String code;
-    @Column(length = 60, nullable = false, unique = true)
+    @Column(length = 60, nullable = false)
     private String name;
 
 }
