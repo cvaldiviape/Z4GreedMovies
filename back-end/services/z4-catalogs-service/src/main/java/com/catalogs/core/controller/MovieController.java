@@ -2,12 +2,8 @@ package com.catalogs.core.controller;
 
 import com.catalogs.core.controller.interfaces.IMovieController;
 import com.catalogs.core.entity.MovieEntity;
-import com.shared.core.controller.*;
 import com.shared.core.service.*;
-import com.shared.core.service.impl.GenericDeleteService;
-import com.shared.core.service.impl.GenericFindAllByListIdsService;
-import com.shared.core.service.impl.GenericFindAllService;
-import com.shared.core.service.impl.GenericFindByIdService;
+import com.shared.core.service.impl.*;
 import com.shared.dto.external.catalogs.MovieDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;

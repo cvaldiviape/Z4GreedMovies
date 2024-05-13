@@ -2,7 +2,6 @@ package com.catalogs.core.controller;
 
 import com.catalogs.core.controller.interfaces.IGenreController;
 import com.catalogs.core.entity.GenreEntity;
-import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
 import com.shared.dto.external.catalogs.GenreDto;

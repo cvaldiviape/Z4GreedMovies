@@ -2,7 +2,6 @@ package com.catalogs.core.controller;
 
 import com.catalogs.core.controller.interfaces.IStudioController;
 import com.catalogs.core.entity.StudioEntity;
-import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
 import com.shared.dto.external.catalogs.StudioDto;
