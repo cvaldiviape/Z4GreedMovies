@@ -1,5 +1,6 @@
 package com.facility.core.controller;
 
+import com.facility.core.controller.interfaces.IRoomController;
 import com.facility.core.entity.RoomEntity;
 import com.shared.core.controller.*;
 import com.shared.core.service.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/rooms")
-public class RoomController implements FindAllController<RoomDto>, FindByIdController<RoomDto, Integer>, CreateController<RoomDto>, UpdateController<RoomDto, Integer>, DeleteController<RoomDto, Integer>, FindAllByListIdsController<RoomDto, Integer> {
+public class RoomController implements IRoomController<RoomDto, Integer> {
 
     private final GenericFindAllService<RoomEntity, RoomDto, Integer> findAllService;
     private final GenericFindByIdService<RoomEntity, RoomDto, Integer> findByIdService;

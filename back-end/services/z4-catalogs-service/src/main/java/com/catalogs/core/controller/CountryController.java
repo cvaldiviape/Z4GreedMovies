@@ -1,7 +1,7 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.ICountryController;
 import com.catalogs.core.entity.CountryEntity;
-import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
 import com.shared.dto.external.catalogs.CountryDto;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/countries")
-public class CountryController implements FindAllController<CountryDto>, FindByIdController<CountryDto, Integer>, CreateController<CountryDto>, UpdateController<CountryDto, Integer>, DeleteController<CountryDto, Integer>, FindAllByListIdsController<CountryDto, Integer> {
+public class CountryController implements ICountryController<CountryDto, Integer> {
 
     private final GenericFindAllService<CountryEntity, CountryDto, Integer> findAllService;
     private final GenericFindByIdService<CountryEntity, CountryDto, Integer> findByIdService;

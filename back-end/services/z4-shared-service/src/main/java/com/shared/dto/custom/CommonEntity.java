@@ -16,9 +16,9 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass // se utiliza para crear clases superiores que proporcionan atributos y comportamiento comunes a las clases descendientes, pero que no se mapean directamente a tablas en la base de datos.
 public class CommonEntity {
 
-    @Column(length = 3, nullable = false, unique = true)
+    @Column(length = 6, nullable = false, unique = true)
     private String code;
-    @Column(length = 40, nullable = false, unique = true)
+    @Column(length = 60, nullable = false)
     private String name;
 
 }

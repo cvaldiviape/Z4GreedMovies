@@ -1,19 +1,17 @@
 package com.catalogs.core.controller;
 
+import com.catalogs.core.controller.interfaces.IProductController;
 import com.catalogs.core.entity.ProductEntity;
-import com.shared.core.controller.*;
 import com.shared.core.service.*;
-import com.shared.core.service.impl.GenericDeleteService;
-import com.shared.core.service.impl.GenericFindAllByListIdsService;
-import com.shared.core.service.impl.GenericFindAllService;
-import com.shared.core.service.impl.GenericFindByIdService;
+import com.shared.core.service.impl.*;
 import com.shared.dto.external.catalogs.ProductDto;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/products")
-public class ProductController implements FindAllController<ProductDto>, FindByIdController<ProductDto, Integer>, CreateController<ProductDto>, UpdateController<ProductDto, Integer>, DeleteController<ProductDto, Integer>, FindAllByListIdsController<ProductDto, Integer> {
+public class ProductController implements IProductController<ProductDto, Integer> {
 
     private final GenericFindAllService<ProductEntity, ProductDto, Integer> findAllService;
     private final GenericFindByIdService<ProductEntity, ProductDto, Integer> findByIdService;

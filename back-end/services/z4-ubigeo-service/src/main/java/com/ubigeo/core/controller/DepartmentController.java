@@ -1,7 +1,7 @@
 package com.ubigeo.core.controller;
 
+import com.ubigeo.core.controller.interfaces.IDepartmentController;
 import com.ubigeo.core.entity.DepartmentEntity;
-import com.shared.core.controller.*;
 import com.shared.core.service.*;
 import com.shared.core.service.impl.*;
 import com.shared.dto.external.ubigeo.DepartmentDto;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/departments")
-public class DepartmentController implements FindAllController<DepartmentDto>, FindByIdController<DepartmentDto, Integer>, CreateController<DepartmentDto>, UpdateController<DepartmentDto, Integer>, DeleteController<DepartmentDto, Integer>, FindAllByListIdsController<DepartmentDto, Integer> {
+public class DepartmentController implements IDepartmentController<DepartmentDto, Integer> {
 
     private final GenericFindAllService<DepartmentEntity, DepartmentDto, Integer> findAllService;
     private final GenericFindByIdService<DepartmentEntity, DepartmentDto, Integer> findByIdService;

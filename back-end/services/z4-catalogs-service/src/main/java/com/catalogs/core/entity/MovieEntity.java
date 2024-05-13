@@ -36,13 +36,13 @@ public class MovieEntity extends CommonEntity {
     @JoinColumn(name = "id_audience")
     private AudienceEntity audience;
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movies_genres",
             joinColumns = @JoinColumn(name = "id_movie", referencedColumnName = "id_movie"),
             inverseJoinColumns = @JoinColumn(name = "id_genre", referencedColumnName = "id_genre"))
     private Set<GenreEntity> listGenres = new HashSet<>();
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movies_languages",
             joinColumns = @JoinColumn(name = "id_movie", referencedColumnName = "id_movie"),
             inverseJoinColumns = @JoinColumn(name = "id_language", referencedColumnName = "id_language"))
