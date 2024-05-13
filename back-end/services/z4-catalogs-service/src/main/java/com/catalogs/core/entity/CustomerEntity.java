@@ -25,7 +25,7 @@ public class CustomerEntity {
     private String dni;
     @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
-    @Column(name = "password", length = 50, nullable = false, unique = true)
+    @Column(name = "password", length = 50, nullable = false)
     private String password;
 
 }
